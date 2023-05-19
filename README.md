@@ -1,7 +1,8 @@
 # BoleteríaOnline
 ```
-Venta de boletos en línea (calendario de rutas, formulario web, proceso de pasarela de pago asíncrono(utilizando PayPal), 
-impresión de tickets, envío de emails, validación con código QR, reportes de ocupación y proyecciones).
+Venta de boletos en línea (calendario de rutas, formulario web, proceso de pasarela de pago asíncrono
+(utilizando PayPal), impresión de tickets, envío de emails, validación con código QR,
+ reportes de ocupación y proyecciones).
 ```
 <h1 align="center">
     Desarrolladores
