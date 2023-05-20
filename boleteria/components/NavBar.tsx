@@ -56,19 +56,21 @@ const NavBar = () => {
             QR
           </Nav.Link>
         </Nav>
-        <div className="container-right">
-          <Image
-            src={User}
-            alt="User Icon"
-            placeholder="blur"
-            className="user-logo img-fluid rounded-circle"
-            width={30}
-            height={30}
-          />
-          <a className="username" style={{ color: "#ffffff" }}>
-            Nombre de usuario
-          </a>
-        </div>
+        <Nav className="container-right align-items-center text-center">
+          <div className="d-flex flex-sm-row flex-column align-items-center text-center">
+            <Image
+              src={User}
+              alt="User Icon"
+              placeholder="blur"
+              className="user-logo img-fluid rounded-circle"
+              width={30}
+              height={30}
+            />
+            <a className="username mr-3" style={{ color: "#ffffff" }}>
+              Nombre de usuario
+            </a>
+          </div>
+        </Nav>
       </Navbar.Collapse>
     </Navbar>
   );

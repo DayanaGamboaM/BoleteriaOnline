@@ -63,10 +63,12 @@ body {
   display: flex;
   align-items: center;
   margin-left: auto;
+  margin-right: 15px;
 }
 .username {
   color: #ffffff;
   margin-left: 8px; 
+  text-decoration: none;
 }
 .user-logo {
   margin-right: 8px; 
