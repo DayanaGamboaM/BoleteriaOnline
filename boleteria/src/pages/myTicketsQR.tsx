@@ -9,8 +9,8 @@ const Home = ()=>{
 
         <Layout>
             <div>
-                <Hero/>
                 <Carousel/>
+                <Hero/>
             </div>
         </Layout>
 
