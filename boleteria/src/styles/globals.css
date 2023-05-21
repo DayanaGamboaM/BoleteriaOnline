@@ -73,3 +73,44 @@ body {
 .user-logo {
   margin-right: 8px; 
 }
+
+.page-header {
+  background: url(/heroBus.jpg) no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 280px;
+  position: relative;
+  margin-bottom: 2rem ;
+}
+.page-header > h2 {
+  height: 100vh; 
+  color: black;
+}
+
+.card-section {
+  position: relative;
+  bottom: 60px;
+  
+}
+.card-block {
+  padding: 50px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+}
+.cardBlock-titles {
+  color:black;
+  font-weight: 900;
+}
+.box-color {
+  background: var(--azul);
+}
+
+.search {
+  text-decoration: none;
+  color:white;
+  background-color: black;
+  padding: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+  border-radius:1em;
+}
