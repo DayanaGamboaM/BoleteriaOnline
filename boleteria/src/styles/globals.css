@@ -87,4 +87,9 @@ body {
   margin-left: 35px;
   font-size: 16px;
   text-align: center;
+  border-radius: 10px;
+}
+.btn1{
+  background-color: #3C6E71;
+  border-radius: 10px;
 }

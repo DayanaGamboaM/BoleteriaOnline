@@ -4,6 +4,7 @@ import Boarding from '../../components/componentsPaymentGateway/Boarding';
 import NavBar from '../../components/NavBar';
 import TravelDate from '../../components/componentsPaymentGateway/TravelDate';
 import Hour from '../../components/componentsPaymentGateway/Hour';
+import Seats from '../../components/componentsPaymentGateway/Seats';
 const Home = ()=>{
 
     return(
@@ -12,6 +13,7 @@ const Home = ()=>{
             <Boarding/>
             <TravelDate/>
             <Hour/>
+            <Seats/>
         </>
     )
 }
