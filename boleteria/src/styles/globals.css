@@ -76,16 +76,18 @@ body {
 
 .ImgContainer{
 
-  max-width: 100%;
-  height: auto;
+  position: relative;
+  z-index: 5;
 
 }
 
-.ImgContainer Image {
-
-  width: 100%;
-  height: auto;
-
+@media (max-width: 700px) {
+  .ImgContainer {
+    width: 100%;
+    height: 100%; /* Cambiado a ancho del 100% */
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 .HeroContainer{
@@ -94,12 +96,22 @@ body {
   width: 1250px; /* Ancho inicial */
   height: 100px; /* Altura inicial */
   background-color: white;
-  border: 1px solid black;
   padding: 10px;
   margin: 10px;
   margin-left: auto;
   margin-right: auto;
   margin-top: -30px;
   z-index: 10;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
 
+}
+
+@media (max-width: 700px) {
+  .HeroContainer {
+    width: 450px;
+    height: 50px; /* Cambiado a ancho del 100% */
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
