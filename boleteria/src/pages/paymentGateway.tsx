@@ -3,6 +3,7 @@ import Layout from '../../components/Layout';
 import Boarding from '../../components/componentsPaymentGateway/Boarding';
 import NavBar from '../../components/NavBar';
 import TravelDate from '../../components/componentsPaymentGateway/TravelDate';
+import Hour from '../../components/componentsPaymentGateway/Hour';
 const Home = ()=>{
 
     return(
@@ -10,6 +11,7 @@ const Home = ()=>{
             <NavBar/>
             <Boarding/>
             <TravelDate/>
+            <Hour/>
         </>
     )
 }
