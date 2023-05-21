@@ -125,8 +125,12 @@ body {
 .HeroButtonContainer{
 
   margin-top: 20px;
-  margin-left: 1150px;
+  margin-left: 1125px;
 
+}
+
+.text-custom {
+  color: #284B63;
 }
 
 @media (max-width: 768px) {
