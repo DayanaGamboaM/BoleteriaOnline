@@ -3,6 +3,7 @@ import Layout from '../../components/Layout';
 import Carousel from '../../components/componentsQR/Carousel';
 import Hero from '../../components/componentsQR/Hero';
 import QR from '../../components/componentsQR/QR';
+import Information from '../../components/componentsQR/Information';
 
 const Home = ()=>{
 
@@ -13,6 +14,7 @@ const Home = ()=>{
                 <Carousel/>
                 <Hero/>
                 <QR/>
+                <Information/>
             </div>
         </Layout>
 

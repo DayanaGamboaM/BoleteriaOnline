@@ -168,3 +168,16 @@ body {
   font-weight: bold;
 
 }
+
+.QrContainer{
+
+  position: relative;
+  width: 1300px; /* Ancho inicial */
+  height: 500px; /* Altura inicial */
+  background-color: #3C6E71;
+  padding: 10px;
+  margin: 100px auto 10px; /* Ajusta el margen superior para alejarlo del div superior */
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+
+}
