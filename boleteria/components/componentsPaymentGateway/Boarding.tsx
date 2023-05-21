@@ -6,7 +6,7 @@ const Boarding = () => {
             <div className="card text-black " style={{ backgroundColor: '#D9D9D9', width: '35rem'}} >
                 <div className="card-header">
                     <div className="d-flex align-items-center mr-3">
-                        <span className="cuadro-azul mr-5">1.</span>
+                        <span className="cuadro-azul mr-5">1</span>
                         <span >Abordaje</span>
                     </div>
                 </div>
