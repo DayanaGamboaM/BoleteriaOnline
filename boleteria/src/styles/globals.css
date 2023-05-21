@@ -100,7 +100,7 @@ body {
 
   position: relative;
   width: 1250px; /* Ancho inicial */
-  height: 100px; /* Altura inicial */
+  height: 150px; /* Altura inicial */
   background-color: white;
   padding: 10px;
   margin: 10px;
@@ -127,6 +127,7 @@ body {
   margin-top: 20px;
   margin-left: 1125px;
 
+
 }
 
 .text-custom {
@@ -143,8 +144,27 @@ body {
 
   .HeroButtonContainer span{
 
-    font-size: 11px;
+    font-size: 12px;
     vertical-align: middle;
 
   }
+
+  .HeroButtonContainer span.text-custom {
+    color: #284B63;
+    font-size: 11px;
+  }
+}
+
+.LogoContainer{
+
+  margin-top: -40px;
+
+}
+
+.HeroContainer h4{
+
+  margin-top: -105px;
+  margin-left: 300px;
+  font-weight: bold;
+
 }

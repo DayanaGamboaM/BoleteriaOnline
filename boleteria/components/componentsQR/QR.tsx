@@ -2,7 +2,7 @@ import React from 'react'
 
 const QR = () => {
   return (
-    <div>QR</div>
+    <div className='QrContainer'></div>
   )
 }
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import Banner from "../banner-bus-1.jpg"
+import Banner from "../Banner-bus-figma.jpeg"
 import Image from "next/image";
 
 const Carousel = () => {
