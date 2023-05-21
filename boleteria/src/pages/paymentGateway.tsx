@@ -1,12 +1,14 @@
 import React from 'react'
 import Layout from '../../components/Layout';
+import Boarding from '../../components/componentsPaymentGateway/Boarding';
+import NavBar from '../../components/NavBar';
 const Home = ()=>{
 
     return(
-
-        <Layout>
-            <h1>Payment Gateway</h1>
-        </Layout>
+        <>
+            <NavBar/>
+            <Boarding/>
+        </>
     )
 }
 

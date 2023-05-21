@@ -73,3 +73,9 @@ body {
 .user-logo {
   margin-right: 8px; 
 }
+
+.cuadro-azul {
+  background-color: #284B63;
+  padding: 1px 5px;
+  border-radius: 4px;
+}
