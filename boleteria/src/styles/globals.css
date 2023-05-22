@@ -173,11 +173,47 @@ body {
 
   position: relative;
   width: 1300px; /* Ancho inicial */
-  height: 500px; /* Altura inicial */
+  height: 510px; /* Altura inicial */
   background-color: #3C6E71;
   padding: 10px;
   margin: 100px auto 10px; /* Ajusta el margen superior para alejarlo del div superior */
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+
+}
+
+.QRdataContainer{
+
+  position: relative;
+  width: 400px; /* Ancho inicial */
+  height: 300px; /* Altura inicial */
+  background-color: #ffffff;
+  padding: 10px;
+  margin: 110px auto 10px; /* Ajusta el margen superior para alejarlo del div superior */
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+
+}
+
+.StateContainer{
+
+  position: relative;
+  width: 175px; /* Ancho inicial */
+  height: 35px; /* Altura inicial */
+  background-color: #ffffff;
+  padding: 10px;
+  margin: 30px auto 10px; /* Ajusta el margen superior para alejarlo del div superior */
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+
+}
+
+.QrContainer h5 {
+
+  position: relative;
+  margin-top: -40px;
+  margin-left: 610px;
+  border-radius: 0px;
+
 
 }
