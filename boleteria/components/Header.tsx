@@ -59,7 +59,7 @@ const Header = () => {
                 <div className="col-xl-2 col-lg-2 col-md-2 col-sm-6 col-12">
                     <p className="cardBlock-titles">Fecha</p>
                     <div className="form-group">
-                        <div className="input-group">
+                        <div className="d-flex align-items-center input-group">
                             <span className="input-group-text text-black"><BsCalendarFill /></span>
                                 <DatePicker
                                     selected={selectedDate}
