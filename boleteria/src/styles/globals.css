@@ -82,7 +82,6 @@ body {
 
 .cuadro-azul-grande {
   background-color: #284B63;
-  color: black;
   padding: 10px 10px;
   margin-left: 35px;
   font-size: 16px;
@@ -91,5 +90,38 @@ body {
 }
 .btn1{
   background-color: #3C6E71;
+  color: white;
   border-radius: 10px;
+}
+.flex-container {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
+.flex-item {
+  flex: 1;
+}
+@media (max-width: 768px) {
+  .flex-container {
+    flex-direction: column;
+  }
+}
+.trip-info {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10px;
+}
+
+.trip-info-item {
+  display: flex;
+  align-items: center;
+}
+
+.trip-info-item h5 {
+  margin: 0;
+  font-weight: bold;
+}
+
+.trip-info-item p {
+  margin: 0;
 }

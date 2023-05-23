@@ -5,17 +5,30 @@ import NavBar from '../../components/NavBar';
 import TravelDate from '../../components/componentsPaymentGateway/TravelDate';
 import Hour from '../../components/componentsPaymentGateway/Hour';
 import Seats from '../../components/componentsPaymentGateway/Seats';
-const Home = ()=>{
+import InfoTravel from '../../components/componentsPaymentGateway/InfoTravel';
+const Home = () => {
 
-    return(
+    return (
         <>
-            <NavBar/>
-            <Boarding/>
-            <TravelDate/>
-            <Hour/>
-            <Seats/>
+            <NavBar />
+            <div className="container">
+                <div className="flex-container">
+                    <div className="flex-item">
+                        <Boarding />
+                        <TravelDate />
+                        <Hour />
+                        <Seats />
+
+                    </div>
+                    <div className="flex-item">
+                        <InfoTravel />
+                    </div>
+                </div>
+            </div>
+
+
         </>
     )
 }
 
-export default Home ; 
+export default Home; 
