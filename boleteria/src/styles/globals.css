@@ -252,3 +252,16 @@ body {
   height: 30px;
   background-size: 100% 100%;
 } */
+
+.QRInformationContainer{
+
+  position: relative;
+  width: 700px; /* Ancho inicial */
+  height: 200px; /* Altura inicial */
+  margin-top: 50px;
+  margin-left: 325px;
+  background-color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+
+}
