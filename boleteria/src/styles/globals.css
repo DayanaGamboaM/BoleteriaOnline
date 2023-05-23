@@ -195,23 +195,35 @@ body {
 
 }
 
+.QRLogoContainer {
+
+  position: relative;
+  margin-top: -350px;
+  margin-left: 550px;
+  border-radius: 0px;
+
+}
+
 .StateContainer{
 
   position: relative;
   width: 175px; /* Ancho inicial */
   height: 35px; /* Altura inicial */
   background-color: #ffffff;
-  padding: 10px;
-  margin: 30px auto 10px; /* Ajusta el margen superior para alejarlo del div superior */
+  padding: 2px;
+  margin: top 30px ; /* Ajusta el margen superior para alejarlo del div superior */
+  margin-left: 550px;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 
 }
 
+
 .QrContainer h5 {
 
   position: relative;
-  margin-top: -40px;
+  margin-top: -30px;
   margin-left: 610px;
   border-radius: 0px;
 }
+
