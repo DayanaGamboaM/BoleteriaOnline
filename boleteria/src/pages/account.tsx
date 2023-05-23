@@ -1,13 +1,13 @@
 import React from "react";
 import Layout from "../../components/Layout";
-import BodyAccount from "../../components/componentsAccount/BodyAccount";
 import Hero from "../../components/componentsAccount/Hero";
+import PersonalInformation from "../../components/componentsAccount/PersonalInformation";
 const Home = () => {
   return (
     <Layout>
-      <div>
+      <div className="container-layout">
         <Hero/>
-        <BodyAccount/>
+        <PersonalInformation/>
       </div>
     </Layout>
   );
