@@ -12,29 +12,29 @@ const QR = () => {
       <Carousel className="QrCarouselContainer" indicators = {false}>
         <Carousel.Item interval={100000}>
           <Image
-            className="d-block w-100"
+            className="Carouselimg1Container"
             src= {imagen1}
             alt="First slide"
-            width={200}
-            height={200}
+            // width={200}
+            // height={200}
           />
         </Carousel.Item>
         <Carousel.Item interval={100000}>
           <Image
-            className="d-block w-100"
+            className="Carouselimg2Container"
             src= {imagen2}
             alt="Second slide"
-            width={200}
-            height={200}
+            // width={200}
+            // height={200}
           />
         </Carousel.Item>
         <Carousel.Item>
           <Image
-            className="d-block w-100"
+            className="Carouselimg3Container"
             src= {imagen3}
             alt="Third slide"
-            width={200}
-            height={200}
+            // width={200}
+            // height={200}
           />
         </Carousel.Item>
       </Carousel>
