@@ -255,3 +255,98 @@ body {
   border: none;
   background: none;
 }
+
+.send-email{
+  position: relative;
+  background-color: #FFFFFF;
+  width: 1180px;
+  height: 150px;
+  margin: auto;
+  margin-top: 50px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+#send{
+  position: absolute;
+  margin-left: 30px;
+  margin-top: 30px;
+  font-weight: bold;
+}
+
+#deactive{
+  position: absolute;
+  margin-left: 30px;
+  margin-top: 90px;
+  font-weight: bold;
+}
+
+/* .btn-sendEmail{
+  position: absolute;
+  margin-top: 89px;
+  margin-left: 140px;
+  background-color: #d9d9d9;
+  border-radius: 20px;
+} */
+
+.togglebutton{
+  position: absolute;
+  margin-top: 87px;
+  margin-left: 140px;
+}
+
+.toggle-button {
+  position: absolute;
+  overflow: hidden;
+  padding: 0;
+  width: 67px;
+  height: 30px;
+  border-radius: 15px;
+  background-color: #e2e2e2;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.container {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  border-radius: 20px;
+  background-color: #d9d9d9;
+}
+
+.circle {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  transition: transform 0.3s ease-in-out;
+  background-color: black;
+}
+
+.circle-on {
+  transform: translateX(0%);
+}
+
+.circle-off {
+  transform: translateX(100%);
+}
+
+.label {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 5px;
+  font-size: 14px;
+}
+
+#activate{
+  position: absolute;
+  margin-top: 90px;
+  margin-left: 220px;
+  font-weight: bold;
+}
+
+
