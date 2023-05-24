@@ -13,7 +13,7 @@ const Hero = () => {
             <Image
               src={UserProfile}
               alt="user profile"
-              className="user-image rounded-circle"
+              className="user-image"
               width={100}
               height={100}
             />
