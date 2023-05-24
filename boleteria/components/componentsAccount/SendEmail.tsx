@@ -12,6 +12,15 @@ const SendEmail = () => {
             </div>
             <h5 id='activate'>Activar</h5>
         </div>
+
+      	<div className='container-btnSave p-5'>
+          <div className='button-save p-5'>
+            <div className='p-5'>
+                <button id='btn-save'>Guardar</button>
+            </div>
+          </div>
+        </div>
+
     </div>
   )
 }

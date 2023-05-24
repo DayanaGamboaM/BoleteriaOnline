@@ -349,4 +349,15 @@ body {
   font-weight: bold;
 }
 
-
+#btn-save{
+  position: absolute;
+  width: 150px;
+  height: 32px;
+  background: #3C6E71;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 20px;
+  margin-left: 400px;
+  margin-top: 50px;
+}
