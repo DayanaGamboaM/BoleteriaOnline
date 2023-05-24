@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button} from 'react-bootstrap';
 import Image from "next/image";
-import Logo from "../Logo-bus.jpg"
+import Logo from "../../public/Logo-bus.jpg"
 
 const Hero = () => {
   return (

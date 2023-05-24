@@ -1,9 +1,9 @@
 import React from "react";
 import Image from "next/image";
 import Carousel from 'react-bootstrap/Carousel';
-import imagen1 from "../QR-1.png"
-import imagen2 from "../QR-2.jpg"
-import imagen3 from "../QR-3.jpg"
+import imagen1 from "../../public/QR-1.png"
+import imagen2 from "../../public/QR-2.jpg"
+import imagen3 from "../../public/QR-3.jpg"
 
 const QR = () => {
   return (
