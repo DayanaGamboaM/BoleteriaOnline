@@ -115,3 +115,14 @@ body {
   border-radius:1em;
 }
 
+.color-footer{
+  background-color: #8E8A8A;
+}
+.footer-copyright{
+  text-decoration: none;
+  font-weight: 900;
+  color:black;
+}
+.icon-black {
+  color: black;
+}

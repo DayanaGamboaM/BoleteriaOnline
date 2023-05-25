@@ -10,7 +10,7 @@ const Header = () => {
         setSelectedDate(date);
     };
   return (
-    <div>
+    <div style={{ backgroundColor: "#d9d9d9"}}>
       <div className="page-header">
         <h2 className="d-flex align-items-start justify-content-center page-title">
           TRANSPORTE UNA
