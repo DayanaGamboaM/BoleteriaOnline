@@ -73,3 +73,81 @@ body {
 .user-logo {
   margin-right: 8px; 
 }
+
+.cuadro-azul {
+  background-color: #284B63;
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+
+.cuadro-azul-grande {
+  background-color: #284B63;
+  padding: 10px 10px;
+  margin-left: 35px;
+  font-size: 16px;
+  text-align: center;
+  border-radius: 10px;
+}
+.btn1{
+  background-color: #3C6E71;
+  color: white;
+  border: none;
+  border-radius: 15px;
+}
+.flex-container {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
+.flex-item {
+  flex: 1;
+}
+@media (max-width: 768px) {
+  .flex-container {
+    flex-direction: column;
+  }
+}
+.trip-info {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10px;
+}
+
+.trip-info-item h5 {
+  margin: 0;
+  font-weight: bold;
+}
+
+.trip-info-item p {
+  margin: 0;
+}
+.cuadro-asientos {
+  background-color: #D9D9D9;
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.fila-asientos {
+  display: flex;
+  align-items: center;
+}
+
+.asiento {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #CCCCCC;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.espacio {
+  width: 20px;
+  height: 40px;
+  margin: 5px;
+}
