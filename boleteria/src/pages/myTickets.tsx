@@ -1,13 +1,18 @@
 import React from 'react'
 import Layout from '../../components/Layout';
+import Carousel from '../../components/componentsMyTickets/Carousel';
+import Hero from '../../components/componentsMyTickets/Hero';
 const Home = ()=>{
 
     return(
 
         <Layout>
-            <h1>My Tickets</h1>
+            <div>
+                <Carousel/>
+                <Hero/>
+            </div>
         </Layout>
     )
 }
 
-export default Home ; 
+export default Home ;
