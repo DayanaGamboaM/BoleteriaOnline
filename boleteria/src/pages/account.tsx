@@ -3,6 +3,8 @@ import Layout from "../../components/Layout";
 import Hero from "../../components/componentsAccount/Hero";
 import PersonalInformation from "../../components/componentsAccount/PersonalInformation";
 import SendEmail from "../../components/componentsAccount/SendEmail";
+import SaveButton from "../../components/componentsAccount/SaveButton";
+import Footer from "../../components/componentsAccount/Footer";
 
 const Home = () => {
   return (
@@ -11,6 +13,8 @@ const Home = () => {
         <Hero/>
         <PersonalInformation/>
         <SendEmail/>
+        <SaveButton/>
+        <Footer/>
       </div>
     </Layout>
   );

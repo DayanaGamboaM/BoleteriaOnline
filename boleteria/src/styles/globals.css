@@ -109,164 +109,6 @@ body {
   margin-bottom: 2rem ;
 } */
 
-/* .container-information{
-  background-color: #FFFFFF;
-  width: 1180px;
-  height: 400px;
-  margin: auto;
-  bottom: 20px;
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-
-}
-
-.personal-information h4{
-  position: absolute;
-  margin-left: 40px;
-  margin-top: 20px;
-  font-weight: bold;
-}
-
-.name{
-  background-color: #d9d9d9;
-  width: 300px;
-  height: 100px;
-  margin-top: 80px;
-  margin-left: 40px;
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.name h5 {
-  margin-left: 10px;
-  margin-top: 5px;
-  font-weight: bold;
-}
-
-.name h4 {
-  margin-left: 10px;
-  margin-top: 5px;
-  font-weight: bold;
-}
-
-.lastname{
-  background-color: #d9d9d9;
-  width: 300px;
-  height: 100px;
-  margin-top: 80px;
-  margin-right: 40px;
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.lastname h5 {
-  margin-left: 10px;
-  margin-top: 5px;
-  font-weight: bold;
-}
-
-.lastname h4 {
-  margin-left: 10px;
-  margin-top: 5px;
-  font-weight: bold;
-}
-
-.gender{
-  background-color: #d9d9d9;
-  width: 300px;
-  height: 100px;
-  margin-bottom: 85px;
-  margin-left: 40px;
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-.gender h5 {
-  margin-left: 10px;
-  margin-top: 5px;
-  font-weight: bold;
-}
-
-.gender h4 {
-  margin-left: 10px;
-  margin-top: 5px;
-  font-weight: bold;
-}
-
-#vertical-line-gender{
-  width: 2px;
-  height: 70px;
-  background-color: rgb(7, 0, 0);
-  position: absolute;
-  left: 250px;
-  top: 230px;
-  transform: translateX(-50%);
-}
-
-#button-gender{
-  position: relative;
-  margin-left: 290px;
-  margin-top: 244px;
-  border-radius: 30px;
-  width: 30px;
-  height: 30px;
-  border: none;
-  background: none;
-  font-size: 1.8rem;
-  font-weight: bold;
-}
-
-.birth{
-  background-color: #d9d9d9;
-  width: 300px;
-  height: 100px;
-  margin-bottom: 85px;
-  margin-right: 40px;
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.birth h5 {
-  margin-left: 10px;
-  margin-top: 5px;
-  font-weight: bold;
-}
-
-.birth h4 {
-  margin-left: 10px;
-  margin-top: 5px;
-  font-weight: bold;
-}
-
-#vertical-line-birth{
-  width: 2px;
-  height: 70px;
-  background-color: rgb(7, 0, 0);
-  position: absolute;
-  left: 1050px;
-  top: 230px;
-  transform: translateX(-50%);
-}
-
-.btn-calendar{
-  position: relative;
-  left: 745px;
-  bottom: 10px;
-  border: none;
-  background: none;
-}
-*/
-
- /* .send-email{
-  position: relative;
-  background-color: #FFFFFF;
-  width: 1180px;
-  height: 150px;
-  margin: auto;
-  margin-top: 50px;
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}  */
-
 .card-email {
   position: relative;
   bottom: -50px;
@@ -296,10 +138,11 @@ body {
   margin-left: 140px;
 } */
 
+/* Toggle Button */
 .toggle-button {
+  position: relative;
   overflow: hidden;
-  width: 67px;
-  height: 30px;
+  height: 24px;
   border-radius: 15px;
   background-color: #e2e2e2;
   border: none;
@@ -307,18 +150,18 @@ body {
   cursor: pointer;
 }
 
-.containerT {
+/* Toggle Container */
+.toggle-container {
   position: relative;
-  width: 24px;
-  height: 24px;
   border-radius: 20px;
   background-color: #d9d9d9;
 }
 
+/* Circle */
 .circle {
-  position: absolute;
-  top: 3px;
-  left: 3px;
+  position: relative;
+  top: -4px;
+  left: -7px;
   width: 18px;
   height: 18px;
   border-radius: 50%;
@@ -326,14 +169,17 @@ body {
   background-color: black;
 }
 
+/* Circle On */
 .circle-on {
   transform: translateX(0%);
 }
 
+/* Circle Off */
 .circle-off {
   transform: translateX(100%);
 }
 
+/* Label */
 .label {
   display: inline-block;
   vertical-align: middle;
@@ -341,16 +187,10 @@ body {
   font-size: 14px;
 }
 
-/* #activate{
-  position: absolute;
-  margin-top: 90px;
-  margin-left: 220px;
-  font-weight: bold;
-} */
-
 /*--------------------------------------------------------------- */
 
-#btn-save{
+/* #btn-save{
+  position: relative;
   width: 150px;
   height: 32px;
   background: #3C6E71;
@@ -361,4 +201,4 @@ body {
   margin-left: 400px;
   margin-top: 50px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
+} */
