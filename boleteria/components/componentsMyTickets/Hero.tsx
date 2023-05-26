@@ -9,7 +9,6 @@ import { Button } from "react-bootstrap";
 const Hero = () => {
   return (
     <div className="container">
-      <div className="page-header">
         <div className="card-section d-flex justify-content-center">
           <div className="container">
             <div
@@ -105,7 +104,6 @@ const Hero = () => {
             </div>
           </div>
         </div>
-      </div>
     </div>
   );
 };

@@ -3,7 +3,7 @@ import Layout from "../../components/Layout";
 import Carousel from "../../components/componentsMyTickets/Carousel";
 import Hero from "../../components/componentsMyTickets/Hero";
 import Tickets from "../../components/componentsMyTickets/Tickets";
-import Footer from "../../components/componentsQR/Footer";
+import Footer from "../../components/Footer";
 const Home = () => {
   return (
     <Layout>
@@ -11,7 +11,7 @@ const Home = () => {
         <Carousel/>
         <Hero />
         <Tickets />
-        <Footer />
+        <Footer/>
       </div>
     </Layout>
   );

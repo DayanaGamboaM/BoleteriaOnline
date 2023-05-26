@@ -149,7 +149,7 @@ const Tickets = () => {
               maxWidth: "100%",
               borderRadius: 20,
               background: "#D9D9D9",
-              color: "black",
+              color: "black"
             }}
           >
             Tiquetes
