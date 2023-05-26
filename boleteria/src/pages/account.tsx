@@ -4,7 +4,8 @@ import Hero from "../../components/componentsAccount/Hero";
 import PersonalInformation from "../../components/componentsAccount/PersonalInformation";
 import SendEmail from "../../components/componentsAccount/SendEmail";
 import SaveButton from "../../components/componentsAccount/SaveButton";
-import Footer from "../../components/componentsAccount/Footer";
+import Footer from "../../components/Footer";
+
 
 const Home = () => {
   return (
