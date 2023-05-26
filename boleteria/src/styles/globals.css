@@ -70,7 +70,18 @@ body {
   margin-left: 8px;
   text-decoration: none;
 }
+
 .user-logo {
+  margin-right: 8px; 
+}
+
+.containerL{
+  background-color: var(--gris);
+}
+
+/* Empieza mis diseños */
+
+.card-block { /* Es para el bloque de la foto del perfil */
   margin-right: 8px;
 }
 
@@ -183,6 +194,86 @@ color: white;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
 }
 
+.imgCont{
+  width: 2904px;
+  max-width: 100%;
+}
+
+.card-information{
+  position: relative;
+  border-radius: 10px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* .page-header { 
+  background: url(../../public/bus-banner.jpg) no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 280px;
+  position: relative;
+  margin-bottom: 2rem ;
+} */
+
+.card-email {
+  position: relative;
+  bottom: -50px;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/*------------------- Toggle Button ----------------------------- */
+
+/* Toggle Button */
+.toggle-button {
+  position: relative;
+  overflow: hidden;
+  height: 24px;
+  border-radius: 15px;
+  background-color: #e2e2e2;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+/* Toggle Container */
+.toggle-container {
+  position: relative;
+  border-radius: 20px;
+  background-color: #d9d9d9;
+}
+
+/* Circle */
+.circle {
+  position: relative;
+  top: -4px;
+  left: -7px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  transition: transform 0.3s ease-in-out;
+  background-color: black;
+}
+
+/* Circle On */
+.circle-on {
+  transform: translateX(0%);
+}
+
+/* Circle Off */
+.circle-off {
+  transform: translateX(100%);
+}
+
+/* Label */
+.label {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 5px;
+  font-size: 14px;
+}
+
+/*--------------------------------------------------------------- */
  .card-State {
   position: relative;
   bottom: 10px;
