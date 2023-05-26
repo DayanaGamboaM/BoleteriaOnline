@@ -5,7 +5,7 @@ import {
   BsPersonFillAdd,
   BsCalendarFill,
 } from "react-icons/bs";
-import DatePicker from "react-datepicker";
+import  DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 const Header = () => {

@@ -3,7 +3,7 @@ import { Button } from "react-bootstrap";
 
 const Tickets = () => {
   return (
-    <div className="d-flex justify-content-between align-items-center flex-column">
+    <div className="d-flex justify-content-between align-items-center flex-column" style={{marginBottom:"50px"}}>
       <div
         className="card mt-5 text-center"
         style={{
@@ -98,7 +98,7 @@ const Tickets = () => {
               maxWidth: "100%",
               borderRadius: 20,
               background: "#D9D9D9",
-              color: "black",
+              color: "black"
             }}
           >
             Tiquetes
@@ -133,7 +133,7 @@ const Tickets = () => {
               maxWidth: "100%",
               borderRadius: 20,
               background: "#D9D9D9",
-              color: "black",
+              color: "black"
             }}
           >
             Imprimir
@@ -149,7 +149,7 @@ const Tickets = () => {
               maxWidth: "100%",
               borderRadius: 20,
               background: "#D9D9D9",
-              color: "black",
+              color: "black"
             }}
           >
             Tiquetes

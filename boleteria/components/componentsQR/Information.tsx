@@ -5,7 +5,7 @@ const Information = () => {
     <div className="d-flex justify-content-center align-items-center">
       <div
         className="card mt-5 text-center"
-        style={{ borderRadius: "10px", width: "90%", maxWidth: "500px" }}
+        style={{ borderRadius: "10px", width: "90%", maxWidth: "500px", marginBottom: '50px'}}
       >
         <div className="card-body">
           <h5 className="card-title">Autobus: 106</h5>

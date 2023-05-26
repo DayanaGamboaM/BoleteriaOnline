@@ -2,12 +2,11 @@ import React from "react";
 
 import { Button } from "react-bootstrap";
 import Image from "next/image";
-import Logo from "../../public/Logo-bus.jpg";
+import Logo from "../../public/logo-footer.png";
 
 const Hero = () => {
   return (
     <div className="container">
-      
       <div className="card-section">
         <div className="container">
           <div className="card-block bg-white mb-3 d-flex flex-row flex-wrap align-items-center justify-content-between" style={{width: '1400px' , maxWidth: '100%'}}>
@@ -16,7 +15,7 @@ const Hero = () => {
                 className="img-fluid"
                 src={Logo}
                 alt="Logo"
-                width={300}
+                width={200}
               />
             </div>
             <div className="text-md-left">
@@ -29,7 +28,6 @@ const Hero = () => {
           </div>
         </div>
       </div>
-        
     </div>
   );
 };
