@@ -117,26 +117,7 @@ body {
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* #send{
-  position: absolute;
-  margin-left: 30px;
-  margin-top: 30px;
-  font-weight: bold;
-} */
-
-/* #deactive{
-  position: absolute;
-  margin-left: 30px;
-  margin-top: 90px;
-  font-weight: bold;
-}  */
-
 /*------------------- Toggle Button ----------------------------- */
-
-/* .togglebutton{
-  margin-top: 87px;
-  margin-left: 140px;
-} */
 
 /* Toggle Button */
 .toggle-button {
@@ -188,17 +169,3 @@ body {
 }
 
 /*--------------------------------------------------------------- */
-
-/* #btn-save{
-  position: relative;
-  width: 150px;
-  height: 32px;
-  background: #3C6E71;
-  color: white;
-  font-weight: bold;
-  border: none;
-  border-radius: 20px;
-  margin-left: 400px;
-  margin-top: 50px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-} */
