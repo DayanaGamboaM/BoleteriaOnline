@@ -7,7 +7,7 @@ import Logo from "../../public/Logo-bus.jpg";
 const Hero = () => {
   return (
     <div className="container">
-      <div className="page-header">
+      
       <div className="card-section">
         <div className="container">
           <div className="card-block bg-white mb-3 d-flex flex-row flex-wrap align-items-center justify-content-between" style={{width: '1400px' , maxWidth: '100%'}}>
@@ -29,7 +29,7 @@ const Hero = () => {
           </div>
         </div>
       </div>
-        </div>
+        
     </div>
   );
 };
