@@ -21,8 +21,8 @@ const QR = () => {
   };
 
   const handleNextClick = () => {
-    // Aquí debes ajustar el número máximo de imágenes en el carrusel
-    const totalImages = 2; // Por ejemplo, si tienes 2 imágenes
+
+    const totalImages = 2;
 
     if (activeIndex < totalImages - 1) {
       setActiveIndex(activeIndex + 1);
