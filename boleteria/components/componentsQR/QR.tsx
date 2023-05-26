@@ -33,14 +33,59 @@ const QR = () => {
     <div className="container">
       <div className="card col-lg-13" style={{ backgroundColor: "#3C6E71" }}>
         <div className="card-body">
-          <div className="d-flex justify-content-between">
-            <Button className="btn btn-custom" onClick={handlePrevClick} style={{background: '#D9D9D9', color: 'Black', borderRadius: 20 }}>
-              Back
+          <div className="d-flex justify-content-center">
+            <Button
+              variant="light"
+              className="btn btn-costume"
+              onClick={handlePrevClick}
+              style={{
+                background: "#D9D9D9",
+                color: "black",
+                borderRadius: 20,
+                marginRight: "80px", // Mover el botón hacia la izquierda
+              }}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                className="bi bi-arrow-left"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"
+                />
+              </svg>
             </Button>
-            <Button className="btn btn-custom" onClick={handleNextClick} style={{background: '#D9D9D9', color: 'Black', borderRadius: 20}}>
-              Next
+            <Button
+              variant="light"
+              className="btn btn-costume"
+              onClick={handleNextClick}
+              style={{
+                background: "#D9D9D9",
+                color: "black",
+                borderRadius: 20,
+                marginLeft: "80px"
+              }}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                className="bi bi-arrow-right"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"
+                />
+              </svg>
             </Button>
           </div>
+
           <div
             className="card bg-white mx-auto my-5"
             style={{ maxWidth: "300px", maxHeight: "250px" }}
