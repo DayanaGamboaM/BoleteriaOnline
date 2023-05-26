@@ -28,7 +28,7 @@ const PersonalInformation = () => {
   return (
     <div className="container">
       <div
-        className="card-information bg-white mb-3"
+        className="card-information bg-white mb-5"
         style={{
           width: "1400px",
           maxWidth: "100%",
