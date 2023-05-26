@@ -98,7 +98,7 @@ const QR = () => {
                 controls={false}
               >
                 <Carousel.Item interval={1000000000}>
-                  <div className="d-flex justify-content-center">
+                  <div className="d-flex justify-content-center" style={{maxWidth:'100%', width:'400px'}}>
                     <Image
                       className="img-fluid"
                       src={imagen1}
@@ -107,7 +107,7 @@ const QR = () => {
                   </div>
                 </Carousel.Item>
                 <Carousel.Item interval={100000}>
-                  <div className="d-flex justify-content-center">
+                  <div className="d-flex justify-content-center" style={{maxWidth:'100%', width:'270px', maxHeight:'100%', height:'230px'}}>
                     <Image
                       className="img-fluid"
                       src={imagen2}

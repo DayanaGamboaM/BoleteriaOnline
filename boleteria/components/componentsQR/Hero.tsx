@@ -2,7 +2,7 @@ import React from "react";
 
 import { Button } from "react-bootstrap";
 import Image from "next/image";
-import Logo from "../../public/Logo-bus.jpg";
+import Logo from "../../public/logo-footer.png";
 
 const Hero = () => {
   return (
@@ -15,7 +15,7 @@ const Hero = () => {
                 className="img-fluid"
                 src={Logo}
                 alt="Logo"
-                width={300}
+                width={200}
               />
             </div>
             <div className="text-md-left">
