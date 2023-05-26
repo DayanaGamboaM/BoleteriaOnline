@@ -7,7 +7,7 @@ import SendEmail from "../../components/componentsAccount/SendEmail";
 const Home = () => {
   return (
     <Layout>
-      <div className="container-layout">
+      <div className="containerL">
         <Hero/>
         <PersonalInformation/>
         <SendEmail/>

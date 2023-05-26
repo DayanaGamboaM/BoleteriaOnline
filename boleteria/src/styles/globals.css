@@ -70,47 +70,46 @@ body {
   margin-left: 8px; 
   text-decoration: none;
 }
+
 .user-logo {
   margin-right: 8px; 
 }
 
-.container-layout{
+.containerL{
   background-color: var(--gris);
 }
 
-.user-profile {
+/* Empieza mis diseños */
+
+.card-block { /* Es para el bloque de la foto del perfil */
   position: relative;
-  background-color: #FFFFFF;
-  width: 1180px;
-  height: 150px;
-  margin: auto;
-  top: 450px;
-  left: 0px;
+  bottom: 40px;
+  padding: 30px;
   border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-.user-image{
- margin-left: 525px;
- margin-top: 25px;
+.imgCont{
+  width: 2904px;
+  max-width: 100%;
 }
 
-.banner-image-container {
-  overflow: hidden;
+.card-information{
   position: relative;
-  width: 100%;
-  height: 0px;
-  padding-bottom: 56.25%;  /* Relación de aspecto 16:9 (dividir la altura por el ancho y multiplicar por 100) */
+  border-radius: 10px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-.banner .img-fluid {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-}
+/* .page-header { 
+  background: url(../../public/bus-banner.jpg) no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 280px;
+  position: relative;
+  margin-bottom: 2rem ;
+} */
 
-.container-information{
+/* .container-information{
   background-color: #FFFFFF;
   width: 1180px;
   height: 400px;
@@ -255,8 +254,9 @@ body {
   border: none;
   background: none;
 }
+*/
 
-.send-email{
+ /* .send-email{
   position: relative;
   background-color: #FFFFFF;
   width: 1180px;
@@ -265,34 +265,39 @@ body {
   margin-top: 50px;
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}  */
+
+.card-email {
+  position: relative;
+  bottom: -50px;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-#send{
+/* #send{
   position: absolute;
   margin-left: 30px;
   margin-top: 30px;
   font-weight: bold;
-}
+} */
 
-#deactive{
+/* #deactive{
   position: absolute;
   margin-left: 30px;
   margin-top: 90px;
   font-weight: bold;
-}
+}  */
 
 /*------------------- Toggle Button ----------------------------- */
 
-.togglebutton{
-  position: absolute;
+/* .togglebutton{
   margin-top: 87px;
   margin-left: 140px;
-}
+} */
 
 .toggle-button {
-  position: absolute;
   overflow: hidden;
-  padding: 0;
   width: 67px;
   height: 30px;
   border-radius: 15px;
@@ -302,7 +307,7 @@ body {
   cursor: pointer;
 }
 
-.container {
+.containerT {
   position: relative;
   width: 24px;
   height: 24px;
@@ -336,17 +341,16 @@ body {
   font-size: 14px;
 }
 
-#activate{
+/* #activate{
   position: absolute;
   margin-top: 90px;
   margin-left: 220px;
   font-weight: bold;
-}
+} */
 
 /*--------------------------------------------------------------- */
 
 #btn-save{
-  position: absolute;
   width: 150px;
   height: 32px;
   background: #3C6E71;
