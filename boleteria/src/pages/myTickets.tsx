@@ -8,7 +8,7 @@ const Home = () => {
   return (
     <Layout>
       <div className="LayoutContainer">
-        <Carousel />
+        <Carousel/>
         <Hero />
         <Tickets />
         <Footer />
