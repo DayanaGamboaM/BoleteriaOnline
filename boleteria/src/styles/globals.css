@@ -67,11 +67,16 @@ body {
 }
 .username {
   color: #ffffff;
-  margin-left: 8px; 
+  margin-left: 8px;
   text-decoration: none;
 }
 .user-logo {
-  margin-right: 8px; 
+  margin-right: 8px;
+}
+
+.LayoutContainer{
+  background-color: #D9D9D9;
+
 }
 
 .page-header {
@@ -83,14 +88,14 @@ body {
   margin-bottom: 2rem ;
 }
 .page-header > h2 {
-  height: 100vh; 
+  height: 100vh;
   color: black;
 }
 
 .card-section {
   position: relative;
   bottom: 60px;
-  
+
 }
 .card-block {
   padding: 50px;
@@ -160,6 +165,7 @@ body {
 }
 .buy:hover {
 color: white;
+}
 
 .cuadro-azul {
   background-color: #284B63;
@@ -167,70 +173,31 @@ color: white;
   border-radius: 4px;
 }
 
-.cuadro-azul-grande {
-  background-color: #284B63;
-  padding: 10px 10px;
-  margin-left: 35px;
-  font-size: 16px;
-  text-align: center;
+
+
+.card-block {
+  position: relative;
+  bottom: 40px;
+  padding: 30px;
   border-radius: 10px;
-}
-.btn1{
-  background-color: #3C6E71;
-  color: white;
-  border: none;
-  border-radius: 15px;
-}
-.flex-container {
-  display: flex;
-  justify-content: space-between;
-  flex-direction: row;
-}
-.flex-item {
-  flex: 1;
-}
-@media (max-width: 768px) {
-  .flex-container {
-    flex-direction: column;
-  }
-}
-.trip-info {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: 10px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-.trip-info-item h5 {
-  margin: 0;
-  font-weight: bold;
-}
-
-.trip-info-item p {
-  margin: 0;
-}
-.cuadro-asientos {
-  background-color: #D9D9D9;
-  padding: 20px;
+ .card-State {
+  position: relative;
+  bottom: 10px;
+  padding: 5px;
   border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-.fila-asientos {
-  display: flex;
-  align-items: center;
-}
 
-.asiento {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-color: #CCCCCC;
-  color: black;
-  font-weight: bold;
-  cursor: pointer;
-  margin: 5px;
+
+
+.imgCont{
+  width: 3000px;
+  max-width: 100%;
+
 }
 
 .espacio {
