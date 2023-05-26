@@ -7,7 +7,7 @@ import User from "/public/user.png";
 const NavBar = () => {
   return (
     <Navbar className="navBar" expand="sm" collapseOnSelect>
-      <Navbar.Brand className="ml-5 p-2 fs-3" href="#home">
+      <Navbar.Brand className="ml-5 p-2 fs-3" href="http://localhost:3000/">
         <Image
           src={Logo}
           alt="Header Image"
@@ -33,20 +33,6 @@ const NavBar = () => {
             className="fs-22 m-3"
           >
             Mis tiquetes
-          </Nav.Link>
-          <Nav.Link
-            href="routeCalendar"
-            style={{ color: "#ffffff" }}
-            className="fs-22 m-3"
-          >
-            Calendario de Rutas
-          </Nav.Link>
-          <Nav.Link
-            href="paymentGateway"
-            style={{ color: "#ffffff" }}
-            className="fs-22 m-3"
-          >
-            Pagos
           </Nav.Link>
           <Nav.Link
             href="myTicketsQR"
