@@ -6,7 +6,7 @@ const SendEmail = () => {
     <div className="container">
       <div className="card-section">
         <div className="container">
-          <div className="card-email bg-white mb-3 d-flex flex-row flex-wrap align-items-center justify-content-between">
+          <div className="card-email bg-white d-flex flex-row flex-wrap align-items-center justify-content-between" style={{position:"relative", top:"175px"}}>
             <h5 id="send">Envío de Email</h5>
             <div className="d-flex flex-row align-items-center">
               <h5 id="deactive">Desactivar</h5>
