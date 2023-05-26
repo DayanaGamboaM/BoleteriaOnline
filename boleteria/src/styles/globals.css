@@ -74,6 +74,93 @@ body {
   margin-right: 8px; 
 }
 
+.page-header {
+  background: url(/heroBus.jpg) no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 280px;
+  position: relative;
+  margin-bottom: 2rem ;
+}
+.page-header > h2 {
+  height: 100vh; 
+  color: black;
+}
+
+.card-section {
+  position: relative;
+  bottom: 60px;
+  
+}
+.card-block {
+  padding: 50px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+}
+.cardBlock-titles {
+  color:black;
+  font-weight: 900;
+}
+.box-color {
+  background: var(--azul);
+}
+
+.search {
+  text-decoration: none;
+  color:white;
+  background-color: black;
+  padding: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+  border-radius:1em;
+}
+
+.color-footer{
+  background-color: #8E8A8A;
+}
+.footer-copyright{
+  text-decoration: none;
+  font-weight: 900;
+  color:black;
+}
+.icon-black {
+  color: black;
+}
+
+.icon-container {
+  background-color: #f8f9fa;
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.25rem;
+  margin-right: 10px;
+}
+
+.card-routes {
+  position: relative;
+  bottom: 80px;
+}
+.bodyC {
+  background-color: #d9d9d9;
+}
+
+.card-block-routes {
+  padding: 50px;
+  margin: 100px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.buy {
+  text-decoration: none;
+  color:black;
+  background-color: #3c6e71;
+  padding: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+  border-radius:1em;
+}
+.buy:hover {
+color: white;
+
 .cuadro-azul {
   background-color: #284B63;
   padding: 1px 5px;
@@ -150,4 +237,5 @@ body {
   width: 20px;
   height: 40px;
   margin: 5px;
+
 }
