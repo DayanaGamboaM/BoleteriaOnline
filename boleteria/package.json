@@ -20,16 +20,20 @@
     "@types/react": "18.2.6",
     "@types/react-dom": "18.2.4",
     "bootstrap": "^5.2.3",
-    "dayjs": "^1.11.7",
     "bootstrap-icons": "^1.10.5",
+    "dayjs": "^1.11.7",
     "eslint": "8.41.0",
     "eslint-config-next": "13.4.3",
     "next": "13.4.3",
     "react": "18.2.0",
     "react-bootstrap": "^2.7.4",
+    "react-datepicker": "^4.12.0",
     "react-dom": "18.2.0",
-    "styled-components": "^5.3.11",
     "react-icons": "^4.8.0",
+    "styled-components": "^5.3.11",
     "typescript": "5.0.4"
+  },
+  "devDependencies": {
+    "@types/react-datepicker": "^4.11.2"
   }
 }
