@@ -1,13 +1,23 @@
-import React from 'react'
-import Layout from '../../components/Layout';
-const Home = ()=>{
+import React from "react";
+import Layout from "../../components/Layout";
+import Hero from "../../components/componentsAccount/Hero";
+import PersonalInformation from "../../components/componentsAccount/PersonalInformation";
+import SendEmail from "../../components/componentsAccount/SendEmail";
+import SaveButton from "../../components/componentsAccount/SaveButton";
+import Footer from "../../components/componentsAccount/Footer";
 
-    return(
+const Home = () => {
+  return (
+    <Layout>
+      <div className="containerL">
+        <Hero/>
+        <PersonalInformation/>
+        <SendEmail/>
+        <SaveButton/>
+        <Footer/>
+      </div>
+    </Layout>
+  );
+};
 
-        <Layout>
-            <h1>Account</h1>
-        </Layout>
-    )
-}
-
-export default Home ; 
+export default Home;
