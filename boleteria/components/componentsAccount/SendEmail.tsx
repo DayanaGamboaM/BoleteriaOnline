@@ -3,7 +3,7 @@ import ToggleButton from "./ToggleButton";
 
 const SendEmail = () => {
   return (
-    <div className="container">
+    <div className="container" style={{marginTop: "-70px"}}>
       <div className="card-section">
         <div className="container">
           <div className="card-email bg-white d-flex flex-row flex-wrap align-items-center justify-content-between" style={{position:"relative", top:"175px"}}>

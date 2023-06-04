@@ -41,7 +41,7 @@ const QR = () => {
               style={{
                 background: "#D9D9D9",
                 color: "black",
-                borderRadius: 20,
+                borderRadius: "1em",
                 marginRight: "80px", // Mover el botón hacia la izquierda
               }}
             >
@@ -66,7 +66,7 @@ const QR = () => {
               style={{
                 background: "#D9D9D9",
                 color: "black",
-                borderRadius: 20,
+                borderRadius: "1em",
                 marginLeft: "80px"
               }}
             >
@@ -121,7 +121,7 @@ const QR = () => {
           <div className="d-flex justify-content-center">
             <div
               className="bg-white mx-auto"
-              style={{ borderRadius: "20px", width: "28%", height: "auto" }}
+              style={{ borderRadius: "1rem", padding: "10px", width: "200px", height: "45px"}}
             >
               <h5 className="text-center">Estado</h5>
             </div>

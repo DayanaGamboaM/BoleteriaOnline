@@ -29,7 +29,7 @@ const Seats = () => {
             <Image
               src={Seat}
               alt="Logo de asiento"
-              className="imr-3"
+              className="mr-3"
               width={35}
             />
             Seleccionar espacios

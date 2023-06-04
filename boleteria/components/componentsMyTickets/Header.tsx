@@ -45,22 +45,16 @@ const Header = () => {
                 </h5>
               </div>
             </div>
-            <div className="container d-flex justify-content-start">
-              <div
-                style={{
-                  maxWidth: "200px",
-                  marginLeft: "100px",
-                  marginRight: "100px",
-                }}
-              >
+            <div className="d-flex flex-wrap justify-content-center">
+              <div className="mx-3 my-2">
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <div className="datepicker-containerT" >
+                  <div className="datepicker-containerT">
                     <DatePicker format="DD-MM-YYYY" />
                   </div>
                 </LocalizationProvider>
               </div>
 
-              <div className="ml-3" style={{ maxWidth: "200px" }}>
+              <div className="mx-3 my-2">
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <div className="datepicker-containerT">
                     <DatePicker format="DD-MM-YYYY" />
@@ -69,9 +63,9 @@ const Header = () => {
               </div>
 
               <a
-                className="principalButton d-flex justify-content-center align-items-center"
+                className="principalButton d-flex justify-content-center align-items-center mx-3 my-2"
                 href="myTicketsQR"
-                style={{ marginLeft: "100px", width: "150px", height: "40px" }}
+                style={{ width: "150px", height: "40px" }}
               >
                 <BsSearch style={{ marginRight: "5px" }} /> Buscar
               </a>

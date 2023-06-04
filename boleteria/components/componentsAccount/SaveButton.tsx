@@ -1,11 +1,14 @@
 import React from 'react'
+import { BsDoorClosed, BsSaveFill } from "react-icons/bs";
 
 const SaveButton = () => {
     return (
-        <div className='container'>
+        <div className='container' style={{marginTop: "70px"}}>
             <div>
                 <div className="container mb-3 d-flex flex-column justify-content-center align-items-center mt-5" style={{position:"relative", top:"-30px", paddingTop:"100px"}}>
-                    <button className="btn btn-primary" style={{position:"relative", backgroundColor:"#3C6E71", fontWeight:"bold",marginTop:"100px"}}>Guardar</button>
+                <a className="principalButton" href="#">
+                 <BsSaveFill className='mr-3' /> Guardar
+              </a>
                 </div>
             </div>
         </div>

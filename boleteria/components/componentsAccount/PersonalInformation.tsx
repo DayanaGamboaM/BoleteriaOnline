@@ -27,7 +27,7 @@ const PersonalInformation = () => {
 
   return (
     <div className="container">
-      <div>
+      <div style={{marginTop: "-50px"}}>
         <div
           className="card-information bg-white mb-5"
           style={{
