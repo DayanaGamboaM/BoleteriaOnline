@@ -1,10 +1,24 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import DatePicker from 'react-datepicker';
+//import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
+import dayjs, { Dayjs } from "dayjs";
+import "dayjs/locale/es";
 
 const TravelDate = () => {
-    const [fechaSeleccionada, setFechaSeleccionada] = useState<Date | null>(null);
+    const [selectedDate, setSelectedDate] = useState<Dayjs>(dayjs());
+
+    const currentDate = dayjs(new Date());
+
+    const handleDateChange = (date: Dayjs | null) => {
+        if (date) {
+        setSelectedDate(date);
+        }
+    };
+
+  dayjs.locale("es");
 
     return (
         <div className="container mt-5">
@@ -16,15 +30,18 @@ const TravelDate = () => {
                     </div>
                 </div>
                 <div className="card-body">
-                    <div className="calendar-container">
-                        <DatePicker
-                            selected={fechaSeleccionada}
-                            onChange={(date: Date | null) => setFechaSeleccionada(date)}
-                            dateFormat="dd/MM/yyyy"
-                            className="form-control"
-                            placeholderText="Da click y selecciona la fecha"
+                <div className="flex-grow-1" style={{ maxWidth: "400px" }}>
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                      <div className="datepicker-container">
+                        <DatePicker 
+                         value={selectedDate}
+                         onChange={handleDateChange}
+                         format="DD-MM-YYYY"
+                         minDate={currentDate} 
                         />
-                    </div>
+                      </div>
+                    </LocalizationProvider>
+                  </div>
                 </div>
             </div>
         </div>

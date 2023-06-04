@@ -6,12 +6,13 @@ import Hour from '../../components/componentsPaymentGateway/Hour';
 import Seats from '../../components/componentsPaymentGateway/Seats';
 import InfoTravel from '../../components/componentsPaymentGateway/InfoTravel';
 import NavBar from '../../components/NavBar';
+import Footer from '../../components/Footer';
 const Home = () => {
 
     return (
         <>
             <NavBar />
-            <div className="container">
+            <div className="container" style={{ marginBottom: '20px' }}>
                 <div className="flex-container">
                     <div className="flex-item">
                         <Boarding/>
@@ -25,7 +26,7 @@ const Home = () => {
                     </div>
                 </div>
             </div>
-
+            <Footer />
 
         </>
     )

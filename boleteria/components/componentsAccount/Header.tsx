@@ -1,14 +1,10 @@
 import React from "react";
 import Image from "next/image";
-import Banner from "../../public/bus-banner.jpg";
 import UserProfile from "../../public/usuario.png";
 
-const Hero = () => {
+const Header = () => {
   return (
     <div>
-      <div className="d-flex justify-content-center">
-        <Image className="imgCont img-fluid" src={Banner} alt="Banner" />
-      </div>
       <div className="container">
         <div className="card-section">
           <div className="container">
@@ -33,4 +29,4 @@ const Hero = () => {
   );
 };
 
-export default Hero;
+export default Header;

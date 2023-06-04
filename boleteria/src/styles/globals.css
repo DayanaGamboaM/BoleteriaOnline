@@ -121,7 +121,7 @@ body {
   background: var(--azul);
 }
 
-.search {
+.principalButton {
   text-decoration: none;
   color:white;
   background-color: black;
@@ -309,8 +309,13 @@ color: white;
   background-color: #3C6E71;
   color: white;
   border: none;
-  border-radius: 15px;
+  text-decoration: none;
+  padding: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+  border-radius:1em;
 }
+
 .flex-container {
   display: flex;
   justify-content: space-between;
@@ -367,4 +372,25 @@ color: white;
   width: 20px;
   height: 40px;
   margin: 5px;
+}
+
+.datepicker-container .MuiInputBase-root {
+  width: 100%;
+  max-width: 100%;
+  height: 37px;
+  padding: 5px;
+}
+
+.datepicker-container .MuiIconButton-root .MuiSvgIcon-root {
+  color: black;
+}
+
+.datepicker-containerT .MuiInputBase-root {
+  width: 100%;
+  max-width: 100%;
+  height: 40px;
+  padding: 5px;
+}
+.datepicker-containerT .MuiIconButton-root .MuiSvgIcon-root {
+  color: black;
 }
