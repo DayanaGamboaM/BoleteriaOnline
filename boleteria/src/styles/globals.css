@@ -70,7 +70,18 @@ body {
   margin-left: 8px;
   text-decoration: none;
 }
+
 .user-logo {
+  margin-right: 8px; 
+}
+
+.containerL{
+  background-color: var(--gris);
+}
+
+/* Empieza mis diseños */
+
+.card-block { /* Es para el bloque de la foto del perfil */
   margin-right: 8px;
 }
 
@@ -110,7 +121,7 @@ body {
   background: var(--azul);
 }
 
-.search {
+.principalButton {
   text-decoration: none;
   color:white;
   background-color: black;
@@ -183,6 +194,86 @@ color: white;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
 }
 
+.imgCont{
+  width: 2904px;
+  max-width: 100%;
+}
+
+.card-information{
+  position: relative;
+  border-radius: 10px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* .page-header { 
+  background: url(../../public/bus-banner.jpg) no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 280px;
+  position: relative;
+  margin-bottom: 2rem ;
+} */
+
+.card-email {
+  position: relative;
+  bottom: -50px;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/*------------------- Toggle Button ----------------------------- */
+
+/* Toggle Button */
+.toggle-button {
+  position: relative;
+  overflow: hidden;
+  height: 24px;
+  border-radius: 15px;
+  background-color: #e2e2e2;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+/* Toggle Container */
+.toggle-container {
+  position: relative;
+  border-radius: 20px;
+  background-color: #d9d9d9;
+}
+
+/* Circle */
+.circle {
+  position: relative;
+  top: -4px;
+  left: -7px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  transition: transform 0.3s ease-in-out;
+  background-color: black;
+}
+
+/* Circle On */
+.circle-on {
+  transform: translateX(0%);
+}
+
+/* Circle Off */
+.circle-off {
+  transform: translateX(100%);
+}
+
+/* Label */
+.label {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 5px;
+  font-size: 14px;
+}
+
+/*--------------------------------------------------------------- */
  .card-State {
   position: relative;
   bottom: 10px;
@@ -191,18 +282,122 @@ color: white;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-
-
-
 .imgCont{
   width: 3000px;
   max-width: 100%;
 
 }
 
+.cuadro-azul {
+  background-color: #284B63;
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+
+.cuadro-azul-grande {
+  background-color: #284B63;
+  padding: 10px 10px;
+  margin-left: 35px;
+  font-size: 16px;
+  text-align: center;
+  border-radius: 10px;
+}
+.btn1{
+  background-color: #3C6E71;
+  color: white;
+  border: none;
+  text-decoration: none;
+  padding: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+  border-radius:1em;
+}
+
+.flex-container {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
+.flex-item {
+  flex: 1;
+}
+@media (max-width: 768px) {
+  .flex-container {
+    flex-direction: column;
+  }
+}
+.trip-info {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10px;
+}
+
+.trip-info-item h5 {
+  margin: 0;
+  font-weight: bold;
+}
+
+.trip-info-item p {
+  margin: 0;
+}
+.cuadro-asientos {
+  background-color: #D9D9D9;
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.fila-asientos {
+  display: flex;
+  align-items: center;
+}
+
+.asiento {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #CCCCCC;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 5px;
+}
+
 .espacio {
   width: 20px;
   height: 40px;
   margin: 5px;
+}
 
+.datepicker-container .MuiInputBase-root {
+  width: 100%;
+  max-width: 100%;
+  height: 37px;
+  padding: 5px;
+}
+
+.datepicker-container .MuiIconButton-root .MuiSvgIcon-root {
+  color: black;
+}
+
+.datepicker-containerT .MuiInputBase-root {
+  width: 100%;
+  max-width: 100%;
+  height: 40px;
+  padding: 5px;
+}
+.datepicker-containerT .MuiIconButton-root .MuiSvgIcon-root {
+  color: black;
+}
+
+.btn-tickes {
+  text-decoration: none;
+  color: black;
+  background-color: #D9D9D9;
+  padding: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+  border-radius:1em;
 }

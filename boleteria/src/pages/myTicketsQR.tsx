@@ -1,10 +1,10 @@
 import React from 'react'
 import Layout from '../../components/Layout';
-import Carousel from '../../components/componentsQR/Carousel';
-import Hero from '../../components/componentsQR/Hero';
 import QR from '../../components/componentsQR/QR';
 import Information from '../../components/componentsQR/Information';
-import Footer from '../../components/componentsQR/Footer';
+import Footer from '../../components/Footer';
+import Header from '../../components/componentsQR/Header';
+import Hero from '../../components/Hero';
 
 
 const Home = ()=>{
@@ -13,8 +13,8 @@ const Home = ()=>{
 
         <Layout>
             <div className='LayoutContainer'>
-                <Carousel/>
-                <Hero/>
+                <Hero />
+                <Header/>
                 <QR/>
                 <Information/>
                 <Footer/>

@@ -1,17 +1,17 @@
 import React from "react";
 import Layout from "../../components/Layout";
-import Carousel from "../../components/componentsMyTickets/Carousel";
-import Hero from "../../components/componentsMyTickets/Hero";
+import Header from "../../components/componentsMyTickets/Header";
 import Tickets from "../../components/componentsMyTickets/Tickets";
-import Footer from "../../components/componentsQR/Footer";
+import Footer from "../../components/Footer";
+import Hero from "../../components/Hero";
 const Home = () => {
   return (
     <Layout>
       <div className="LayoutContainer">
-        <Carousel />
         <Hero />
+        <Header />
         <Tickets />
-        <Footer />
+        <Footer/>
       </div>
     </Layout>
   );
