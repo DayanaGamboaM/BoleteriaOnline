@@ -1,0 +1,95 @@
+{
+    "routes": [
+      {
+        "origin": "San José",
+        "destination": "San Isidro",
+        "date": "09/06/2023"
+      },
+      {
+        "origin": "San José",
+        "destination": "San Vito",
+        "date": "09/06/2023"
+      },
+      {
+        "origin": "San José",
+        "destination": "Paso Canoas",
+        "date": "09/06/2023"
+      },
+      {
+        "origin": "San José",
+        "destination": "Rio Claro",
+        "date": "09/06/2023"
+      },
+      {
+        "origin": "San Isidro",
+        "destination": "San José",
+        "date": "09/06/2023"
+      },
+      {
+        "origin": "San Isidro",
+        "destination": "San Vito",
+        "date": "09/06/2023"
+      },
+      {
+        "origin": "San Isidro",
+        "destination": "Paso Canoas",
+        "date": "09/06/2023"
+      },
+      {
+        "origin": "San Isidro",
+        "destination": "Rio Claro",
+        "date": "09/06/2023"
+      },
+      {
+        "origin": "San Vito",
+        "destination": "San José",
+        "date": "09/06/2023"
+      },
+      {
+        "origin": "San Vito",
+        "destination": "San Isidro",
+        "date": "09/06/2023"
+      },
+      {
+        "origin": "San Vito",
+        "destination": "Paso Canoas",
+        "date": "09/06/2023"
+      },
+      {
+        "origin": "San Vito",
+        "destination": "Rio Claro",
+        "date": "09/06/2023"
+      },
+      {
+        "origin": "Paso Canoas",
+        "destination": "San José",
+        "date": "09/06/2023"
+      },
+      {
+        "origin": "Paso Canoas",
+        "destination": "San Isidro",
+        "date": "09/06/2023"
+      },
+      {
+        "origin": "Paso Canoas",
+        "destination": "San Vito",
+        "date": "09/06/2023"
+      },
+      {
+        "origin": "Paso Canoas",
+        "destination": "Rio Claro",
+        "date": "09/06/2023"
+      },
+      {
+        "origin": "Rio Claro",
+        "destination": "San José",
+        "date": "09/06/2023"
+      },
+      {
+        "origin": "Rio Claro",
+        "destination": "San Isidro",
+        "date": "09/06/2023"
+      }
+    ]
+  }
+  
