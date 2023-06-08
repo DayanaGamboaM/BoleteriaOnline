@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { BsSearch } from "react-icons/bs";
 import { Button } from "react-bootstrap";
 
 const PersonalInformation = () => {
@@ -27,20 +28,20 @@ const PersonalInformation = () => {
 
   return (
     <div className="container">
-      <div style={{marginTop: "-50px"}}>
+      <div style={{ marginTop: "-50px" }}>
         <div
           className="card-information bg-white mb-5"
           style={{
-            position:"relative",
+            position: "relative",
             width: "1400px",
             maxWidth: "100%",
-            bottom:"-30px"
+            bottom: "-30px",
           }}
         >
           <div className="row p-4">
             <div
               className="p-4"
-              style={{ position: "relative", margin: "auto"}}
+              style={{ position: "relative", margin: "auto" }}
             >
               <h4
                 style={{
@@ -151,9 +152,11 @@ const PersonalInformation = () => {
                     <h5 style={{ fontWeight: "bold", color: "Black" }}>
                       Nacimiento
                     </h5>
-                    <div style={{ position: "relative", bottom: "5px" }}>
+                    <div>
                       <LocalizationProvider dateAdapter={AdapterDayjs}>
-                        <DatePicker />
+                        <div className="datepicker-containerT">
+                          <DatePicker format="DD-MM-YYYY" />
+                        </div>
                       </LocalizationProvider>
                     </div>
                   </div>
