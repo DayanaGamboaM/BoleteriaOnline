@@ -5,20 +5,46 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
 import dayjs, { Dayjs } from "dayjs";
 import "dayjs/locale/es";
+import Swal from 'sweetalert2';
 
 import placesOrigin from "../public/placesOrigin.json";
 import placesDestination from "../public/placesDestination.json";
 import cantPerson from "../public/cantPerson.json";
 
 const Header = () => {
-
   const [selectedDate, setSelectedDate] = useState<Dayjs>(dayjs());
+  const [showAlert, setShowAlert] = useState(false);
 
   const currentDate = dayjs(new Date());
 
   const handleDateChange = (date: Dayjs | null) => {
     if (date) {
       setSelectedDate(date);
+    }
+  };
+
+  const handleSearchClick = () => {
+    const origin = document.getElementById("origin") as HTMLSelectElement;
+    const destination = document.getElementById(
+      "destination"
+    ) as HTMLSelectElement;
+    const passengers = document.getElementById(
+      "passengers"
+    ) as HTMLSelectElement;
+
+    if (
+      !origin.value ||
+      !destination.value ||
+      !passengers.value ||
+      !selectedDate
+    ) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Debe llenar todos los campos',
+      });
+    } else {
+      window.location.href = "routeCalendar";
     }
   };
 
@@ -37,7 +63,11 @@ const Header = () => {
                     <span className="input-group-text text-black">
                       <BsGeoFill />
                     </span>
-                    <select className="form-select" aria-label="Select origin">
+                    <select
+                      id="origin"
+                      className="form-select"
+                      aria-label="Select origin"
+                    >
                       <option value="">Origen</option>
                       {placesOrigin.map((origin) => (
                         <option key={origin.id} value={origin.name}>
@@ -56,6 +86,7 @@ const Header = () => {
                       <BsGeoFill />
                     </span>
                     <select
+                      id="destination"
                       className="form-select"
                       aria-label="Select destination"
                     >
@@ -77,6 +108,7 @@ const Header = () => {
                       <BsPersonFillAdd />
                     </span>
                     <select
+                      id="passengers"
                       className="form-select"
                       aria-label="Select passenger"
                     >
@@ -108,7 +140,10 @@ const Header = () => {
                 </div>
               </div>
               <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 text-center mt-5">
-                <a className="principalButton" href="routeCalendar">
+                <a
+                  className="principalButton"
+                  onClick={handleSearchClick}
+                >
                   <BsSearch /> Buscar
                 </a>
               </div>

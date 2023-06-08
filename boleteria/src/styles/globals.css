@@ -401,3 +401,13 @@ color: white;
   text-transform: uppercase;
   border-radius:1em;
 }
+
+.bntClose {
+  text-decoration: none;
+  color:white;
+  background-color: red;
+  padding: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+  border-radius:1em;
+}
