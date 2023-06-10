@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import ToggleButton from "./ToggleButton";
+import { Switch } from "@mui/material";
 
 const SendEmail = () => {
+
+  const [toggle, setToggle] = useState(false)
+
   return (
     <div className="container" style={{marginTop: "-70px"}}>
       <div className="card-section">
@@ -10,9 +14,7 @@ const SendEmail = () => {
             <h5 id="send">Envío de Email</h5>
             <div className="d-flex flex-row align-items-center">
               <h5 id="deactive">Desactivar</h5>
-              <div className="toggle-container mx-3">
-                <ToggleButton />
-              </div>
+                <ToggleButton/>
               <h5 id="activate">Activar</h5>
             </div>
           </div>
