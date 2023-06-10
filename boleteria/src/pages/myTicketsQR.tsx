@@ -7,7 +7,7 @@ import Header from '../../components/componentsQR/Header';
 import Hero from '../../components/Hero';
 
 
-const Home = ()=>{
+const MyTicketsQR = ()=>{
 
     return(
 
@@ -24,4 +24,4 @@ const Home = ()=>{
     )
 }
 
-export default Home ;
+export default MyTicketsQR ;

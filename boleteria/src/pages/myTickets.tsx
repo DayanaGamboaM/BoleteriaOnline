@@ -4,7 +4,7 @@ import Header from "../../components/componentsMyTickets/Header";
 import Tickets from "../../components/componentsMyTickets/Tickets";
 import Footer from "../../components/Footer";
 import Hero from "../../components/Hero";
-const Home = () => {
+const MyTickets = () => {
   return (
     <Layout>
       <div className="LayoutContainer">
@@ -17,4 +17,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default MyTickets;

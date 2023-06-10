@@ -4,7 +4,7 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import RoutesC from '../../components/componentsRouteCalendar/RoutesC';
 import Hero from '../../components/Hero';
-const Home = ()=>{
+const RouteCalendar = ()=>{
 
     return(
 
@@ -21,4 +21,4 @@ const Home = ()=>{
     )
 }
 
-export default Home ; 
+export default RouteCalendar ; 
