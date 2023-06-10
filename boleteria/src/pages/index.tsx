@@ -27,12 +27,12 @@ export default function Home() {
       setIsLoading(false);
     });
 
-    // Limpiar el evento de cambio de estado cuando el componente se desmonte
+  
     return () => unsubscribe();
   }, []);
 
   if (isLoading) {
-    // Mostrar un mensaje de carga mientras se verifica el estado de autenticación
+    
     return <div>Cargando...</div>;
   }
 
