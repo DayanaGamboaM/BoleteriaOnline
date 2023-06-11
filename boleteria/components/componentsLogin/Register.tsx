@@ -1,5 +1,4 @@
 import React, { useState, FormEvent } from "react";
-import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { auth } from "@/fireBase/app";
 import Logo from "../../public/logoLogin.jpg";
 import Image from "next/image";
@@ -7,6 +6,8 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
+
+import { useRouter } from "next/router";
 
 const SignUp = () => {
   const [signUpForm, setSignUpForm] = useState({
@@ -19,13 +20,17 @@ const SignUp = () => {
     confirmPassword: "",
   });
 
+  const router = useRouter();
+
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.target as HTMLFormElement;
     const correo = form.email.value;
     const contrasenna = form.password.value;
 
-    await createUserWithEmailAndPassword(auth, correo, contrasenna);
+    await createUserWithEmailAndPassword(auth, correo, contrasenna).then(() => {
+      router.push("/");
+    });
   };
 
   return (

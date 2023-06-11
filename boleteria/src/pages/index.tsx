@@ -10,12 +10,14 @@ import Hero from "../../components/Hero";
 import Login from "../../components/componentsLogin/Login";
 import { auth } from "../../src/fireBase/app";
 import { onAuthStateChanged, User } from "firebase/auth";
+import { useRouter } from "next/router";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   const [usuario, setUsuario] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const router = useRouter();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (usuarioFirebase) => {
@@ -27,12 +29,16 @@ export default function Home() {
       setIsLoading(false);
     });
 
-  
     return () => unsubscribe();
   }, []);
 
+  useEffect(() => {
+    if (usuario) {
+      router.push("/");
+    }
+  }, [usuario]);
+
   if (isLoading) {
-    
     return <div>Cargando...</div>;
   }
 
