@@ -28,6 +28,7 @@ const Header = () => {
               height: "100px",
               borderRadius: "50%",
               overflow: "hidden",
+              marginRight:"30px"
             }}
           >
             <Image
@@ -51,7 +52,7 @@ const Header = () => {
                   boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.2)",
                   fontSize: "14px",
                   fontWeight: "900",
-                  marginLeft: "-25px",
+                  marginLeft: "-27px",
                   textTransform:"uppercase"
                 }}
               >
@@ -93,7 +94,7 @@ const Header = () => {
                   boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.2)",
                   fontSize: "14px",
                   fontWeight: "900",
-                  marginLeft: "-25px",
+                  marginLeft: "-27px",
                   textTransform:"uppercase"
                 }}
               >
