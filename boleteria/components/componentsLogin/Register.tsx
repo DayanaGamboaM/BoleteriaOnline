@@ -33,6 +33,10 @@ const SignUp = () => {
     });
   };
 
+  const handleBack = () => {
+    router.push("/login"); 
+  };
+
   return (
     <div id="register" style={{ backgroundColor: "#284B63" }}>
       <section className="vh-100" style={{ backgroundColor: "#284B63" }}>
@@ -178,15 +182,19 @@ const SignUp = () => {
                               </label>
                             </div>
 
-                            <div className="pt-1 mb-4 ">
-                              <button
-                                className="btn btn-dark btn-lg"
-                                type="submit"
-                                //disabled={loading}
-                              >
-                                {/* {loading ? "Registrando..." : "Registrar"} */}
-                                Registrar
-                              </button>
+                            <div className="pt-1 mb-4">
+                              <div className="row">
+                                <div className="col-sm-6">
+                                  <button className="btn btn-dark btn-lg" type="submit">
+                                    Registrar
+                                  </button>
+                                </div>
+                                <div className="col-sm-6">
+                                  <button className="btn btn-dark btn-lg" type="button" onClick={handleBack}>
+                                    Atrás
+                                  </button>
+                                </div>
+                              </div>
                             </div>
                           </div>
                         </div>
