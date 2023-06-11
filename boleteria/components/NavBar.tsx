@@ -1,10 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Navbar, Nav } from "react-bootstrap";
 import Logo from "/public/logo.png";
 import Image from "next/image";
 import User from "/public/user.png";
+import { auth } from "@/fireBase/app";
+
 
 const NavBar = () => {
+
+  const [userEmail, setUserEmail] = useState<string>("");
+
+  useEffect(() => {
+    // Función para obtener el correo electrónico del usuario autenticado
+    const getUserEmail = () => {
+      if (auth.currentUser?.email) {
+        const email = auth.currentUser.email;
+        setUserEmail(email);
+      }
+    };
+
+    getUserEmail();
+  }, []);
+
   return (
     <Navbar className="navBar" expand="sm" collapseOnSelect>
       <Navbar.Brand className="ml-5 p-2 fs-3" href="http://localhost:3000/">
@@ -60,7 +77,7 @@ const NavBar = () => {
               height={30}
             />
             <a className="username mr-3" style={{ color: "#ffffff" }}>
-              Nombre de usuario
+              {userEmail}
             </a>
           </div>
         </Nav>
