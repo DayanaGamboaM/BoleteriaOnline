@@ -221,58 +221,14 @@ color: white;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-/*------------------- Toggle Button ----------------------------- */
-
-/* Toggle Button */
-.toggle-button {
-  position: relative;
-  overflow: hidden;
-  height: 24px;
-  border-radius: 15px;
-  background-color: #e2e2e2;
-  border: none;
-  outline: none;
-  cursor: pointer;
-}
-
-/* Toggle Container */
-.toggle-container {
-  position: relative;
-  border-radius: 20px;
-  background-color: #d9d9d9;
-}
-
-/* Circle */
-.circle {
-  position: relative;
-  top: -4px;
-  left: -7px;
-  width: 18px;
-  height: 18px;
+ .ImageUserPerfil{
+  height: 100px;
+  width: 100px;
   border-radius: 50%;
-  transition: transform 0.3s ease-in-out;
-  background-color: black;
-}
+  object-fit: cover;
+  background: #dfdfdf;
+ }
 
-/* Circle On */
-.circle-on {
-  transform: translateX(0%);
-}
-
-/* Circle Off */
-.circle-off {
-  transform: translateX(100%);
-}
-
-/* Label */
-.label {
-  display: inline-block;
-  vertical-align: middle;
-  margin-left: 5px;
-  font-size: 14px;
-}
-
-/*--------------------------------------------------------------- */
  .card-State {
   position: relative;
   bottom: 10px;
