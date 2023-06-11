@@ -1,23 +1,39 @@
-import React, {useState, FormEvent} from "react";
-import Logo from '../../public/logoLogin.jpg'
+import React, { useState, FormEvent } from "react";
+import Logo from "../../public/logoLogin.jpg";
 import Image from "next/image";
+import { auth } from "../../src/fireBase/app";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { useRouter } from "next/router";
+import Swal from 'sweetalert2';
 
-import {auth} from '../../src/fireBase/app'
-import {createUserWithEmailAndPassword, signInWithEmailAndPassword} from 'firebase/auth'
 
 const Login = () => {
+  const router = useRouter();
+  const [register, setRegister] = useState(false);
 
-    const[register, setRegister] = useState(false)
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = e.target as HTMLFormElement;
+    const correo = form.ema.value;
+    const contrasenna = form.pass.value;
 
-    const handleSubmit = async(e: FormEvent<HTMLFormElement>)=>{
-        e.preventDefault()
-        const form = e.target as HTMLFormElement;
-        const correo = form.ema.value;
-        const contrasenna = form.pass.value;
+    try {
+      // Autenticar al usuario
+      await signInWithEmailAndPassword(auth, correo, contrasenna);
 
-        await signInWithEmailAndPassword(auth,correo,contrasenna)
-     }
-    
+      // Redirigir al usuario a la página de inicio
+      router.push("/home");
+    } catch (error) {
+      // Manejar errores de autenticación
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Error al digitar los datos requeridos',
+      });
+      console.log("Error de autenticación:", error);
+    }
+  };
+
   return (
     <div>
       <section className="vh-100" style={{ backgroundColor: "#284B63" }}>
@@ -28,7 +44,7 @@ const Login = () => {
                 <div className="row g-0">
                   <div className="col-md-6 col-lg-5 d-none d-md-block">
                     <Image
-                      src= {Logo}
+                      src={Logo}
                       alt="login form"
                       className="img-fluid"
                       width={700}
@@ -62,12 +78,7 @@ const Login = () => {
                             placeholder="Ingresar correo"
                             required
                           />
-                          <label
-                            className="form-label"
-                            
-                          >
-                            Correo Electronico
-                          </label>
+                          <label className="form-label">Correo Electronico</label>
                         </div>
 
                         <div className="form-outline mb-4">
@@ -78,18 +89,11 @@ const Login = () => {
                             placeholder="Ingresar contraseña"
                             required
                           />
-                          <label
-                            className="form-label"
-                          >
-                            Contraseña
-                          </label>
+                          <label className="form-label">Contraseña</label>
                         </div>
 
                         <div className="pt-1 mb-4">
-                          <button
-                            className="btn btn-dark btn-lg btn-block"
-                            type="submit"
-                          >
+                          <button className="btn btn-dark btn-lg btn-block" type="submit">
                             Iniciar sesión
                           </button>
                         </div>
@@ -97,10 +101,7 @@ const Login = () => {
                         <a className="small text-muted" href="#!">
                           Olvidaste la contraseña?
                         </a>
-                        <p
-                          className="mb-5 pb-lg-2"
-                          style={{ color: "#393f81" }}
-                        >
+                        <p className="mb-5 pb-lg-2" style={{ color: "#393f81" }}>
                           No tienes una cuenta?{" "}
                           <a href="register" style={{ color: "#393f81" }}>
                             Registrate aquí
