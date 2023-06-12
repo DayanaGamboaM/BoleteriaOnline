@@ -119,15 +119,6 @@ const PersonalInformation = () => {
                     <h5 style={{ fontWeight: "bold", color: "Black" }}>Sexo</h5>
                     <h4 style={{ fontWeight: "bold", color: "Black" }}>F/M</h4>
                   </div>
-                  <div
-                    id="vertical-line-gender"
-                    style={{
-                      width: "3px",
-                      height: "70px",
-                      background: "rgb(7, 0, 0)",
-                      marginLeft: "60px",
-                    }}
-                  ></div>
                   <Button
                     id="button-gender"
                     style={buttonStyles}
