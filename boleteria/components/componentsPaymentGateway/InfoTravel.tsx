@@ -1,8 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Paypal from "/public/paypal.jpg";
+import QR from '../componentsQR/QR';
 
 const InfoTravel = () => {
+  const [qrValue, setQRValue] = useState('');
+  
+
+  const generateRandomQRCode = () => {
+    const randomValue = Math.random().toString(36).substring(2, 15);
+    setQRValue(randomValue);
+    console.log(qrValue)
+  };
+
   return (
     <div className="container mt-5">
       <div
@@ -90,9 +100,14 @@ const InfoTravel = () => {
                   PayPal
                 </label>
               </div>
-              <button className="btn1" style={{ width: "100px"}}>
+              <button
+                onClick={generateRandomQRCode}
+                className="btn"
+                style={{ width: "100px" }}
+              >
                 Pagar
               </button>
+              {/* <QR qrValue={qrValue}></QR> */}
             </div>
           </div>
         </div>

@@ -1,13 +1,13 @@
-import React from "react";
-import Image from "next/image";
+import React, { useState } from "react";
 import Carousel from "react-bootstrap/Carousel";
-import imagen1 from "../../public/QR-1.png";
-import imagen2 from "../../public/QR-2.jpg";
-import imagen3 from "../../public/QR-3.jpg";
 import { Button } from "react-bootstrap";
-import { useState } from "react";
+import QRCode from "react-qr-code";
 
-const QR = () => {
+interface QRProps {
+  qrValue: string;
+}
+
+const QR: React.FC<QRProps> = ({ qrValue }) => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const handleSelect = (selectedIndex: any) => {
@@ -21,9 +21,7 @@ const QR = () => {
   };
 
   const handleNextClick = () => {
-
     const totalImages = 2;
-
     if (activeIndex < totalImages - 1) {
       setActiveIndex(activeIndex + 1);
     }
@@ -85,7 +83,6 @@ const QR = () => {
               </svg>
             </Button>
           </div>
-
           <div
             className="card bg-white mx-auto my-5"
             style={{ maxWidth: "300px", maxHeight: "250px" }}
@@ -98,21 +95,13 @@ const QR = () => {
                 controls={false}
               >
                 <Carousel.Item interval={1000000000}>
-                  <div className="d-flex justify-content-center" style={{maxWidth:'100%', width:'400px'}}>
-                    <Image
-                      className="img-fluid"
-                      src={imagen1}
-                      alt="First slide"
-                    />
+                  <div className="d-flex justify-content-center" style={{maxWidth:'100%', width:'270px', maxHeight:'100%', height:'230px'}}>
+                   {qrValue && <QRCode value={qrValue} size={220}/>}
                   </div>
                 </Carousel.Item>
                 <Carousel.Item interval={100000}>
                   <div className="d-flex justify-content-center" style={{maxWidth:'100%', width:'270px', maxHeight:'100%', height:'230px'}}>
-                    <Image
-                      className="img-fluid"
-                      src={imagen2}
-                      alt="Second slide"
-                    />
+                  <QRCode value="Segundo tiquete" size={220}/>
                   </div>
                 </Carousel.Item>
               </Carousel>

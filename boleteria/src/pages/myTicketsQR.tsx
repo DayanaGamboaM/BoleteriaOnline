@@ -15,7 +15,7 @@ const Home = ()=>{
             <div className='LayoutContainer'>
                 <Hero />
                 <Header/>
-                <QR/>
+                <QR qrValue="" />
                 <Information/>
                 <Footer/>
             </div>
