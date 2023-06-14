@@ -8,7 +8,7 @@ import InfoTravel from '../../components/componentsPaymentGateway/InfoTravel';
 import NavBar from '../../components/NavBar';
 import Footer from '../../components/Footer';
 
-const Home = () => {
+const PaymentGateway = () => {
 
     return (
         <>
@@ -33,4 +33,4 @@ const Home = () => {
     )
 }
 
-export default Home; 
+export default PaymentGateway; 
