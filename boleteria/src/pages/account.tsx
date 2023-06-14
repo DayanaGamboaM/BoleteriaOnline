@@ -8,7 +8,7 @@ import Footer from "../../components/Footer";
 import Hero from "../../components/Hero";
 
 
-const Home = () => {
+const Account = () => {
   return (
     <Layout>
       <div className="containerL">
@@ -23,4 +23,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Account;
