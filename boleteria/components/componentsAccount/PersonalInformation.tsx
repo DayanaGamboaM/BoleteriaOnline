@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
 import dayjs, { Dayjs } from "dayjs";
 import "dayjs/locale/es";
 import { Button } from "react-bootstrap";
+import { auth } from "@/fireBase/app";
+//import firebase from 'firebase/app';
+//import "firebase/database";
 
 const PersonalInformation = () => {
   const [hover, setHover] = useState(false);
@@ -19,6 +22,25 @@ const PersonalInformation = () => {
   };
 
   dayjs.locale("es");
+
+  //-----------------------------------------------------\\
+  //const [tableName, setTableName] = useState<string>("");
+
+  /*useEffect(() => {
+    const getTableName = () => {
+      const database = firebase.;
+      const usuarioRef = database.ref('/usuario');
+
+      usuarioRef.once('value', (snapshot) => {
+        const tableName = snapshot.key;
+        setTableName(tableName);
+     });
+    };
+
+      getTableName();
+    }, []);
+    */
+
 
   const buttonStyles = {
     width: "40px",
