@@ -7,7 +7,6 @@ import Seats from '../../components/componentsPaymentGateway/Seats';
 import InfoTravel from '../../components/componentsPaymentGateway/InfoTravel';
 import NavBar from '../../components/NavBar';
 import Footer from '../../components/Footer';
-
 const PaymentGateway = () => {
 
     return (
