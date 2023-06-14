@@ -156,6 +156,8 @@ const SignUp = () => {
                                 //value={signUpForm.birthDate}
                                 //onChange={handleChange}
                                 //required
+                                onChange={catchInputs}
+                                value={user.birthDate}
                               />
                               <label className="form-label">
                                 Fecha de Nacimiento
