@@ -29,7 +29,7 @@ const Header = () => {
 
   const handleDateChange = (date: Dayjs | null) => {
     if (date) {
-      setDate(date.toDate());
+      setDate(date);
     }
   };
 
@@ -148,7 +148,7 @@ const Header = () => {
                           value={selectedDate}
                           onChange={handleDateChange}
                           format="DD-MM-YYYY"
-                          minDate={currentDate.toDate()}
+                          minDate={currentDate}
                         />
                       </div>
                     </LocalizationProvider>
