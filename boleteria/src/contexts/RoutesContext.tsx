@@ -1,14 +1,15 @@
 import React, {createContext, useState, FC } from "react";
+import dayjs, {Dayjs} from "dayjs";
 
 interface RoutesContextType {
 
     selectedOrigin: string;
     selectedDestination: string;
-    selectedDate: Date;
+    selectedDate: Dayjs;
     selectedPassengers: string;
     setOrigin: (origin: string) => void;
     setDestination: (destination: string) => void;
-    setDate: (date: Date) => void;
+    setDate: (date: Dayjs) => void;
     setPassengers: (passengers: string) => void;
 
 }
@@ -22,13 +23,13 @@ type Props = {
 export const RoutesProvider = ({ children  }:Props) => {
     const [selectedOrigin, setSelectedOrigin] = useState("");
     const [selectedDestination, setSelectedDestination] = useState("");
-    const [selectedDate, setSelectedDate] = useState<Date>(new Date());
+    const [selectedDate, setSelectedDate] = useState<Dayjs>(dayjs());
     const [selectedPassengers, setSelectedPassengers] = useState("");
   
     const setOrigin = (origin: string) => setSelectedOrigin(origin);
     const setDestination = (destination: string) =>
       setSelectedDestination(destination);
-    const setDate = (date: Date) => setSelectedDate(date);
+    const setDate = (date: Dayjs) => setSelectedDate(date);
     const setPassengers = (passengers: string) =>
       setSelectedPassengers(passengers);
   
