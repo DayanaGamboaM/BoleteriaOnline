@@ -13,6 +13,13 @@ import placesDestination from "../public/placesDestination.json";
 import cantPerson from "../public/cantPerson.json";
 
 const Header = () => {
+  const routesContext = useContext(RoutesContext);
+
+  if (!routesContext) {
+    // El contexto aún no está disponible, puedes mostrar un indicador de carga o una alternativa temporal.
+    return <div>Loading...</div>;
+  }
+
   const {
     selectedOrigin,
     selectedDestination,
@@ -22,7 +29,7 @@ const Header = () => {
     setDestination,
     setDate,
     setPassengers,
-  } = useContext(RoutesContext)!;
+  } = routesContext;
 
   const [showAlert, setShowAlert] = useState(false);
   const currentDate = dayjs(new Date());

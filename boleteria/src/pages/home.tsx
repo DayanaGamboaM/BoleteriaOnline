@@ -5,9 +5,11 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import FooterInformation from "../../components/componentsIndex/FooterInformation";
 import Hero from "../../components/Hero";
+import { RoutesProvider } from "@/contexts/RoutesContext";
 
 const HomePage = () => {
   return (
+    <RoutesProvider>
       <div style={{ backgroundColor: "#d9d9d9" }}>
       <NavBar  />
       <Hero />
@@ -15,6 +17,7 @@ const HomePage = () => {
       <FooterInformation />
       <Footer />
     </div>
+    </RoutesProvider>
     
   );
 };

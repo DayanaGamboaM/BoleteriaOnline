@@ -5,24 +5,25 @@ import Footer from '../../components/Footer';
 import RoutesC from '../../components/componentsRouteCalendar/RoutesC';
 import Hero from '../../components/Hero';
 import { RoutesProvider } from "@/contexts/RoutesContext";
+import NavBar from "../../components/NavBar";
 
-const RouteCalendar = ()=>{
+const RouteCalendar = () => {
 
-    return(
-
-        <Layout>
-            <RoutesProvider>
+    return (
+        <RoutesProvider>
             <div className='bodyC'>
-                <Hero />
-                <Header />
-                <RoutesC />
-                <Footer />
+            <NavBar />
+            <Hero />
+            <Header />
+            <RoutesC />
+            <Footer />
 
-           </div>
-            </RoutesProvider>
-           
-        </Layout>
+        </div>
+        </RoutesProvider>
+        
+
+
     )
 }
 
-export default RouteCalendar ; 
+export default RouteCalendar; 
