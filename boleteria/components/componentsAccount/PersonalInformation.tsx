@@ -93,7 +93,7 @@ const PersonalInformation = () => {
             bottom: "-30px",
           }}
         ></div>
-        <div style={{   }} className="row p-4 bg-white rounded-4"> {/* Estos estilos hacen que se pierda lo responsive*/}
+        <div className="row p-4 bg-white rounded-4"> {/* Estos estilos hacen que se pierda lo responsive*/}
           <div className="p-4" style={{ position: "relative", margin: "auto" }}>
             <h4
               style={{
@@ -191,7 +191,7 @@ const PersonalInformation = () => {
                   </h5>
                   <div className="card-body">
                     <div className="col-12 col-md-6 d-flex">
-                      <LocalizationProvider dateAdapter={AdapterDayjs} locale="es">
+                      <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <div className="datepicker-container">
                           <DatePicker
                             value={selectedDate}
@@ -199,7 +199,7 @@ const PersonalInformation = () => {
                             renderInput={(params) => (
                               <TextField
                                 {...params}
-                                variant="outlined" // También puedes probar con "filled" o "standard"
+                                variant="outlined"
                                 // Resto de propiedades personalizadas para el TextField
                               />
                             )}
