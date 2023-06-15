@@ -1,22 +1,18 @@
 [
   {
     "id": 1,
-    "name": "San José"
-  },
-  {
-    "id": 2,
     "name": "San Isidro"
   },
   {
-    "id": 3,
-    "name": "San Vito"
-  },
-  {
-    "id": 4,
+    "id": 2,
     "name": "Paso Canoas"
   },
   {
-    "id": 5,
-    "name": "Rio Claro"
+    "id": 3,
+    "name": "Golfito"
+  },
+  {
+    "id": 4,
+    "name": "Ciudad Neily"
   }
 ]

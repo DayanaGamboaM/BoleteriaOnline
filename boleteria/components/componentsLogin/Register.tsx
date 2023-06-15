@@ -1,5 +1,5 @@
 import React, { useState, FormEvent } from "react";
-import { auth } from "@/fireBase/app";
+import { auth, firestore } from "@/fireBase/app";
 import Logo from "../../public/logoLogin.jpg";
 import Image from "next/image";
 import {
@@ -9,17 +9,27 @@ import {
 
 import { useRouter } from "next/router";
 
-const SignUp = () => {
-  const [signUpForm, setSignUpForm] = useState({
-    firstName: "",
-    lastName: "",
-    gender: "",
-    birthDate: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
+import { collection, addDoc, getDoc, doc,setDoc} from "firebase/firestore";
 
+
+
+const SignUp = () => {
+  
+  //const {name,lastName,gender,birthDate,correo,contrasenna} = userDetails
+  const initialValue = {
+    name: '',
+    lastName: '',
+    gender: '',
+    birthDate: '',
+    email: ''
+  }
+  const [user, setUser] = useState(initialValue);
+
+  const catchInputs = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setUser((user) => ({ ...user, [name]: value }));
+  };
+  
   const router = useRouter();
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -27,10 +37,34 @@ const SignUp = () => {
     const form = e.target as HTMLFormElement;
     const correo = form.email.value;
     const contrasenna = form.password.value;
+  
+    try {
+      // Crear el usuario en Firebase Authentication
+      const { user: authUser } = await createUserWithEmailAndPassword(
+        auth,
+        correo,
+        contrasenna
+      );
+  
+      // Obtener el UID del usuario
+      const uid = authUser.uid;
+  
+      // Agregar los datos del usuario a Firestore usando el UID como identificador del documento
+      await setDoc(doc(firestore, "users", uid), {
+        ...user,
+      });
+  
+      // Redireccionar al apartado de información propia del usuario
+      router.push("/home");
+    } catch (error) {
+      console.log(error);
+    }
+  
+    setUser({ ...initialValue });
+  };
 
-    await createUserWithEmailAndPassword(auth, correo, contrasenna).then(() => {
-      router.push("/");
-    });
+  const handleBack = () => {
+    router.push("/login"); 
   };
 
   return (
@@ -76,13 +110,12 @@ const SignUp = () => {
                             <div className="form-outline mb-4">
                               <input
                                 type="text"
-                                id="firstName"
+                                id="name"
                                 className="form-control form-control-lg"
                                 placeholder="Nombre"
-                                name="firstName"
-                                //value={signUpForm.firstName}
-                                //onChange={handleChange}
-                                //required
+                                name="name"
+                                onChange={catchInputs}
+                                value={user.name}
                               />
                               <label className="form-label">Nombre</label>
                             </div>
@@ -94,9 +127,8 @@ const SignUp = () => {
                                 className="form-control form-control-lg"
                                 placeholder="Apellido"
                                 name="lastName"
-                                //value={signUpForm.lastName}
-                                //onChange={handleChange}
-                                //required
+                                onChange={catchInputs}
+                                value={user.lastName}
                               />
                               <label className="form-label">Apellido</label>
                             </div>
@@ -108,9 +140,8 @@ const SignUp = () => {
                                 className="form-control form-control-lg"
                                 placeholder="Género"
                                 name="gender"
-                                //value={signUpForm.gender}
-                                //onChange={handleChange}
-                                //required
+                                onChange={catchInputs}
+                                value={user.gender}
                               />
                               <label className="form-label">Género</label>
                             </div>
@@ -125,6 +156,8 @@ const SignUp = () => {
                                 //value={signUpForm.birthDate}
                                 //onChange={handleChange}
                                 //required
+                                onChange={catchInputs}
+                                value={user.birthDate}
                               />
                               <label className="form-label">
                                 Fecha de Nacimiento
@@ -141,7 +174,8 @@ const SignUp = () => {
                                 name="email"
                                 //value={signUpForm.email}
                                 //onChange={handleChange}
-                                required
+                                onChange={catchInputs}
+                                value={user.email}
                               />
                               <label className="form-label">
                                 Correo Electrónico
@@ -178,15 +212,19 @@ const SignUp = () => {
                               </label>
                             </div>
 
-                            <div className="pt-1 mb-4 ">
-                              <button
-                                className="btn btn-dark btn-lg"
-                                type="submit"
-                                //disabled={loading}
-                              >
-                                {/* {loading ? "Registrando..." : "Registrar"} */}
-                                Registrar
-                              </button>
+                            <div className="pt-1 mb-4">
+                              <div className="row">
+                                <div className="col-sm-6">
+                                  <button className="btn btn-dark btn-lg" type="submit" >
+                                    Registrar
+                                  </button>
+                                </div>
+                                <div className="col-sm-6">
+                                  <button className="btn btn-dark btn-lg" type="button" onClick={handleBack}>
+                                    Atrás
+                                  </button>
+                                </div>
+                              </div>
                             </div>
                           </div>
                         </div>
