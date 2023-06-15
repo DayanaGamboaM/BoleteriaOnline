@@ -162,14 +162,14 @@ const PersonalInformation = () => {
                     <h5 style={{ fontWeight: "bold", color: "Black" }}>Sexo</h5>
                     <h4 style={{ fontWeight: "bold", color: "Black" }}>{userGender}</h4>
                   </div>
-                  <Button
+                  {/* <Button
                     id="button-gender"
                     style={buttonStyles}
                     onMouseEnter={() => setHover(true)}
                     onMouseLeave={() => setHover(false)}
                   >
                     X
-                  </Button>
+                  </Button> */}
                 </div>
               </div>
 
