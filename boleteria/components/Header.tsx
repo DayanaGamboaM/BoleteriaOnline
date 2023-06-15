@@ -30,8 +30,6 @@ const Header = () => {
   const handleDateChange = (date: Dayjs | null) => {
     if (date) {
       setDate(date.toDate());
-    }else{
-      setDate(null);
     }
   };
 
