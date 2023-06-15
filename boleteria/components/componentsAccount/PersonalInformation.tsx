@@ -5,8 +5,9 @@ import dayjs, { Dayjs } from "dayjs";
 import "dayjs/locale/es";
 import { Button } from "react-bootstrap";
 import { auth } from "@/fireBase/app";
-//import firebase from 'firebase/app';
-//import "firebase/database";
+import { firestore } from "@/fireBase/app";
+import { doc, getDoc } from "firebase/firestore";
+
 
 const PersonalInformation = () => {
   const [hover, setHover] = useState(false);
@@ -23,23 +24,82 @@ const PersonalInformation = () => {
 
   dayjs.locale("es");
 
-  //-----------------------------------------------------\\
-  //const [tableName, setTableName] = useState<string>("");
+  //-------------------NOMBRE----------------------------------\\
+  const [userName, setUserName] = useState<string>("");
 
-  /*useEffect(() => {
-    const getTableName = () => {
-      const database = firebase.;
-      const usuarioRef = database.ref('/usuario');
-
-      usuarioRef.once('value', (snapshot) => {
-        const tableName = snapshot.key;
-        setTableName(tableName);
-     });
+  useEffect(() => {
+    const getUserName = async () => {
+      // Verificar si los datos del usuario están almacenados en el Local Storage
+      const storedUserName = localStorage.getItem("userName");
+      if (storedUserName) {
+        setUserName(storedUserName);
+      } else {
+        // Si no hay datos en el Local Storage, obtener los datos del usuario desde Firestore
+        if (auth.currentUser) {
+          const userId = auth.currentUser.uid;
+          const userRef = doc(firestore, "users", userId);
+          const userDoc = await getDoc(userRef);
+          if (userDoc.exists()) {
+            const name = userDoc.data().name;
+            setUserName(name);
+            // Guardar los datos del usuario en el Local Storage para futuras visitas
+            localStorage.setItem("userName", name);
+          }
+        }
+      }
     };
 
-      getTableName();
-    }, []);
-    */
+    getUserName();
+  }, []);
+
+  //-------------------APELLIDO----------------------------------\\
+  const [userLastName, setUserLastName] = useState<string>("");
+
+  useEffect(() => {
+    const getUserLastName = async () => {
+      // Verificar si los datos del usuario están almacenados en el Local Storage
+      const storedUserLastName = localStorage.getItem("userLastName");
+      if (storedUserLastName) {
+        setUserLastName(storedUserLastName);
+      } else {
+        // Si no hay datos en el Local Storage, obtener los datos del usuario desde Firestore
+        if (auth.currentUser) {
+          const userId = auth.currentUser.uid;
+          const userRef = doc(firestore, "users", userId);
+          const userDoc = await getDoc(userRef);
+          if (userDoc.exists()) {
+            const lastName = userDoc.data().lastName; // Asegúrate de ajustar el campo "name" según la estructura de tu documento en Firestore
+            setUserLastName(lastName);
+            // Guardar los datos del usuario en el Local Storage para futuras visitas
+            localStorage.setItem("userLastName", lastName);
+          }
+        }
+      }
+    };
+
+    getUserLastName();
+  }, []);
+
+
+  //Hacer cambio en género//
+  //-------------------GENERO----------------------------------\\
+  const [userGender, setGender] = useState<string>("");
+
+  useEffect(() => {
+    const getGender = async () => {
+      if (auth.currentUser) {
+        const userId = auth.currentUser.uid;
+        const userRef = doc(firestore, "users", userId);
+        const userDoc = await getDoc(userRef);
+        if (userDoc.exists()) {
+          const gender = userDoc.data().gender; // Asegúrate de ajustar el campo "name" según la estructura de tu documento en Firestore
+          setGender(gender);
+        }
+      }
+    };
+
+    getGender();
+  }, []);
 
 
   const buttonStyles = {
@@ -100,7 +160,7 @@ const PersonalInformation = () => {
                 >
                   <h5 style={{ fontWeight: "bold", color: "Black" }}>Nombre</h5>
                   <h4 style={{ fontWeight: "bold", color: "Black" }}>
-                    Persona123
+                    {userName}
                   </h4>
                 </div>
               </div>
@@ -119,7 +179,7 @@ const PersonalInformation = () => {
                     Apellido
                   </h5>
                   <h4 style={{ fontWeight: "bold", color: "Black" }}>
-                    Apellido123
+                    {userLastName}
                   </h4>
                 </div>
               </div>
@@ -139,7 +199,7 @@ const PersonalInformation = () => {
                 >
                   <div>
                     <h5 style={{ fontWeight: "bold", color: "Black" }}>Sexo</h5>
-                    <h4 style={{ fontWeight: "bold", color: "Black" }}>F/M</h4>
+                    <h4 style={{ fontWeight: "bold", color: "Black" }}>{userGender}</h4>
                   </div>
                   <Button
                     id="button-gender"
