@@ -6,16 +6,14 @@ import "dayjs/locale/es";
 import { Button } from "react-bootstrap";
 import { auth } from "@/fireBase/app";
 import { firestore } from "@/fireBase/app";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, onSnapshot } from "firebase/firestore";
 
 
 const PersonalInformation = () => {
   const [hover, setHover] = useState(false);
 
   const [selectedDate, setSelectedDate] = useState<Dayjs>(dayjs());
-
   const currentDate = dayjs(new Date());
-
   const handleDateChange = (date: Dayjs | null) => {
     if (date) {
       setSelectedDate(date);
@@ -24,81 +22,43 @@ const PersonalInformation = () => {
 
   dayjs.locale("es");
 
-  //-------------------NOMBRE----------------------------------\\
   const [userName, setUserName] = useState<string>("");
-
-  useEffect(() => {
-    const getUserName = async () => {
-      // Verificar si los datos del usuario están almacenados en el Local Storage
-      const storedUserName = localStorage.getItem("userName");
-      if (storedUserName) {
-        setUserName(storedUserName);
-      } else {
-        // Si no hay datos en el Local Storage, obtener los datos del usuario desde Firestore
-        if (auth.currentUser) {
-          const userId = auth.currentUser.uid;
-          const userRef = doc(firestore, "users", userId);
-          const userDoc = await getDoc(userRef);
-          if (userDoc.exists()) {
-            const name = userDoc.data().name;
-            setUserName(name);
-            // Guardar los datos del usuario en el Local Storage para futuras visitas
-            localStorage.setItem("userName", name);
-          }
-        }
-      }
-    };
-
-    getUserName();
-  }, []);
-
-  //-------------------APELLIDO----------------------------------\\
   const [userLastName, setUserLastName] = useState<string>("");
+  const [userGender, setUserGender] = useState<string>("");
 
   useEffect(() => {
-    const getUserLastName = async () => {
-      // Verificar si los datos del usuario están almacenados en el Local Storage
-      const storedUserLastName = localStorage.getItem("userLastName");
-      if (storedUserLastName) {
-        setUserLastName(storedUserLastName);
-      } else {
-        // Si no hay datos en el Local Storage, obtener los datos del usuario desde Firestore
-        if (auth.currentUser) {
-          const userId = auth.currentUser.uid;
-          const userRef = doc(firestore, "users", userId);
-          const userDoc = await getDoc(userRef);
-          if (userDoc.exists()) {
-            const lastName = userDoc.data().lastName; // Asegúrate de ajustar el campo "name" según la estructura de tu documento en Firestore
-            setUserLastName(lastName);
-            // Guardar los datos del usuario en el Local Storage para futuras visitas
-            localStorage.setItem("userLastName", lastName);
-          }
-        }
-      }
-    };
-
-    getUserLastName();
-  }, []);
-
-
-  //Hacer cambio en género//
-  //-------------------GENERO----------------------------------\\
-  const [userGender, setGender] = useState<string>("");
-
-  useEffect(() => {
-    const getGender = async () => {
-      if (auth.currentUser) {
-        const userId = auth.currentUser.uid;
+    const unsubscribe = auth.onAuthStateChanged(async (user) => {
+      if (user) {
+        const userId = user.uid;
         const userRef = doc(firestore, "users", userId);
-        const userDoc = await getDoc(userRef);
-        if (userDoc.exists()) {
-          const gender = userDoc.data().gender; // Asegúrate de ajustar el campo "name" según la estructura de tu documento en Firestore
-          setGender(gender);
-        }
-      }
-    };
+        const unsubscribeUser = onSnapshot(userRef, (snapshot) => {
+          if (snapshot.exists()) {
+            const data = snapshot.data();
+            setUserName(data?.name || "");
+            setUserLastName(data?.lastName || "");
+            setUserGender(data?.gender || "");
+            localStorage.setItem("userName", data?.name || "");
+            localStorage.setItem("userLastName", data?.lastName || "");
+            localStorage.setItem("userGender", data?.gender || "");
+          }
+        });
 
-    getGender();
+        return () => {
+          unsubscribeUser();
+        };
+      } else {
+        setUserName("");
+        setUserLastName("");
+        setUserGender("");
+        localStorage.removeItem("userName");
+        localStorage.removeItem("userLastName");
+        localStorage.removeItem("userGender");
+      }
+    });
+
+    return () => {
+      unsubscribe();
+    };
   }, []);
 
 
@@ -229,8 +189,8 @@ const PersonalInformation = () => {
                     Nacimiento
                   </h5>
                   <div className="card-body">
-                    <div className="col-12 col-md-6 d-flex" style={{  }}>
-                      <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <div className="col-12 col-md-6 d-flex">
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <div className="datepicker-container">
                           <DatePicker
                             value={selectedDate}
