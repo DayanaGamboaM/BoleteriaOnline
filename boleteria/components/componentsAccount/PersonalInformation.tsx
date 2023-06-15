@@ -1,30 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
+import { LocalizationProvider } from "@mui/x-date-pickers";
 import dayjs, { Dayjs } from "dayjs";
 import "dayjs/locale/es";
 import { Button } from "react-bootstrap";
 import { auth } from "@/fireBase/app";
 import { firestore } from "@/fireBase/app";
 import { doc, getDoc, onSnapshot } from "firebase/firestore";
+import TextField from "@mui/material/TextField";
+import { DatePicker } from "@mui/x-date-pickers";
 
 
 const PersonalInformation = () => {
   const [hover, setHover] = useState(false);
 
-  const [selectedDate, setSelectedDate] = useState<Dayjs>(dayjs());
-  const currentDate = dayjs(new Date());
-  const handleDateChange = (date: Dayjs | null) => {
-    if (date) {
-      setSelectedDate(date);
-    }
-  };
-
-  dayjs.locale("es");
-
   const [userName, setUserName] = useState<string>("");
   const [userLastName, setUserLastName] = useState<string>("");
   const [userGender, setUserGender] = useState<string>("");
+  const [selectedDate, setSelectedDate] = useState<Dayjs | null>(null);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (user) => {
@@ -40,6 +33,10 @@ const PersonalInformation = () => {
             localStorage.setItem("userName", data?.name || "");
             localStorage.setItem("userLastName", data?.lastName || "");
             localStorage.setItem("userGender", data?.gender || "");
+
+            // Convertir la cadena de fecha de nacimiento a un objeto Dayjs
+            const birthDate = dayjs(data?.birthDate);
+            setSelectedDate(birthDate);
           }
         });
 
@@ -60,6 +57,10 @@ const PersonalInformation = () => {
       unsubscribe();
     };
   }, []);
+
+  const handleDateChange = (date: Dayjs | null) => {
+    setSelectedDate(date);
+  };
 
 
   const buttonStyles = {
@@ -190,13 +191,20 @@ const PersonalInformation = () => {
                   </h5>
                   <div className="card-body">
                     <div className="col-12 col-md-6 d-flex">
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                      <LocalizationProvider dateAdapter={AdapterDayjs} locale="es">
                         <div className="datepicker-container">
                           <DatePicker
                             value={selectedDate}
                             onChange={handleDateChange}
+                            renderInput={(params) => (
+                              <TextField
+                                {...params}
+                                variant="outlined" // También puedes probar con "filled" o "standard"
+                                // Resto de propiedades personalizadas para el TextField
+                              />
+                            )}
                             format="DD-MM-YYYY"
-                            minDate={currentDate}
+                            minDate={dayjs()}
                           />
                         </div>
                       </LocalizationProvider>
