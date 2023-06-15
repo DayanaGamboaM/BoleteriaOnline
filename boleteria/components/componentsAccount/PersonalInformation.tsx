@@ -1,11 +1,67 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import dayjs, { Dayjs } from "dayjs";
+import "dayjs/locale/es";
 import { Button } from "react-bootstrap";
+import { auth } from "@/fireBase/app";
+import { firestore } from "@/fireBase/app";
+import { doc, getDoc, onSnapshot } from "firebase/firestore";
+import TextField from "@mui/material/TextField";
+import { DatePicker } from "@mui/x-date-pickers";
+
 
 const PersonalInformation = () => {
   const [hover, setHover] = useState(false);
+
+  const [userName, setUserName] = useState<string>("");
+  const [userLastName, setUserLastName] = useState<string>("");
+  const [userGender, setUserGender] = useState<string>("");
+  const [selectedDate, setSelectedDate] = useState<Dayjs | null>(null);
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(async (user) => {
+      if (user) {
+        const userId = user.uid;
+        const userRef = doc(firestore, "users", userId);
+        const unsubscribeUser = onSnapshot(userRef, (snapshot) => {
+          if (snapshot.exists()) {
+            const data = snapshot.data();
+            setUserName(data?.name || "");
+            setUserLastName(data?.lastName || "");
+            setUserGender(data?.gender || "");
+            localStorage.setItem("userName", data?.name || "");
+            localStorage.setItem("userLastName", data?.lastName || "");
+            localStorage.setItem("userGender", data?.gender || "");
+
+            // Convertir la cadena de fecha de nacimiento a un objeto Dayjs
+            const birthDate = dayjs(data?.birthDate);
+            setSelectedDate(birthDate);
+          }
+        });
+
+        return () => {
+          unsubscribeUser();
+        };
+      } else {
+        setUserName("");
+        setUserLastName("");
+        setUserGender("");
+        localStorage.removeItem("userName");
+        localStorage.removeItem("userLastName");
+        localStorage.removeItem("userGender");
+      }
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
+  const handleDateChange = (date: Dayjs | null) => {
+    setSelectedDate(date);
+  };
+
 
   const buttonStyles = {
     width: "40px",
@@ -27,133 +83,130 @@ const PersonalInformation = () => {
 
   return (
     <div className="container">
-      <div style={{marginTop: "-50px"}}>
+      <div style={{ marginTop: "-50px" }}>
         <div
           className="card-information bg-white mb-5"
           style={{
-            position:"relative",
+            position: "relative",
             width: "1400px",
             maxWidth: "100%",
-            bottom:"-30px"
+            bottom: "-30px",
           }}
-        >
-          <div className="row p-4">
-            <div
-              className="p-4"
-              style={{ position: "relative", margin: "auto"}}
+        ></div>
+        <div className="row p-4 bg-white rounded-4"> {/* Estos estilos hacen que se pierda lo responsive*/}
+          <div className="p-4" style={{ position: "relative", margin: "auto" }}>
+            <h4
+              style={{
+                fontWeight: "bold",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}
             >
-              <h4
-                style={{
-                  fontWeight: "bold",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                }}
-              >
-                Tus Datos Personales
-              </h4>
-            </div>
-            <div className="container">
-              <div className="row">
-                <div className="col-12 col-md-6 d-flex">
-                  <div
-                    className="p-3 mt-3 rounded-2"
-                    style={{
-                      width: "400px",
-                      maxWidth: "100%",
-                      backgroundColor: "#D9D9D9",
-                      boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)",
-                      margin: "auto",
-                    }}
-                  >
-                    <h5 style={{ fontWeight: "bold", color: "Black" }}>
-                      Nombre
-                    </h5>
-                    <h4 style={{ fontWeight: "bold", color: "Black" }}>
-                      Persona123
-                    </h4>
-                  </div>
+              Tus Datos Personales
+            </h4>
+          </div>
+          <div className="container">
+            <div className="row">
+              <div className="col-12 col-md-6 d-flex">
+                <div
+                  className="p-3 mt-3 rounded-2"
+                  style={{
+                    width: "400px",
+                    maxWidth: "100%",
+                    backgroundColor: "#D9D9D9",
+                    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)",
+                    margin: "auto",
+                  }}
+                >
+                  <h5 style={{ fontWeight: "bold", color: "Black" }}>Nombre</h5>
+                  <h4 style={{ fontWeight: "bold", color: "Black" }}>
+                    {userName}
+                  </h4>
                 </div>
-                <div className="col-12 col-md-6 d-flex justify-content-end">
-                  <div
-                    className="p-3 mt-3 rounded-2"
-                    style={{
-                      width: "400px",
-                      maxWidth: "100%",
-                      backgroundColor: "#D9D9D9",
-                      boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)",
-                      margin: "auto",
-                    }}
-                  >
-                    <h5 style={{ fontWeight: "bold", color: "Black" }}>
-                      Apellido
-                    </h5>
-                    <h4 style={{ fontWeight: "bold", color: "Black" }}>
-                      Apellido123
-                    </h4>
-                  </div>
+              </div>
+              <div className="col-12 col-md-6 d-flex justify-content-end">
+                <div
+                  className="p-3 mt-3 rounded-2"
+                  style={{
+                    width: "400px",
+                    maxWidth: "100%",
+                    backgroundColor: "#D9D9D9",
+                    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)",
+                    margin: "auto",
+                  }}
+                >
+                  <h5 style={{ fontWeight: "bold", color: "Black" }}>
+                    Apellido
+                  </h5>
+                  <h4 style={{ fontWeight: "bold", color: "Black" }}>
+                    {userLastName}
+                  </h4>
                 </div>
-                <div className="col-12 col-md-6 d-flex">
-                  <div
-                    className="p-3 mt-3 rounded-2"
-                    style={{
-                      width: "400px",
-                      maxWidth: "100%",
-                      backgroundColor: "#D9D9D9",
-                      boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)",
-                      margin: "auto",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "space-between",
-                    }}
-                  >
-                    <div>
-                      <h5 style={{ fontWeight: "bold", color: "Black" }}>
-                        Sexo
-                      </h5>
-                      <h4 style={{ fontWeight: "bold", color: "Black" }}>
-                        F/M
-                      </h4>
-                    </div>
-                    <div
-                      id="vertical-line-gender"
-                      style={{
-                        width: "3px",
-                        height: "70px",
-                        background: "rgb(7, 0, 0)",
-                        marginLeft: "60px",
-                      }}
-                    ></div>
-                    <Button
-                      id="button-gender"
-                      style={buttonStyles}
-                      onMouseEnter={() => setHover(true)}
-                      onMouseLeave={() => setHover(false)}
-                    >
-                      X
-                    </Button>
+              </div>
+              <div className="col-12 col-md-6 d-flex">
+                <div
+                  className="p-3 mt-3 rounded-2"
+                  style={{
+                    width: "400px",
+                    maxWidth: "100%",
+                    backgroundColor: "#D9D9D9",
+                    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)",
+                    margin: "auto",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <div>
+                    <h5 style={{ fontWeight: "bold", color: "Black" }}>Sexo</h5>
+                    <h4 style={{ fontWeight: "bold", color: "Black" }}>{userGender}</h4>
                   </div>
+                  {/* <Button
+                    id="button-gender"
+                    style={buttonStyles}
+                    onMouseEnter={() => setHover(true)}
+                    onMouseLeave={() => setHover(false)}
+                  >
+                    X
+                  </Button> */}
                 </div>
+              </div>
 
-                <div className="col-12 col-md-6 d-flex justify-content-end align-items-end">
-                  <div
-                    className="p-3 mt-3 rounded-2"
-                    style={{
-                      width: "400px",
-                      maxWidth: "100%",
-                      height: "100px",
-                      maxHeight: "100%",
-                      backgroundColor: "#D9D9D9",
-                      boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)",
-                      margin: "auto",
-                    }}
-                  >
-                    <h5 style={{ fontWeight: "bold", color: "Black" }}>
-                      Nacimiento
-                    </h5>
-                    <div style={{ position: "relative", bottom: "5px" }}>
+              <div className="col-12 col-md-6 d-flex">
+                <div
+                  className="p-3 mt-3 rounded-2"
+                  style={{
+                    width: "400px",
+                    maxWidth: "100%",
+                    height: "102px",
+                    maxHeight: "100%",
+                    backgroundColor: "#D9D9D9",
+                    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)",
+                    margin: "auto",
+                  }}
+                >
+                  <h5 style={{ fontWeight: "bold", color: "Black" }}>
+                    Nacimiento
+                  </h5>
+                  <div className="card-body">
+                    <div className="col-12 col-md-6 d-flex">
                       <LocalizationProvider dateAdapter={AdapterDayjs}>
-                        <DatePicker />
+                        <div className="datepicker-container">
+                          <DatePicker
+                            value={selectedDate}
+                            onChange={handleDateChange}
+                            renderInput={(params) => (
+                              <TextField
+                                {...params}
+                                variant="outlined"
+                                // Resto de propiedades personalizadas para el TextField
+                              />
+                            )}
+                            format="DD-MM-YYYY"
+                            minDate={dayjs()}
+                          />
+                        </div>
                       </LocalizationProvider>
                     </div>
                   </div>
