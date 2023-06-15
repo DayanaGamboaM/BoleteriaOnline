@@ -5,7 +5,7 @@ import QR from '../componentsQR/QR';
 
 const InfoTravel = () => {
   const [qrValue, setQRValue] = useState('');
-  
+
 
   const generateRandomQRCode = () => {
     const randomValue = Math.random().toString(36).substring(2, 15);
@@ -107,7 +107,6 @@ const InfoTravel = () => {
               >
                 Pagar
               </button>
-              {/* <QR qrValue={qrValue}></QR> */}
             </div>
           </div>
         </div>
