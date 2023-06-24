@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import { Inter } from "next/font/google";
 import { useRouter } from "next/router";
-import { auth } from "../../src/fireBase/app";
+import { auth } from "../fireBase/app";
 import { onAuthStateChanged, User } from "firebase/auth";
 import HomePage from "./home";
 import Login from "./login";

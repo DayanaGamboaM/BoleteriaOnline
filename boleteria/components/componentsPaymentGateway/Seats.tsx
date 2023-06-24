@@ -10,6 +10,10 @@ const Seats = () => {
     setShowSeats(true);
   };
 
+  const availableSeats = [1, 2, 3, 4, 5, 14, 16, 18, 23, 27, 32, 36, 39, 43, 47, 48, 50, 52]; // Ejemplo: Asientos disponibles
+
+  const totalSeats = 53; // Total de asientos
+
   return (
     <div className="container mt-5">
       <div
@@ -41,18 +45,24 @@ const Seats = () => {
         <div className="cuadro-asientos mt-3" style={{ maxWidth: "35rem" }}>
           <h3>Asientos Disponibles</h3>
           <div className="fila-asientos">
-            <button className="asiento">1</button>
-            <button className="asiento">2</button>
-            <div className="espacio"></div>
-            <button className="asiento">3</button>
-            <button className="asiento">4</button>
-          </div>
-          <div className="fila-asientos">
-            <button className="asiento">5</button>
-            <button className="asiento">6</button>
-            <div className="espacio"></div>
-            <button className="asiento">7</button>
-            <button className="asiento">8</button>
+            <div className="columna-asientos">
+              {Array.from({ length: totalSeats }, (_, index) => index + 1).map(
+                (seatNumber) => (
+                  <button
+                    key={seatNumber}
+                    className="asiento"
+                    style={{
+                      borderColor: availableSeats.includes(seatNumber)
+                        ? 'green'
+                        : 'red',
+                    }}
+                    disabled={!availableSeats.includes(seatNumber)}
+                  >
+                    {seatNumber}
+                  </button>
+                )
+              )}
+            </div>
           </div>
           <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 text-center mt-5">
             <a className="principalButton" onClick={() => setShowSeats(false)}>
