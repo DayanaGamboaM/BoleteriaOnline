@@ -2,6 +2,7 @@ import React from "react";
 import { Button } from "react-bootstrap";
 
 const Tickets = () => {
+
   const availableTickets = [
     {
       hourI: "10:00 AM",
