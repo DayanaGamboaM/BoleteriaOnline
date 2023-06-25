@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
+import { PayPalButton } from "react-paypal-button-v2";
 import Image from "next/image";
 import Paypal from "/public/paypal.jpg";
-import QR from '../componentsQR/QR';
 
 const InfoTravel = () => {
+  const [paymentStatus, setPaymentStatus] = useState<string>("");
+
+  const onSuccess = (details: any, data: any) => {
+    // Lógica a ejecutar cuando el pago es exitoso
+    console.log("Pago realizado con éxito", details, data);
+    setPaymentStatus("success");
+  };
+
   return (
     <div className="container mt-5">
       <div
@@ -70,7 +78,7 @@ const InfoTravel = () => {
             </div>
 
             <div>
-               <div
+              {/* <div
                 className="form-check "
                 style={{ marginRight: "80px", marginBottom: "10px" }}
               >
@@ -90,10 +98,16 @@ const InfoTravel = () => {
                   />
                   PayPal
                 </label>
-              </div>
-              <button className="btn1" style={{ width: "100px"}}>
-                Pagar
-              </button>
+              </div> */}
+              <PayPalButton
+                amount={60.0}
+                onSuccess={onSuccess}
+                options={{
+                  clientId: "AXtVLUWZ8_l5qbZoCt2IloZ3g1y9kD1N8O0JLZ9HUOpFTkPbAw6IZ63MmCGSle0HbkJByTQaWJx2OrdU",
+                  currency: "USD",
+                }}
+                style={{ color: "blue", shape: "rect", label: "pay" }}
+              />
             </div>
           </div>
         </div>
