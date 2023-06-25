@@ -1,50 +1,42 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
+import { getFirestore, collection, getDocs, DocumentData } from "firebase/firestore";
+import { app } from "../../src/fireBase/app";
 
-const Tickets = () => {
+const firestore = getFirestore(app);
 
-  const availableTickets = [
-    {
-      passengerName: "Andrey",
-      seatNumber: 5,
-      origin: "San Isidro",
-      destination: "Ciudad Neily",
-      dateTravel: "2023-04-23",
-      departureTime: "10:00 AM",
-      arrivalTime: "02:00 PM",
-      datePurchase: "2023-03-22",
-      totalAmount: "6000",
-    },
-    {
-      passengerName: "Andrey",
-      seatNumber: 5,
-      origin: "Canoas",
-      destination: "San Jose",
-      dateTravel: "2023-06-2",
-      departureTime: "06:00 AM",
-      arrivalTime: "01:00 PM",
-      datePurchase: "2023-05-28",
-      totalAmount: "10500",
-    },
-    {
-      passengerName: "Andrey",
-      seatNumber: 5,
-      origin: "San Jose",
-      destination: "Canoas",
-      dateTravel: "2023-01-18",
-      departureTime: "08:00 AM",
-      arrivalTime: "03:00 PM",
-      datePurchase: "2023-01-15",
-      totalAmount: "10500",
-    },
-  ];
+interface TicketsProps {
+  passengerName: string;
+  seatNumber: number;
+  origin: string;
+  destination: string;
+}
+
+const Tickets:React.FC<TicketsProps> = ({ passengerName, seatNumber, origin, destination }) => {
+  const [availableTicket, setAvailableTicket] = useState<DocumentData[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const firestore = getFirestore(app);
+      try {
+        const avaibletickets = collection(firestore, "tickets");
+        const snapshot = await getDocs(avaibletickets);
+        const tickets: DocumentData[] = snapshot.docs.map((doc) => doc.data());
+        setAvailableTicket(tickets);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+  }, [passengerName, seatNumber, origin, destination]);
 
   return (
     <div
       className="d-flex justify-content-between align-items-center flex-column"
       style={{ marginTop: "-50px", marginBottom: '20px'}}
     >
-      {availableTickets.map((tick, index) => (
+      {availableTicket.map((tick: DocumentData, index: number) => (
         <div
           className="card mt-5 text-center" key={index}
           style={{
