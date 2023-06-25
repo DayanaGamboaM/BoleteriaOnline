@@ -5,22 +5,37 @@ const Tickets = () => {
 
   const availableTickets = [
     {
-      hourI: "10:00 AM",
-      Route: "CANOAS-SAN ISIDRO",
-      Date: "05-04-2023",
-      Precio: "5500",
+      passengerName: "Andrey",
+      seatNumber: 5,
+      origin: "San Isidro",
+      destination: "Ciudad Neily",
+      dateTravel: "2023-04-23",
+      departureTime: "10:00 AM",
+      arrivalTime: "02:00 PM",
+      datePurchase: "2023-03-22",
+      totalAmount: "6000",
     },
     {
-      hourI: "01:30 PM",
-      Route: "CANOAS-SAN JOSE",
-      Date: "17-07-2023",
-      Precio: "11500",
+      passengerName: "Andrey",
+      seatNumber: 5,
+      origin: "Canoas",
+      destination: "San Jose",
+      dateTravel: "2023-06-2",
+      departureTime: "06:00 AM",
+      arrivalTime: "01:00 PM",
+      datePurchase: "2023-05-28",
+      totalAmount: "10500",
     },
     {
-      hourI: "08:00 AM",
-      Route: "SAN JOSE-CANOAS",
-      Date: "15-02-2023",
-      Precio: "11500",
+      passengerName: "Andrey",
+      seatNumber: 5,
+      origin: "San Jose",
+      destination: "Canoas",
+      dateTravel: "2023-01-18",
+      departureTime: "08:00 AM",
+      arrivalTime: "03:00 PM",
+      datePurchase: "2023-01-15",
+      totalAmount: "10500",
     },
   ];
 
@@ -42,10 +57,13 @@ const Tickets = () => {
         >
           <div className="card-body mb-2" style={{marginTop: "25px"}}>
             <h5 className="card-title mb-3">UNA-TRANSPORTE UNA</h5>
-            <h5 className="card-subtitle mb-3">{tick.Route}</h5>
-            <h5 className="card-text mb-3">Fecha salida {tick.Date}</h5>
-            <h5 className="card-text">Hora salida {tick.hourI}</h5>
-            <h5 className="card-text">Precio: {tick.Precio}</h5>
+            <h5 className="card-title mb-3">Nombre de pasajero: {tick.passengerName}</h5>
+            <h5 className="card-title mb-3">Número de Asiento: {tick.seatNumber}</h5>
+            <h5 className="card-subtitle mb-3">{tick.origin}-{tick.destination}</h5>
+            <h5 className="card-text mb-3">Fecha de salida: {tick.dateTravel}</h5>
+            <h5 className="card-text mb-3">Hora de salida: {tick.departureTime}</h5>
+            <h5 className="card-text mb-3">Hora de salida: {tick.arrivalTime}</h5>
+            <h5 className="card-text">Precio Total: {tick.totalAmount}</h5>
             <div style={{ marginTop: "25px" }}>
               <a
                 className="btn-tickes"
