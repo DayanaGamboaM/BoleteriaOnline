@@ -1,8 +1,12 @@
-import * as React from "react";
-import { styled } from "@mui/material/styles";
-import FormGroup from "@mui/material/FormGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Switch, { SwitchProps } from "@mui/material/Switch";
+import React, { useState } from 'react';
+import { styled } from '@mui/material/styles';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Switch, { SwitchProps } from '@mui/material/Switch';
+
+interface ToggleButtonProps {
+  onToggle: (isChecked: boolean) => void;
+}
 
 const IOSSwitch = styled((props: SwitchProps) => (
   <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
@@ -55,13 +59,23 @@ const IOSSwitch = styled((props: SwitchProps) => (
   },
 }));
 
-export default function CustomizedSwitches() {
+const ToggleButton: React.FC<ToggleButtonProps> = ({ onToggle }) => {
+  const [isChecked, setIsChecked] = useState(false);
+
+  const handleToggle = () => {
+    const newState = !isChecked;
+    setIsChecked(newState);
+    onToggle(newState);
+  };
+
   return (
     <FormGroup>
       <FormControlLabel
-        control={<IOSSwitch sx={{ m: 3 }} defaultChecked={false} />}
+        control={<IOSSwitch sx={{ m: 3 }} checked={isChecked} onChange={handleToggle} />}
         label=""
       />
     </FormGroup>
   );
-}
+};
+
+export default ToggleButton;
