@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import nodemailer from 'nodemailer';
-import { getFirestore, collection, getDocs } from 'firebase/firestore';
+import { getFirestore, collection, query, where, getDocs } from 'firebase/firestore';
 import { app } from '../../fireBase/app';
 
 export default async function handler(
@@ -16,11 +16,16 @@ export default async function handler(
       },
     });
 
+    const { email } = req.query; // Obtén el correo electrónico del usuario desde la URL de la solicitud
+    console.log('Valor del correo electrónico:', email);
+
     const db = getFirestore(app);
     const usersCollectionRef = collection(db, 'users');
-    const usersSnapshot = await getDocs(usersCollectionRef);
+    const usersQuery = query(usersCollectionRef, where('email', '==', email));
+    const usersSnapshot = await getDocs(usersQuery);
 
-    usersSnapshot.forEach(async (userDoc) => {
+    if (!usersSnapshot.empty) {
+      const userDoc = usersSnapshot.docs[0];
       const recipientEmail = userDoc.data().email;
 
       const mailOptions = {
@@ -32,12 +37,14 @@ export default async function handler(
       };
 
       const info = await transporter.sendMail(mailOptions);
-      console.log('Correo electrónico enviado:', info.messageId);
-    });
+      //console.log('Correo electrónico enviado:', info.messageId);
 
-    res.status(200).json({ message: 'Correos electrónicos enviados' });
+      res.status(200).json({ message: 'Correo electrónico enviado' });
+    } else {
+      res.status(404).json({ error: 'Usuario no encontrado' });
+    }
   } catch (error) {
-    console.error('Error al enviar los correos electrónicos:', error);
-    res.status(500).json({ error: 'Error al enviar los correos electrónicos' });
+    console.error('Error al enviar el correo electrónico:', error);
+    res.status(500).json({ error: 'Error al enviar el correo electrónico' });
   }
 }

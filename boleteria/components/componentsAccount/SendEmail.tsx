@@ -1,10 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ToggleButton from "./ToggleButton";
 import { BsDoorClosed, BsSaveFill } from "react-icons/bs";
+import { auth } from "../../src/fireBase/app"; // Importa la instancia de autenticación de Firebase
+
+
+interface User {
+  id: string;
+  email: string | null;
+}
 
 const SendEmail: React.FC = () => {
   const [isChecked, setChecked] = useState(false);
   const [saveButtonClicked, setSaveButtonClicked] = useState(false);
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    // Verifica si hay un usuario activo en el estado cada vez que cambie
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        // Si hay un usuario activo, establece el estado con la información del usuario
+        setCurrentUser({
+          id: user.uid, // Puedes usar el UID del usuario como identificador único
+          email: user.email,
+        });
+      } else {
+        // Si no hay un usuario activo, establece el estado en null
+        setCurrentUser(null);
+      }
+    });
+
+    // Limpia el evento de cambio de autenticación cuando el componente se desmonte
+    return () => unsubscribe();
+  }, []);
 
   const handleToggle = (isChecked: boolean) => {
     setChecked(isChecked);
@@ -14,20 +41,26 @@ const SendEmail: React.FC = () => {
   const handleSaveButtonClick = async () => {
     setSaveButtonClicked(true);
     if (isChecked) {
-      try {
-        const response = await fetch("/api/mailerApi", { method: "POST" });
-        if (response.ok) {
-          console.log("Correo electrónico enviado");
-        } else {
-          console.log("Error al enviar el correo electrónico");
+      if (currentUser && currentUser.email) { // Verifica si currentUser y currentUser.email no son nulos
+        try {
+          // Envía el correo solo al usuario activo
+          const response = await fetch(`/api/mailerApi?email=${encodeURIComponent(currentUser.email)}`, { method: 'POST' });
+          if (response.ok) {
+            console.log("Correo electrónico enviado");
+          } else {
+            console.log("Error al enviar el correo electrónico");
+          }
+        } catch (error) {
+          console.log("Error al enviar el correo electrónico", error);
         }
-      } catch (error) {
-        console.log("Error al enviar el correo electrónico", error);
+      } else {
+        console.log("No se encontró un usuario activo o un correo electrónico válido");
       }
     } else {
       console.log("El botón de alternancia debe estar activado para enviar el correo");
     }
   };
+  
 
   return (
     <div>
