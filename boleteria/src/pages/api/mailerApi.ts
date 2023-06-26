@@ -1,7 +1,7 @@
-// api/sendEmail.ts
-
 import { NextApiRequest, NextApiResponse } from 'next';
 import nodemailer from 'nodemailer';
+import { getFirestore, collection, getDocs } from 'firebase/firestore';
+import { app } from '../../fireBase/app';
 
 export default async function handler(
   req: NextApiRequest,
@@ -16,20 +16,28 @@ export default async function handler(
       },
     });
 
-    const mailOptions = {
-      from: 'boleteria.online.una@gmail.com',
-      to: 'cristoferb.bils@gmail.com',
-      subject: 'Datos de Tiquetes',
-      text:
-        'Este correo es enviado por la empresa de buses de la UNA para hacerle ver los datos de su tiquete, muchas gracias por elegir nuestro servicio',
-    };
+    const db = getFirestore(app);
+    const usersCollectionRef = collection(db, 'users');
+    const usersSnapshot = await getDocs(usersCollectionRef);
 
-    const info = await transporter.sendMail(mailOptions);
-    console.log('Correo electrónico enviado:', info.messageId);
+    usersSnapshot.forEach(async (userDoc) => {
+      const recipientEmail = userDoc.data().email;
 
-    res.status(200).json({ message: 'Correo electrónico enviado' });
+      const mailOptions = {
+        from: 'boleteria.online.una@gmail.com',
+        to: recipientEmail,
+        subject: 'Datos de Tiquetes',
+        text:
+          'Este correo es enviado por la empresa de buses de la UNA para hacerle ver los datos de su tiquete, muchas gracias por elegir nuestro servicio',
+      };
+
+      const info = await transporter.sendMail(mailOptions);
+      console.log('Correo electrónico enviado:', info.messageId);
+    });
+
+    res.status(200).json({ message: 'Correos electrónicos enviados' });
   } catch (error) {
-    console.error('Error al enviar el correo electrónico:', error);
-    res.status(500).json({ error: 'Error al enviar el correo electrónico' });
+    console.error('Error al enviar los correos electrónicos:', error);
+    res.status(500).json({ error: 'Error al enviar los correos electrónicos' });
   }
 }
