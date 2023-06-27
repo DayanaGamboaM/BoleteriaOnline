@@ -2,14 +2,33 @@ import React, { useState } from "react";
 import { PayPalButton } from "react-paypal-button-v2";
 import Image from "next/image";
 import Paypal from "/public/paypal.jpg";
+import QR from '../componentsQR/QR';
+import { getFirestore, collection, addDoc } from 'firebase/firestore';
+import { app } from "../../src/fireBase/app";
+
+const firestore = getFirestore(app);
 
 const InfoTravel = () => {
   const [paymentStatus, setPaymentStatus] = useState<string>("");
+  const [qrValue, setQRValue] = useState('');
+
+  const generateRandomQRCode = async(getApp:any) => {
+    const randomValue = Math.random().toString(36).substring(2, 15);
+    setQRValue(randomValue);
+
+    try {
+      const docRef = await addDoc(collection(firestore, 'dataTickets'), { qrValue: randomValue });
+      console.log('Documento guardado con ID:', docRef.id);
+    } catch (error) {
+      console.error('Error al guardar el documento:', error);
+    }
+  };
 
   const onSuccess = (details: any, data: any) => {
     // Lógica a ejecutar cuando el pago es exitoso
     console.log("Pago realizado con éxito", details, data);
     setPaymentStatus("success");
+    generateRandomQRCode
   };
 
   return (
@@ -78,27 +97,6 @@ const InfoTravel = () => {
             </div>
 
             <div>
-              {/* <div
-                className="form-check "
-                style={{ marginRight: "80px", marginBottom: "10px" }}
-              >
-                <input
-                  className="form-check-input"
-                  type="radio"
-                  name="opcionPago"
-                  id="pago"
-                />
-
-                <label className="form-check-label d-flex" htmlFor="pago">
-                  <Image
-                    src={Paypal}
-                    alt="paypal"
-                    className="mg-fluid rounded-circle mr-3"
-                    width={35}
-                  />
-                  PayPal
-                </label>
-              </div> */}
               <PayPalButton
                 amount={60.0}
                 onSuccess={onSuccess}
