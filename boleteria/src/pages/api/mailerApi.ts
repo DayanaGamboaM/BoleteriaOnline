@@ -1,6 +1,7 @@
+
 import { NextApiRequest, NextApiResponse } from 'next';
 import nodemailer from 'nodemailer';
-import { getFirestore, collection, query, where, getDocs } from 'firebase/firestore';
+import { getFirestore, collection, query, getDocs, where } from 'firebase/firestore';
 import { app } from '../../fireBase/app';
 
 export default async function handler(
@@ -17,7 +18,6 @@ export default async function handler(
     });
 
     const { email } = req.query; // Obtén el correo electrónico del usuario desde la URL de la solicitud
-    console.log('Valor del correo electrónico:', email);
 
     const db = getFirestore(app);
     const usersCollectionRef = collection(db, 'users');
@@ -28,18 +28,55 @@ export default async function handler(
       const userDoc = usersSnapshot.docs[0];
       const recipientEmail = userDoc.data().email;
 
-      const mailOptions = {
-        from: 'boleteria.online.una@gmail.com',
-        to: recipientEmail,
-        subject: 'Datos de Tiquetes',
-        text:
-          'Este correo es enviado por la empresa de buses de la UNA para hacerle ver los datos de su tiquete, muchas gracias por elegir nuestro servicio',
-      };
+      // Obtén los documentos en la colección "dataTickets" relacionados con el usuario
+      const dataTicketsCollectionRef = collection(db, 'dataTickets');
+      const dataTicketsQuery = query(dataTicketsCollectionRef, where('userId', '==', userDoc.id));
+      const dataTicketsSnapshot = await getDocs(dataTicketsQuery);
 
-      const info = await transporter.sendMail(mailOptions);
-      //console.log('Correo electrónico enviado:', info.messageId);
+      if (!dataTicketsSnapshot.empty) {
+        let mailText = 'Este correo es enviado por la empresa de buses de la UNA para hacerle ver los datos de su tiquete, muchas gracias por elegir nuestro servicio!\n\n';
 
-      res.status(200).json({ message: 'Correo electrónico enviado' });
+        dataTicketsSnapshot.forEach((doc) => {
+          const dataTicketsData = doc.data();
+
+          const {
+            arrivalTime,
+            dateTravel,
+            departureTime,
+            destination,
+            hours,
+            origin,
+            passengerName,
+            qr,
+            seatNumber,
+          } = dataTicketsData;
+
+          mailText +=
+            `Hora de llegada: ${arrivalTime}\n` +
+            `Fecha de viaje: ${dateTravel}\n` +
+            `Hora de salida: ${departureTime}\n` +
+            `Destino: ${destination}\n` +
+            `Horas: ${hours}\n` +
+            `Origen: ${origin}\n` +
+            `Nombre de pasajero: ${passengerName}\n` +
+            `Número QR: ${qr}\n` +
+            `Número de asiento: ${seatNumber}\n\n`;
+        });
+
+        const mailOptions = {
+          from: 'boleteria.online.una@gmail.com',
+          to: recipientEmail,
+          subject: 'Datos de Tiquetes',
+          text: mailText,
+        };
+
+        const info = await transporter.sendMail(mailOptions);
+        console.log('Correo electrónico enviado:', info.messageId);
+
+        res.status(200).json({ message: 'Correo electrónico enviado' });
+      } else {
+        res.status(404).json({ error: 'No se encontraron documentos en la colección "dataTickets" relacionados con el usuario' });
+      }
     } else {
       res.status(404).json({ error: 'Usuario no encontrado' });
     }
