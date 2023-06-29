@@ -1,22 +1,36 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Carousel from "react-bootstrap/Carousel";
 import { Button } from "react-bootstrap";
 import QRCode from "react-qr-code";
 import { app } from "../../src/fireBase/app";
-import { getFirestore, collection, onSnapshot, DocumentData } from "firebase/firestore";
+import {
+  getFirestore,
+  collection,
+  onSnapshot,
+  DocumentData,
+} from "firebase/firestore";
 
 const firestore = getFirestore(app);
 
 interface QRProps {
   qrValue: string;
   qr: string;
+  passengerName: string;
+  seatNumber: string; // Cambiar el tipo a string
+  origin: string;
+  destination: string;
+  dateTravel: string;
+  departureTime: string;
+  arrivalTime: string;
+  hours: string;
+  datePurchase: string;
 }
 
 const QR: React.FC<QRProps> = ({ qrValue, qr }) => {
   const [availableQR, setAvailableQR] = useState<DocumentData[]>([]);
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const handleSelect = (selectedIndex: any) => {
+  const handleSelect = (selectedIndex: number) => {
     setActiveIndex(selectedIndex);
   };
 
@@ -38,7 +52,9 @@ const QR: React.FC<QRProps> = ({ qrValue, qr }) => {
       try {
         const availableQRCollection = collection(firestore, "dataTickets");
         const unsubscribe = onSnapshot(availableQRCollection, (snapshot) => {
-          const qrs: DocumentData[] = snapshot.docs.map((docSnapshot) => docSnapshot.data());
+          const qrs: DocumentData[] = snapshot.docs.map((docSnapshot) =>
+            docSnapshot.data()
+          );
           setAvailableQR(qrs);
         });
 
@@ -89,7 +105,7 @@ const QR: React.FC<QRProps> = ({ qrValue, qr }) => {
                 background: "#D9D9D9",
                 color: "black",
                 borderRadius: "1em",
-                marginLeft: "80px"
+                marginLeft: "80px",
               }}
             >
               <svg
@@ -120,8 +136,20 @@ const QR: React.FC<QRProps> = ({ qrValue, qr }) => {
               >
                 {availableQR.map((ticket: DocumentData, index: number) => (
                   <Carousel.Item key={index} interval={1000000000}>
-                    <div className="d-flex justify-content-center" style={{ maxWidth: '100%', width: '270px', maxHeight: '100%', height: '230px' }}>
-                      <QRCode value={ticket.qr} size={220} />
+                    <div className="d-flex flex-column align-items-center">
+                      <div className="d-flex justify-content-center">
+                        <QRCode value={ticket.qr} size={220} />
+                      </div>
+                      {/* <p>{ticket.qr}</p>{" "} */}
+                      {/* Pasajero: {ticket.passengerName},
+                      Asiento: {ticket.seatNumber},
+                      Origen: {ticket.origin},
+                      Destino: {ticket.destination},
+                      Fecha de viaje: {ticket.dateTravel},
+                      Hora de llegada: {ticket.arrivalTime},
+                      Hora de partida: {ticket.departureTime},
+                      Hora de viaje: {ticket.hours},
+                      Fecha de compra: {ticket.datePurchase}, */}
                     </div>
                   </Carousel.Item>
                 ))}
@@ -131,7 +159,12 @@ const QR: React.FC<QRProps> = ({ qrValue, qr }) => {
           <div className="d-flex justify-content-center">
             <div
               className="bg-white mx-auto"
-              style={{ borderRadius: "1rem", padding: "10px", width: "200px", height: "45px" }}
+              style={{
+                borderRadius: "1rem",
+                padding: "10px",
+                width: "200px",
+                height: "45px",
+              }}
             >
               <h5 className="text-center">Estado</h5>
             </div>

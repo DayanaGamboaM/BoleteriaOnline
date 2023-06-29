@@ -5,6 +5,7 @@ import Paypal from "/public/paypal.jpg";
 import QR from '../componentsQR/QR';
 import { getFirestore, collection, addDoc } from 'firebase/firestore';
 import { app } from "../../src/fireBase/app";
+import { getApp } from "firebase/app";
 
 const firestore = getFirestore(app);
 
@@ -17,19 +18,26 @@ const InfoTravel = () => {
     setQRValue(randomValue);
 
     try {
-      const docRef = await addDoc(collection(firestore, 'dataTickets'), { qrValue: randomValue });
+      const docRef = await addDoc(collection(firestore, 'tickets'), { qrValue: randomValue });
       console.log('Documento guardado con ID:', docRef.id);
+      console.log(qrValue);
     } catch (error) {
       console.error('Error al guardar el documento:', error);
     }
   };
+  
+  
 
-  const onSuccess = (details: any, data: any) => {
-    // Lógica a ejecutar cuando el pago es exitoso
-    console.log("Pago realizado con éxito", details, data);
-    setPaymentStatus("success");
-    generateRandomQRCode
+  const handleClick = () => {
+    generateRandomQRCode(qrValue);
   };
+  
+  // const onSuccess = (details: any, data: any) => {
+  //   // Lógica a ejecutar cuando el pago es exitoso
+  //   console.log("Pago realizado con éxito", details, data);
+  //   setPaymentStatus("success");
+  //   generateRandomQRCode
+  // };
 
   return (
     <div className="container mt-5">
@@ -97,15 +105,7 @@ const InfoTravel = () => {
             </div>
 
             <div>
-              <PayPalButton
-                amount={60.0}
-                onSuccess={onSuccess}
-                options={{
-                  clientId: "AXtVLUWZ8_l5qbZoCt2IloZ3g1y9kD1N8O0JLZ9HUOpFTkPbAw6IZ63MmCGSle0HbkJByTQaWJx2OrdU",
-                  currency: "USD",
-                }}
-                style={{ color: "blue", shape: "rect", label: "pay" }}
-              />
+            <button onClick={handleClick}>Guardar</button>
             </div>
           </div>
         </div>
