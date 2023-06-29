@@ -12,20 +12,28 @@ const NavBar = () => {
   const router = useRouter();
 
   useEffect(() => {
-    // Función para obtener el correo electrónico del usuario autenticado
+   
     const getUserEmail = () => {
       if (auth.currentUser?.email) {
         const email = auth.currentUser.email;
         setUserEmail(email);
+        localStorage.setItem("userEmail", email); 
       }
     };
 
-    getUserEmail();
+   //cargar el local cuando cambio de componente
+    const storedUserEmail = localStorage.getItem("userEmail");
+    if (storedUserEmail) {
+      setUserEmail(storedUserEmail);
+    } else {
+      getUserEmail();
+    }
   }, []);
 
   const handleSignOut = async () => {
     try {
       await signOut(auth);
+      localStorage.removeItem("userEmail"); 
       router.push("/login");
     } catch (error) {
       console.log("Error al cerrar sesión:", error);
@@ -103,3 +111,4 @@ const NavBar = () => {
 };
 
 export default NavBar;
+
