@@ -6,8 +6,11 @@ import {
   DocumentData,
   doc,
   getDoc,
+  where,
+  query
 } from "firebase/firestore";
-import { app } from "../../src/fireBase/app";
+import { app, auth } from "../../src/fireBase/app";
+import {onAuthStateChanged } from "firebase/auth";
 
 const firestore = getFirestore(app);
 
@@ -33,60 +36,73 @@ const Tickets: React.FC<TicketsProps> = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const availableTickets = collection(firestore, "tickets");
-        const snapshot = await getDocs(availableTickets);
-        const tickets: TicketData[] = await Promise.all(
-          snapshot.docs.map(async (docSnapshot) => {
-            const data = docSnapshot.data();
+        // Obtener el ID del usuario autenticado
+        const userId = auth.currentUser?.uid;
+        console.log("User Ref:", userId);
 
-            // Obtener datos del usuario
-            const userRef = doc(firestore, data.passengerName?.path || "");
-            const userSnapshot = await getDoc(userRef);
-            const userData = userSnapshot.data();
+        // Verificar si el usuario está autenticado
+        if (userId) {
+          const ticketsRef = collection(firestore, "tickets");
+          const queryy = query(ticketsRef, where("passengerName", "==", userId));
+          const snapshot = await getDocs(queryy);
+          const tickets: TicketData[] = await Promise.all(
+            snapshot.docs.map(async (docSnapshot) => {
+              const data = docSnapshot.data();
 
-            // Obtener datos del asiento
-            const seatRef = doc(firestore, data.seat?.path);
-            const seatSnapshot = await getDoc(seatRef);
-            const seatData = seatSnapshot.data();
+              // Obtener datos del usuario
+              const userRef = doc(firestore, data.passengerName?.path || "");
+              console.log("User Ref:", userRef);
+              const userSnapshot = await getDoc(userRef);
+              const userData = userSnapshot.data();
 
-            // Obtener datos de la referencia "idTravel"
-            const travelRef = doc(firestore, data.idTravel?.path || "");
-            const travelSnapshot = await getDoc(travelRef);
-            const travelData = travelSnapshot.data();
+              // Obtener datos del asiento
+              const seatRef = doc(firestore, data.seat?.path);
+              const seatSnapshot = await getDoc(seatRef);
+              const seatData = seatSnapshot.data();
 
-            // Obtener datos de la referencia "idSchedule" en "travel"
-            const scheduleRef = doc(firestore, travelData?.idSchedule?.path || "");
-            const scheduleSnapshot = await getDoc(scheduleRef);
-            const scheduleData = scheduleSnapshot.data();
+              // Obtener datos de la referencia "idTravel"
+              const travelRef = doc(firestore, data.idTravel?.path || "");
+              const travelSnapshot = await getDoc(travelRef);
+              const travelData = travelSnapshot.data();
 
-            // Obtener datos de departureTime, arrivalTime y hours desde scheduleData
-            const departureTime = scheduleData?.departureTime || "";
-            const arrivalTime = scheduleData?.arrivalTime || "";
-            const hours = scheduleData?.hours || "";
+              // Obtener datos de la referencia "idSchedule" en "travel"
+              const scheduleRef = doc(firestore, travelData?.idSchedule?.path || "");
+              const scheduleSnapshot = await getDoc(scheduleRef);
+              const scheduleData = scheduleSnapshot.data();
 
-            // Asignar los datos al objeto del tiquete
-            return {
-              passengerName: userData?.name || "",
-              seatNumber: seatData?.seat || "",
-              origin: travelData?.origin || "",
-              destination: travelData?.destination || "",
-              dateTravel: travelData?.dateTravel || "",
-              departureTime,
-              arrivalTime,
-              hours,
-              datePurchase: data.dateOfPurchase, // Ajusta este valor según corresponda
-            };
-          })
-        );
+              // Obtener datos de departureTime, arrivalTime y hours desde scheduleData
+              const departureTime = scheduleData?.departureTime || "";
+              const arrivalTime = scheduleData?.arrivalTime || "";
+              const hours = scheduleData?.hours || "";
 
-        setAvailableTicket(tickets);
+              return {
+                passengerName: userData?.name || "",
+                seatNumber: seatData?.seat || "",
+                origin: travelData?.origin || "",
+                destination: travelData?.destination || "",
+                dateTravel: travelData?.dateTravel || "",
+                departureTime,
+                arrivalTime,
+                hours,
+                datePurchase: data.dateOfPurchase,
+              };
+            })
+          );
+
+          setAvailableTicket(tickets);
+        }
       } catch (error) {
         console.log(error);
       }
     };
 
-    fetchData();
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        fetchData();
+      }
+    });
   }, []);
+
 
   return (
     <div
@@ -135,7 +151,7 @@ const Tickets: React.FC<TicketsProps> = () => {
               <a className="btn-tickes" href="#">
                 Imprimir
               </a>
-              <a className="btn-tickes" href="myTicketsQR">
+              <a className="btn-tickes m-2" href="myTicketsQR">
                 Tiquetes
               </a>
             </div>
