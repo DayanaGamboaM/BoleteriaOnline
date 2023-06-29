@@ -34,7 +34,7 @@ const NavBar = () => {
 
   return (
     <Navbar className="navBar" expand="sm" collapseOnSelect>
-      <Navbar.Brand className="ml-5 p-2 fs-3" href="http://localhost:3000/">
+      <Navbar.Brand className="ml-5 p-2 fs-3" href="home">
         <Image
           src={Logo}
           alt="Header Image"
