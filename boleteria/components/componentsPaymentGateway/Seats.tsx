@@ -6,15 +6,14 @@ import Seat from "/public/seat.png";
 const Seats = () => {
   const [showSeats, setShowSeats] = useState(false);
   const [selectedSeats, setSelectedSeats] = useState<number[]>([]);
-  const [availableSeats, setAvailableSeats] = useState<number[]>([
-    1, 2, 3, 4, 5, 14, 16, 18, 23, 27, 32, 36, 39, 43, 47, 48, 50, 52
-  ]); 
-
-  const totalSeats = 53; 
 
   const showBoxSeating = () => {
     setShowSeats(true);
   };
+
+  const availableSeats = [1, 2, 3, 4, 5, 14, 16, 18, 23, 27, 32, 36, 39, 43, 47, 48, 50, 52]; // Ejemplo: Asientos disponibles
+
+  const totalSeats = 53; // Total de asientos
 
   const handleSeatClick = (seatNumber: number) => {
     if (selectedSeats.includes(seatNumber)) {
@@ -22,12 +21,6 @@ const Seats = () => {
     } else if (selectedSeats.length < 5 && availableSeats.includes(seatNumber)) {
       setSelectedSeats([...selectedSeats, seatNumber]);
     }
-  };
-
-  const handleSeatsClose = () => {
-    setAvailableSeats(availableSeats.filter((seat) => !selectedSeats.includes(seat)));
-    setSelectedSeats([]);
-    setShowSeats(false);
   };
 
   return (
@@ -73,7 +66,7 @@ const Seats = () => {
             </div>
           </div>
           <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 text-center mt-5">
-            <a className="principalButton" onClick={handleSeatsClose}>
+            <a className="principalButton" onClick={() => setShowSeats(false)}>
               <BsDoorClosed /> Cerrar
             </a>
           </div>
