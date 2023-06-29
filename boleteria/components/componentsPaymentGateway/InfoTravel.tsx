@@ -25,13 +25,11 @@ const InfoTravel = () => {
       console.error('Error al guardar el documento:', error);
     }
   };
-  
-  
 
   const handleClick = () => {
     generateRandomQRCode(qrValue);
   };
-  
+
   // const onSuccess = (details: any, data: any) => {
   //   // Lógica a ejecutar cuando el pago es exitoso
   //   console.log("Pago realizado con éxito", details, data);
