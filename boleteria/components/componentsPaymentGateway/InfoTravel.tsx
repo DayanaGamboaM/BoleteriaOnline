@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { PayPalButton } from "react-paypal-button-v2";
 import Image from "next/image";
 import Paypal from "/public/paypal.jpg";
 
-const InfoTravel = () => {
+interface InfoTravelProps {
+  origin?: string;
+  destination?: string;
+}
+
+const InfoTravel = ({ origin: originProp, destination: destinationProp }: InfoTravelProps) => {
   const [paymentStatus, setPaymentStatus] = useState<string>("");
 
   const onSuccess = (details: any, data: any) => {
@@ -11,6 +16,18 @@ const InfoTravel = () => {
     console.log("Pago realizado con éxito", details, data);
     setPaymentStatus("success");
   };
+
+  const [origin, setOrigin] = useState<string | null>(null);
+  const [destination, setDestination] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const localStorageOrigin = localStorage.getItem("routeOrigin");
+      const localStorageDestination = localStorage.getItem("routeDestination");
+      setOrigin(originProp ?? localStorageOrigin);
+      setDestination(destinationProp ?? localStorageDestination);
+    }
+  }, [originProp, destinationProp]);
 
   return (
     <div className="container mt-5">
@@ -31,14 +48,14 @@ const InfoTravel = () => {
             <div>
               <h5>Fecha</h5>
             </div>
-            <hr></hr>
+            <hr />
             <div>
               <h5>Hora de abordaje:</h5>
               <p>10:00 AM</p>
             </div>
             <div>
               <h5>Origen:</h5>
-              <p>Ciudad A</p>
+              <p>{origin}</p>
             </div>
             <div>
               <h5>Posible hora de llegada:</h5>
@@ -46,7 +63,7 @@ const InfoTravel = () => {
             </div>
             <div>
               <h5>Destino:</h5>
-              <p>Ciudad B</p>
+              <p>{destination}</p>
             </div>
           </div>
 
@@ -78,27 +95,6 @@ const InfoTravel = () => {
             </div>
 
             <div>
-              {/* <div
-                className="form-check "
-                style={{ marginRight: "80px", marginBottom: "10px" }}
-              >
-                <input
-                  className="form-check-input"
-                  type="radio"
-                  name="opcionPago"
-                  id="pago"
-                />
-
-                <label className="form-check-label d-flex" htmlFor="pago">
-                  <Image
-                    src={Paypal}
-                    alt="paypal"
-                    className="mg-fluid rounded-circle mr-3"
-                    width={35}
-                  />
-                  PayPal
-                </label>
-              </div> */}
               <PayPalButton
                 amount={60.0}
                 onSuccess={onSuccess}

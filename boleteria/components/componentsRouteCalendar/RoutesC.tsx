@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { BsArrowRight } from "react-icons/bs";
 import { getFirestore, collection, getDocs, DocumentData } from "firebase/firestore";
 import { app } from "../../src/fireBase/app";
+import InfoTravel from "../componentsPaymentGateway/InfoTravel";
 
 const firestore = getFirestore(app);
 
@@ -12,6 +13,9 @@ interface RoutesCProps {
 
 const RoutesC: React.FC<RoutesCProps> = ({ origen, destino }) => {
   const [availableRoutes, setAvailableRoutes] = useState<DocumentData[]>([]);
+  const [showInfoTravel, setShowInfoTravel] = useState(false);
+  const [routeOrigin, setRouteOrigin] = useState("");
+  const [routeDestination, setRouteDestination] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,6 +30,7 @@ const RoutesC: React.FC<RoutesCProps> = ({ origen, destino }) => {
         );
 
         setAvailableRoutes(filteredRoutes);
+        
       } catch (error) {
         console.log(error);
       }
@@ -34,6 +39,12 @@ const RoutesC: React.FC<RoutesCProps> = ({ origen, destino }) => {
     fetchData();
   }, [origen, destino]);
 
+  const handleAvanzarClick = () => {
+    setRouteOrigin(origen);
+    setRouteDestination(destino);
+    window.location.href = "paymentGateway"
+  };
+  
   return (
     <div style={{ backgroundColor: "#d9d9d9" }}>
       <div className="container">
@@ -66,7 +77,7 @@ const RoutesC: React.FC<RoutesCProps> = ({ origen, destino }) => {
                   </div>
                 </div>
                 <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 d-flex justify-content-center align-items-center mt-3">
-                  <a className="buy d-inline-block" href="paymentGateway">
+                  <a className="buy d-inline-block"  onClick={handleAvanzarClick}>
                     Avanzar{" "}
                     <span className="d-inline-block d-sm-none mx-auto" style={{ width: "24px" }}>
                       <BsArrowRight className="align-middle" />
@@ -81,6 +92,9 @@ const RoutesC: React.FC<RoutesCProps> = ({ origen, destino }) => {
           </div>
         ))}
       </div>
+      {showInfoTravel && (
+        <InfoTravel origin={routeOrigin} destination={routeDestination} />
+      )}
     </div>
   );
 };
