@@ -3,6 +3,7 @@ import Carousel from "react-bootstrap/Carousel";
 import { Button } from "react-bootstrap";
 import QRCode from "react-qr-code";
 import { app } from "../../src/fireBase/app";
+import Swal from "sweetalert2";
 import {
   getFirestore,
   collection,
@@ -16,7 +17,7 @@ interface QRProps {
   qrValue: string;
   qr: string;
   passengerName: string;
-  seatNumber: string; // Cambiar el tipo a string
+  seatNumber: string;
   origin: string;
   destination: string;
   dateTravel: string;
@@ -29,6 +30,18 @@ interface QRProps {
 const QR: React.FC<QRProps> = ({ qrValue, qr }) => {
   const [availableQR, setAvailableQR] = useState<DocumentData[]>([]);
   const [activeIndex, setActiveIndex] = useState(0);
+
+  const handleQRScan = () => {
+    const ticketEncontrado = availableQR.find(
+      (ticket) => ticket.qr === qr
+    );
+
+    if (ticketEncontrado) {
+      Swal.fire("Tiquete válido");
+    } else {
+      Swal.fire("Tiquete no válido");
+    }
+  };
 
   const handleSelect = (selectedIndex: number) => {
     setActiveIndex(selectedIndex);
@@ -140,16 +153,6 @@ const QR: React.FC<QRProps> = ({ qrValue, qr }) => {
                       <div className="d-flex justify-content-center">
                         <QRCode value={ticket.qr} size={220} />
                       </div>
-                      {/* <p>{ticket.qr}</p>{" "} */}
-                      {/* Pasajero: {ticket.passengerName},
-                      Asiento: {ticket.seatNumber},
-                      Origen: {ticket.origin},
-                      Destino: {ticket.destination},
-                      Fecha de viaje: {ticket.dateTravel},
-                      Hora de llegada: {ticket.arrivalTime},
-                      Hora de partida: {ticket.departureTime},
-                      Hora de viaje: {ticket.hours},
-                      Fecha de compra: {ticket.datePurchase}, */}
                     </div>
                   </Carousel.Item>
                 ))}
@@ -157,17 +160,20 @@ const QR: React.FC<QRProps> = ({ qrValue, qr }) => {
             </div>
           </div>
           <div className="d-flex justify-content-center">
-            <div
-              className="bg-white mx-auto"
+            <button
+              className="btn btn-costume qr-scan-button"
+              onClick={handleQRScan}
               style={{
                 borderRadius: "1rem",
                 padding: "10px",
                 width: "200px",
                 height: "45px",
+                marginTop: "20px",
+                background: "White",
               }}
             >
-              <h5 className="text-center">Estado</h5>
-            </div>
+              Escanea este código QR
+            </button>
           </div>
         </div>
       </div>
