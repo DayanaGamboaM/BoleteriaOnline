@@ -74,7 +74,7 @@ const Tickets: React.FC<TicketsProps> = () => {
               departureTime,
               arrivalTime,
               hours,
-              datePurchase: "", // Ajusta este valor según corresponda
+              datePurchase: data.dateOfPurchase, // Ajusta este valor según corresponda
             };
           })
         );
