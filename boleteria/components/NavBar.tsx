@@ -12,26 +12,42 @@ const NavBar = () => {
   const router = useRouter();
 
   useEffect(() => {
-    // Función para obtener el correo electrónico del usuario autenticado
     const getUserEmail = () => {
       if (auth.currentUser?.email) {
         const email = auth.currentUser.email;
         setUserEmail(email);
+        localStorage.setItem("userEmail", email);
       }
     };
 
-    getUserEmail();
+    const storedUserEmail = localStorage.getItem("userEmail");
+    if (storedUserEmail) {
+      setUserEmail(storedUserEmail);
+    } else {
+      getUserEmail();
+    }
+
+    // Manejar el evento beforeunload para cerrar la sesión antes de que la página se cierre
+    const handleBeforeUnload = () => {
+      handleSignOut();
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
   }, []);
 
   const handleSignOut = async () => {
     try {
       await signOut(auth);
+      localStorage.removeItem("userEmail");
       router.push("/login");
     } catch (error) {
       console.log("Error al cerrar sesión:", error);
     }
   };
-
   return (
     <Navbar className="navBar" expand="sm" collapseOnSelect>
       <Navbar.Brand className="ml-5 p-2 fs-3" href="home">
@@ -103,3 +119,4 @@ const NavBar = () => {
 };
 
 export default NavBar;
+
