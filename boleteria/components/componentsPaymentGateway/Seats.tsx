@@ -11,9 +11,9 @@ const Seats = () => {
     setShowSeats(true);
   };
 
-  const availableSeats = [1, 2, 3, 4, 5, 14, 16, 18, 23, 27, 32, 36, 39, 43, 47, 48, 50, 52]; // Ejemplo: Asientos disponibles
+  const availableSeats = [1, 2, 3, 4, 5, 14, 16, 18, 23, 27, 32, 36, 39, 43, 47, 48, 50, 52]; 
 
-  const totalSeats = 53; // Total de asientos
+  const totalSeats = 53;
 
   const handleSeatClick = (seatNumber: number) => {
     if (selectedSeats.includes(seatNumber)) {
