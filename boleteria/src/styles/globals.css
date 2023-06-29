@@ -366,3 +366,8 @@ color: white;
   text-transform: uppercase;
   border-radius:1em;
 }
+.selected-seat {
+  margin-left: 10px;
+  color: green;
+  font-weight: bold;
+}
