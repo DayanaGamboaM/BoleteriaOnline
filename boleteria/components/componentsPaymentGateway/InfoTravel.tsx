@@ -24,10 +24,11 @@ const InfoTravel = ({ origin: originProp, destination: destinationProp }: InfoTr
     if (typeof window !== "undefined") {
       const localStorageOrigin = localStorage.getItem("routeOrigin");
       const localStorageDestination = localStorage.getItem("routeDestination");
-      setOrigin(originProp ?? localStorageOrigin);
-      setDestination(destinationProp ?? localStorageDestination);
+      setOrigin(localStorageOrigin);
+      setDestination(localStorageDestination);
     }
-  }, [originProp, destinationProp]);
+  }, []);
+  
 
   return (
     <div className="container mt-5">
