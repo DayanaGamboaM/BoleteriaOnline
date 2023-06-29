@@ -43,7 +43,7 @@ const Tickets: React.FC<TicketsProps> = () => {
         // Verificar si el usuario está autenticado
         if (userId) {
           const ticketsRef = collection(firestore, "tickets");
-          const queryy = query(ticketsRef, where("passengerName", "==", userId));
+          const queryy = query(ticketsRef, where("passengerName", "==", doc(firestore, `users/${userId}`)));
           const snapshot = await getDocs(queryy);
           const tickets: TicketData[] = await Promise.all(
             snapshot.docs.map(async (docSnapshot) => {
