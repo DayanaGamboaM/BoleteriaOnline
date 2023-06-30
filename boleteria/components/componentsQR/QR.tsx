@@ -15,7 +15,6 @@ const firestore = getFirestore(app);
 
 interface QRProps {
   qrValue: string;
-  qr: string;
   passengerName: string;
   seatNumber: string;
   origin: string;
@@ -27,19 +26,19 @@ interface QRProps {
   datePurchase: string;
 }
 
-const QR: React.FC<QRProps> = ({ qrValue, qr }) => {
+const QR: React.FC<QRProps> = ({ qrValue }) => {
   const [availableQR, setAvailableQR] = useState<DocumentData[]>([]);
   const [activeIndex, setActiveIndex] = useState(0);
 
   const handleQRScan = () => {
     const ticketEncontrado = availableQR.find(
-      (ticket) => ticket.qr === qr
+      (ticket: DocumentData) => ticket.qrValue === qrValue
     );
-
-    if (ticketEncontrado) {
-      Swal.fire("Tiquete válido");
-    } else {
+  
+    if (ticketEncontrado && ticketEncontrado.qrValue) {
       Swal.fire("Tiquete no válido");
+    } else {
+      Swal.fire("Tiquete válido");
     }
   };
 
@@ -63,7 +62,7 @@ const QR: React.FC<QRProps> = ({ qrValue, qr }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const availableQRCollection = collection(firestore, "dataTickets");
+        const availableQRCollection = collection(firestore, "pruebaqr");
         const unsubscribe = onSnapshot(availableQRCollection, (snapshot) => {
           const qrs: DocumentData[] = snapshot.docs.map((docSnapshot) =>
             docSnapshot.data()
@@ -71,7 +70,7 @@ const QR: React.FC<QRProps> = ({ qrValue, qr }) => {
           setAvailableQR(qrs);
         });
 
-        return () => unsubscribe(); // Cleanup function to unsubscribe from the snapshot listener
+        return () => unsubscribe();
       } catch (error) {
         console.log(error);
       }
@@ -151,7 +150,7 @@ const QR: React.FC<QRProps> = ({ qrValue, qr }) => {
                   <Carousel.Item key={index} interval={1000000000}>
                     <div className="d-flex flex-column align-items-center">
                       <div className="d-flex justify-content-center">
-                        <QRCode value={ticket.qr} size={220} />
+                        <QRCode value={ticket.qrValue} size={220} />
                       </div>
                     </div>
                   </Carousel.Item>
