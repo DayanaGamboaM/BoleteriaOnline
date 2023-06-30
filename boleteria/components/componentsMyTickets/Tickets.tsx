@@ -103,7 +103,9 @@ const Tickets: React.FC<TicketsProps> = () => {
     });
   }, []);
 
-
+  const handlePrintTicket = () => {
+    window.print();
+  };
   return (
     <div
       className="d-flex justify-content-between align-items-center flex-column"
@@ -148,9 +150,9 @@ const Tickets: React.FC<TicketsProps> = () => {
               Fecha de compra: {ticket.datePurchase}
             </h5>
             <div style={{ marginTop: "25px" }}>
-              <a className="btn-tickes" href="#">
-                Imprimir
-              </a>
+            <a className="btn-tickes" href="#" onClick={handlePrintTicket}>
+              Imprimir
+            </a>
               <a className="btn-tickes m-2" href="myTicketsQR">
                 Tiquetes
               </a>
