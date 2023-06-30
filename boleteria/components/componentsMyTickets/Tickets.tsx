@@ -159,6 +159,7 @@ const Tickets: React.FC<TicketsProps> = () => {
         </div>
       ))}
     </div>
+    
   );
 };
 

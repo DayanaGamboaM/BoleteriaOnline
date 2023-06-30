@@ -61,13 +61,6 @@ const NavBar = () => {
           >
             Mis tiquetes
           </Nav.Link>
-          <Nav.Link
-            href="login"
-            style={{ color: "#ffffff" }}
-            className="fs-22 m-3"
-          >
-            Login
-          </Nav.Link>
         </Nav>
         <Nav className="container-right align-items-center text-center">
           <div className="d-flex flex-sm-row flex-column align-items-center text-center">
