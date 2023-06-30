@@ -34,8 +34,8 @@ const QR: React.FC<QRProps> = ({ qrValue }) => {
     const ticketEncontrado = availableQR.find(
       (ticket: DocumentData) => ticket.qrValue === qrValue
     );
-  
-    if (ticketEncontrado && ticketEncontrado.qrValue) {
+
+    if (ticketEncontrado) {
       Swal.fire("Tiquete no válido");
     } else {
       Swal.fire("Tiquete válido");
