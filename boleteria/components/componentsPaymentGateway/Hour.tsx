@@ -3,11 +3,16 @@ import { getFirestore, collection, getDocs, DocumentData } from "firebase/firest
 import { app } from "../../src/fireBase/app";
 
 const firestore = getFirestore(app);
-const Hour = () => {
+
+interface HourProps {
+  onHourSelect: (hour: string | null) => void;
+}
+
+const Hour: React.FC<HourProps> = ({ onHourSelect }) => {
   const [hoursData, setHoursData] = useState<DocumentData[]>([]);
+  const [selectedHour, setSelectedHour] = useState<string | null>(null);
 
   useEffect(() => {
-    // Realiza la consulta a Firebase para obtener los datos de la colección
     const fetchHoursData = async () => {
       const collectionRef = collection(firestore, "schedules");
       const snapshot = await getDocs(collectionRef);
@@ -18,13 +23,14 @@ const Hour = () => {
     fetchHoursData();
   }, []);
 
-  const [selectedHour, setSelectedHour] = useState<string | null>(null);
-
-  const handleHourSelect = (hour: string) => {
+  const handleHourSelect = (hour: string | null) => {
     if (selectedHour === hour) {
-      setSelectedHour(null); // Deseleccionar la hora si ya estaba seleccionada
+      setSelectedHour(null);
+      onHourSelect(null); // Pass null to InfoTravel component
     } else {
-      setSelectedHour(hour); // Seleccionar la hora si no estaba seleccionada previamente
+      setSelectedHour(hour);
+      onHourSelect(hour); 
+      // Pass selected hour to InfoTravel component
     }
   };
 

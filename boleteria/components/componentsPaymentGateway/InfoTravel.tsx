@@ -1,33 +1,69 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { PayPalButton } from "react-paypal-button-v2";
+import firebase from "firebase/app";
+import "firebase/firestore";
 import Image from "next/image";
 import Paypal from "/public/paypal.jpg";
+
+import { getDocs, collection, query, where } from "firebase/firestore";
+import { app, firestore } from "../../src/fireBase/app";
 
 interface InfoTravelProps {
   origin?: string;
   destination?: string;
+  selectedHour?: string | null;
 }
 
-const InfoTravel = ({ origin: originProp, destination: destinationProp }: InfoTravelProps) => {
+const InfoTravel: React.FC<InfoTravelProps> = ({
+  origin: originProp,
+  destination: destinationProp,
+  selectedHour,
+}) => {
   const [paymentStatus, setPaymentStatus] = useState<string>("");
 
   const onSuccess = (details: any, data: any) => {
-    // Lógica a ejecutar cuando el pago es exitoso
     console.log("Pago realizado con éxito", details, data);
     setPaymentStatus("success");
   };
 
   const [origin, setOrigin] = useState<string | null>(null);
   const [destination, setDestination] = useState<string | null>(null);
+  const [arrivalTime, setArrivalTime] = useState<string | null>(null);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
       const localStorageOrigin = localStorage.getItem("routeOrigin");
       const localStorageDestination = localStorage.getItem("routeDestination");
-      setOrigin(originProp ?? localStorageOrigin);
-      setDestination(destinationProp ?? localStorageDestination);
+      setOrigin(localStorageOrigin);
+      setDestination(localStorageDestination);
+
+      if (selectedHour) {
+        // Consultar el documento correspondiente a la hora seleccionada
+        const q = query(
+          collection(firestore, "schedules"),
+          where("departureTime", "==", selectedHour)
+        );
+
+        getDocs(q)
+          .then((querySnapshot) => {
+            if (!querySnapshot.empty) {
+              const doc = querySnapshot.docs[0];
+              const arrivalTime = doc.get("arrivalTime");
+              setArrivalTime(arrivalTime);
+            }
+          })
+          .catch((error) => {
+            console.log("Error al consultar la hora de llegada", error);
+          });
+      } else {
+        setArrivalTime(null); 
+      }
     }
-  }, [originProp, destinationProp]);
+  }, [selectedHour]);
+
+  const handleNextClick = () => {
+    console.log("Siguiente");
+  };
 
   return (
     <div className="container mt-5">
@@ -47,11 +83,12 @@ const InfoTravel = ({ origin: originProp, destination: destinationProp }: InfoTr
           >
             <div>
               <h5>Fecha</h5>
+              <p>AquiFecha</p>
             </div>
             <hr />
             <div>
               <h5>Hora de abordaje:</h5>
-              <p>10:00 AM</p>
+              <p>{selectedHour}</p>
             </div>
             <div>
               <h5>Origen:</h5>
@@ -59,7 +96,7 @@ const InfoTravel = ({ origin: originProp, destination: destinationProp }: InfoTr
             </div>
             <div>
               <h5>Posible hora de llegada:</h5>
-              <p>12:00 PM</p>
+              <p>{arrivalTime}</p>
             </div>
             <div>
               <h5>Destino:</h5>
@@ -99,12 +136,16 @@ const InfoTravel = ({ origin: originProp, destination: destinationProp }: InfoTr
                 amount={60.0}
                 onSuccess={onSuccess}
                 options={{
-                  clientId: "AXtVLUWZ8_l5qbZoCt2IloZ3g1y9kD1N8O0JLZ9HUOpFTkPbAw6IZ63MmCGSle0HbkJByTQaWJx2OrdU",
+                  clientId:
+                    "AXtVLUWZ8_l5qbZoCt2IloZ3g1y9kD1N8O0JLZ9HUOpFTkPbAw6IZ63MmCGSle0HbkJByTQaWJx2OrdU",
                   currency: "USD",
                 }}
                 style={{ color: "blue", shape: "rect", label: "pay" }}
               />
             </div>
+            <button className="btn-tickes" onClick={handleNextClick}>
+              Siguiente
+            </button>
           </div>
         </div>
       </div>
