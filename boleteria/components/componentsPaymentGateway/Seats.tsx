@@ -1,27 +1,69 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { BsDoorClosed } from "react-icons/bs";
 import Seat from "/public/seat.png";
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  DocumentData,
+  doc,
+  getDoc,
+  where,
+  query,
+  updateDoc
+} from "firebase/firestore";
+import { app } from "../../src/fireBase/app";
+const firestore = getFirestore(app);
 
 const Seats = () => {
   const [showSeats, setShowSeats] = useState(false);
   const [selectedSeats, setSelectedSeats] = useState<number[]>([]);
+  const [occupiedSeats, setOccupiedSeats] = useState<string[]>([]);
 
   const showBoxSeating = () => {
     setShowSeats(true);
   };
 
-  const availableSeats = [1, 2, 3, 4, 5, 14, 16, 18, 23, 27, 32, 36, 39, 43, 47, 48, 50, 52]; 
-
   const totalSeats = 53;
 
-  const handleSeatClick = (seatNumber: number) => {
+  const handleSeatClick = async (seatNumber: number) => {
     if (selectedSeats.includes(seatNumber)) {
       setSelectedSeats(selectedSeats.filter((seat) => seat !== seatNumber));
-    } else if (selectedSeats.length < 5 && availableSeats.includes(seatNumber)) {
+    } else if (selectedSeats.length < 5 && !occupiedSeats.includes(seatNumber.toString())) {
       setSelectedSeats([...selectedSeats, seatNumber]);
+
+      const seatingRef = collection(firestore, "seating");
+      const seatDocRef = doc(seatingRef, seatNumber.toString());
+      await updateDoc(seatDocRef, { occupation: "s" });
+
+      const updatedOccupiedSeats = [...occupiedSeats, seatNumber.toString()];
+      setOccupiedSeats(updatedOccupiedSeats);
     }
   };
+
+  const fetchSeatData = async (): Promise<string[]> => {
+    const seatingRef = collection(firestore, "seating");
+    const q = query(seatingRef, where("occupation", "==", "s"));
+    const querySnapshot = await getDocs(q);
+
+    const occupiedSeats: string[] = [];
+    querySnapshot.forEach((doc) => {
+      const seatNumber = doc.data().seat;
+      occupiedSeats.push(seatNumber);
+    });
+
+    return occupiedSeats;
+  };
+
+  useEffect(() => {
+    const getOccupiedSeats = async () => {
+      const seats: string[] = await fetchSeatData();
+      setOccupiedSeats(seats);
+    };
+
+    getOccupiedSeats();
+  }, []);
 
   return (
     <div className="container mt-5">
@@ -50,19 +92,27 @@ const Seats = () => {
           <h3>Asientos Disponibles</h3>
           <div className="fila-asientos">
             <div className="columna-asientos">
-              {Array.from({ length: totalSeats }, (_, index) => index + 1).map((seatNumber: number) => (
-                <button
-                  key={seatNumber}
-                  className={`asiento ${selectedSeats.includes(seatNumber) ? "selected" : ""}`}
-                  style={{
-                    border: `2px solid ${selectedSeats.includes(seatNumber) ? "red" : availableSeats.includes(seatNumber) ? "green" : "red"}`,
-                  }}
-                  disabled={!availableSeats.includes(seatNumber) || selectedSeats.length === 5}
-                  onClick={() => handleSeatClick(seatNumber)}
-                >
-                  {seatNumber}
-                </button>
-              ))}
+              {Array.from({ length: totalSeats }, (_, index) => index + 1).map((seatNumber: number) => {
+                const isOccupied = occupiedSeats.includes(seatNumber.toString());
+                const isSelected = selectedSeats.includes(seatNumber);
+                const seatStyle = {
+                  border: `2px solid ${isSelected || isOccupied ? "red" : "green"}`,
+                };
+
+                const handleButtonClick = isOccupied ? undefined : () => handleSeatClick(seatNumber);
+
+                return (
+                  <button
+                    key={seatNumber}
+                    className={`asiento ${isSelected ? "selected" : ""}`}
+                    style={seatStyle}
+                    disabled={isOccupied || selectedSeats.length === 5}
+                    onClick={handleButtonClick}
+                  >
+                    {seatNumber}
+                  </button>
+                );
+              })}
             </div>
           </div>
           <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 text-center mt-5">
