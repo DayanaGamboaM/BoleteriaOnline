@@ -35,10 +35,15 @@ const Seats = () => {
 
       const seatingRef = collection(firestore, "seating");
       const seatDocRef = doc(seatingRef, seatNumber.toString());
+      const seatDocSnapshot = await getDoc(seatDocRef);
+    if (seatDocSnapshot.exists()) {
       await updateDoc(seatDocRef, { occupation: "s" });
 
       const updatedOccupiedSeats = [...occupiedSeats, seatNumber.toString()];
       setOccupiedSeats(updatedOccupiedSeats);
+    } else {
+      console.log("El documento no existe");
+    }
     }
   };
 
