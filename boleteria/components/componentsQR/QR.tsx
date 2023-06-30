@@ -62,7 +62,7 @@ const QR: React.FC<QRProps> = ({ qrValue }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const availableQRCollection = collection(firestore, "pruebaqr");
+        const availableQRCollection = collection(firestore, "tickets");
         const unsubscribe = onSnapshot(availableQRCollection, (snapshot) => {
           const qrs: DocumentData[] = snapshot.docs.map((docSnapshot) =>
             docSnapshot.data()

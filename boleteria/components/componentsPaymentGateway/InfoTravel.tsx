@@ -6,15 +6,25 @@ import Image from "next/image";
 import Paypal from "/public/paypal.jpg";
 import { onAuthStateChanged } from "firebase/auth";
 import Swal from "sweetalert2";
-import { getDocs, collection, query, where, addDoc, serverTimestamp, getDoc, doc } from "firebase/firestore";
+import {
+  getDocs,
+  collection,
+  query,
+  where,
+  addDoc,
+  serverTimestamp,
+  getDoc,
+  doc,
+} from "firebase/firestore";
 import { getAuth, User } from "firebase/auth";
 import { app, firestore } from "../../src/fireBase/app";
-import {  updateDoc, setDoc } from "firebase/firestore";
+import { updateDoc, setDoc } from "firebase/firestore";
 
 interface InfoTravelProps {
   origin?: string;
   destination?: string;
   selectedHour?: string | null;
+  qrValue?: string;
 }
 
 const InfoTravel: React.FC<InfoTravelProps> = ({
@@ -23,29 +33,19 @@ const InfoTravel: React.FC<InfoTravelProps> = ({
   selectedHour,
 }) => {
   const [paymentStatus, setPaymentStatus] = useState<string>("");
-  const [qrValue, setQRValue] = useState('');
+  const [randomQR, setQRValue] = useState("");
 
-  const generateRandomQRCode = async(getApp:any) => {
+  const generateRandomQRCode = async (getApp: any) => {
     const randomValue = Math.random().toString(36).substring(2, 15);
     setQRValue(randomValue);
-
-    try {
-      const docRef = await addDoc(collection(firestore, 'tickets'), { qrValue: randomValue });
-      console.log('Documento guardado con ID:', docRef.id);
-      console.log(qrValue);
-    } catch (error) {
-      console.error('Error al guardar el documento:', error);
-    }
   };
 
-  
-
-    const onSuccess = (details: any, data: any) => {
-      //Lógica a ejecutar cuando el pago es exitoso
-      console.log("Pago realizado con éxito", details, data);
-      setPaymentStatus("success");
-      generateRandomQRCode
-    }
+  const onSuccess = (details: any, data: any) => {
+    //Lógica a ejecutar cuando el pago es exitoso
+    console.log("Pago realizado con éxito", details, data);
+    setPaymentStatus("success");
+    generateRandomQRCode;
+  };
 
   const [origin, setOrigin] = useState<string | null>(null);
   const [destination, setDestination] = useState<string | null>(null);
@@ -104,7 +104,6 @@ const InfoTravel: React.FC<InfoTravelProps> = ({
 
   const handleNextClick = async () => {
     try {
-      generateRandomQRCode(qrValue);
       // Crear un nuevo documento en la colección 'travels'
       const originValue = origin;
       const destinationValue = destination;
@@ -115,39 +114,46 @@ const InfoTravel: React.FC<InfoTravelProps> = ({
         destination: destinationValue,
         origin: originValue,
       });
-  
+
       console.log("Documento de viaje creado con ID:", travelDocRef.id);
-  
+      
       // Obtener el UID del usuario actual
       const auth = getAuth();
       const user = auth.currentUser;
       if (user) {
         const uid = user.uid;
         console.log("UID del usuario:", uid);
-  
+
         // Crear una referencia al documento de usuario
         const userRef = doc(firestore, `users/${uid}`);
-  
+
         // Consultar el documento de horario correspondiente a la hora seleccionada
-        const schedulesQuery = query(collection(firestore, "schedules"), where("departureTime", "==", selectedHour));
+        const schedulesQuery = query(
+          collection(firestore, "schedules"),
+          where("departureTime", "==", selectedHour)
+        );
         const schedulesSnapshot = await getDocs(schedulesQuery);
-  
+
         let idSchedule = null;
         if (!schedulesSnapshot.empty) {
           const scheduleDoc = schedulesSnapshot.docs[0];
           idSchedule = scheduleDoc.id;
         }
-  
+
         // Crear una referencia al documento de viaje
         const travelRef = doc(firestore, `travels/${travelDocRef.id}`);
-  
+
         // Actualizar el campo idSchedule del documento de viaje
-        await setDoc(travelRef, { idSchedule: doc(firestore, `schedules/${idSchedule}`) }, { merge: true });
-  
+        await setDoc(
+          travelRef,
+          { idSchedule: doc(firestore, `schedules/${idSchedule}`) },
+          { merge: true }
+        );
+
         // Obtener un documento aleatorio de la colección "seating"
         const seatingQuery = query(collection(firestore, "seating"));
         const seatingSnapshot = await getDocs(seatingQuery);
-  
+
         let seatingId = null;
         if (!seatingSnapshot.empty) {
           const seatingDocs = seatingSnapshot.docs;
@@ -155,32 +161,44 @@ const InfoTravel: React.FC<InfoTravelProps> = ({
           const randomSeatingDoc = seatingDocs[randomIndex];
           seatingId = randomSeatingDoc.id;
         }
-  
+
         // Obtener solo la fecha actual para dateOfPurchase
         const currentDateOfPurchase = new Date();
         const dateOfPurchase = currentDateOfPurchase.toISOString().slice(0, 10); // Obtener los primeros 10 caracteres (yyyy-mm-dd)
-  
+
         // Obtener un documento aleatorio de la colección "purchaseDetails"
-        const purchaseDetailsQuery = query(collection(firestore, "purchaseDetails"));
+        const purchaseDetailsQuery = query(
+          collection(firestore, "purchaseDetails")
+        );
         const purchaseDetailsSnapshot = await getDocs(purchaseDetailsQuery);
-  
+
         let purchaseDetailId = null;
         if (!purchaseDetailsSnapshot.empty) {
           const purchaseDetailDocs = purchaseDetailsSnapshot.docs;
-          const randomIndex = Math.floor(Math.random() * purchaseDetailDocs.length);
+          const randomIndex = Math.floor(
+            Math.random() * purchaseDetailDocs.length
+          );
           const randomPurchaseDetailDoc = purchaseDetailDocs[randomIndex];
           purchaseDetailId = randomPurchaseDetailDoc.id;
         }
-  
+        const randomQRCode = generateRandomQRCode(app);
+        console.log(randomQR);
         // Crear un nuevo documento en la colección 'tickets' con las referencias
         const ticketDocRef = await addDoc(collection(firestore, "tickets"), {
           dateOfPurchase: dateOfPurchase,
           idTravel: travelRef,
           passengerName: doc(firestore, `users/${uid}`),
           seat: doc(firestore, `seating/${seatingId}`),
-          idPurchaseDetail: doc(firestore, `purchaseDetails/${purchaseDetailId}`),
+          idPurchaseDetail: doc(firestore,`purchaseDetails/${purchaseDetailId}`),
+
+          qrValue: randomQR,
+          
         });
-        Swal.fire("¡Éxito!", "Tu compra se realizó correctamente", "success").then(() => {
+        Swal.fire(
+          "¡Éxito!",
+          "Tu compra se realizó correctamente",
+          "success"
+        ).then(() => {
           window.location.href = "home";
         });
         console.log("Documento de boleto creado con ID:", ticketDocRef.id);
@@ -190,7 +208,7 @@ const InfoTravel: React.FC<InfoTravelProps> = ({
     } catch (error) {
       console.log("Error al crear los documentos:", error);
     }
-  
+
     console.log("Siguiente");
   };
   return (
