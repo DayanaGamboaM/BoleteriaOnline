@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import ToggleButton from "./ToggleButton";
 import { BsDoorClosed, BsSaveFill } from "react-icons/bs";
 import { auth } from "../../src/fireBase/app"; // Importa la instancia de autenticación de Firebase
-
+import Swal from "sweetalert2";
 
 interface User {
   id: string;
@@ -46,6 +46,8 @@ const SendEmail: React.FC = () => {
           // Envía el correo solo al usuario activo
           const response = await fetch(`/api/mailerApi?email=${encodeURIComponent(currentUser.email)}`, { method: 'POST' });
           if (response.ok) {
+            
+            Swal.fire("¡Éxito!", "Ha sido enviado tu tiquete al correo", "success")
             console.log("Correo electrónico enviado");
           } else {
             console.log("Error al enviar el correo electrónico");
