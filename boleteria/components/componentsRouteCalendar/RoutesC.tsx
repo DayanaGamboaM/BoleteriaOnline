@@ -74,10 +74,6 @@ const RoutesC: React.FC<RoutesCProps> = ({ origen, destino }) => {
                   </div>
                 </div>
                 <div className="mt-1">
-                  <div className="text-center">
-                    <h5 className="text-black mr-2">Total:</h5>
-                    <span>${route.total}</span>
-                  </div>
                 </div>
                 <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 d-flex justify-content-center align-items-center mt-3">
                   <a className="buy d-inline-block"  onClick={handleAvanzarClick}>

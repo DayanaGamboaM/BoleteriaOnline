@@ -62,13 +62,6 @@ const NavBar = () => {
             Mis tiquetes
           </Nav.Link>
           <Nav.Link
-            href="myTicketsQR"
-            style={{ color: "#ffffff" }}
-            className="fs-22 m-3"
-          >
-            QR
-          </Nav.Link>
-          <Nav.Link
             href="login"
             style={{ color: "#ffffff" }}
             className="fs-22 m-3"

@@ -4,9 +4,12 @@ import firebase from "firebase/app";
 import "firebase/firestore";
 import Image from "next/image";
 import Paypal from "/public/paypal.jpg";
-
-import { getDocs, collection, query, where } from "firebase/firestore";
+import { onAuthStateChanged } from "firebase/auth";
+import Swal from "sweetalert2";
+import { getDocs, collection, query, where, addDoc, serverTimestamp, getDoc, doc } from "firebase/firestore";
+import { getAuth, User } from "firebase/auth";
 import { app, firestore } from "../../src/fireBase/app";
+import {  updateDoc, setDoc } from "firebase/firestore";
 
 interface InfoTravelProps {
   origin?: string;
@@ -56,15 +59,121 @@ const InfoTravel: React.FC<InfoTravelProps> = ({
             console.log("Error al consultar la hora de llegada", error);
           });
       } else {
-        setArrivalTime(null); 
+        setArrivalTime(null);
       }
     }
   }, [selectedHour]);
 
-  const handleNextClick = () => {
-    console.log("Siguiente");
+  const getUserData = async () => {
+    try {
+      const auth = getAuth();
+      const currentUser: User | null = auth.currentUser;
+
+      if (currentUser) {
+        const userRef = doc(firestore, "users", currentUser.uid);
+        const userSnapshot = await getDoc(userRef);
+        const userData = userSnapshot.data();
+
+        if (userData) {
+          const { displayName } = userData;
+          console.log("Nombre de usuario:", displayName);
+        }
+      }
+    } catch (error) {
+      console.log("Error al obtener los datos del usuario:", error);
+    }
   };
 
+  const handleNextClick = async () => {
+    try {
+      // Crear un nuevo documento en la colección 'travels'
+      const originValue = origin;
+      const destinationValue = destination;
+      const currentDate = new Date();
+      const dateTravel = currentDate.toISOString().split("T")[0]; // Obtener solo la parte de la fecha
+      const travelDocRef = await addDoc(collection(firestore, "travels"), {
+        dateTravel: dateTravel,
+        destination: destinationValue,
+        origin: originValue,
+      });
+  
+      console.log("Documento de viaje creado con ID:", travelDocRef.id);
+  
+      // Obtener el UID del usuario actual
+      const auth = getAuth();
+      const user = auth.currentUser;
+      if (user) {
+        const uid = user.uid;
+        console.log("UID del usuario:", uid);
+  
+        // Crear una referencia al documento de usuario
+        const userRef = doc(firestore, `users/${uid}`);
+  
+        // Consultar el documento de horario correspondiente a la hora seleccionada
+        const schedulesQuery = query(collection(firestore, "schedules"), where("departureTime", "==", selectedHour));
+        const schedulesSnapshot = await getDocs(schedulesQuery);
+  
+        let idSchedule = null;
+        if (!schedulesSnapshot.empty) {
+          const scheduleDoc = schedulesSnapshot.docs[0];
+          idSchedule = scheduleDoc.id;
+        }
+  
+        // Crear una referencia al documento de viaje
+        const travelRef = doc(firestore, `travels/${travelDocRef.id}`);
+  
+        // Actualizar el campo idSchedule del documento de viaje
+        await setDoc(travelRef, { idSchedule: doc(firestore, `schedules/${idSchedule}`) }, { merge: true });
+  
+        // Obtener un documento aleatorio de la colección "seating"
+        const seatingQuery = query(collection(firestore, "seating"));
+        const seatingSnapshot = await getDocs(seatingQuery);
+  
+        let seatingId = null;
+        if (!seatingSnapshot.empty) {
+          const seatingDocs = seatingSnapshot.docs;
+          const randomIndex = Math.floor(Math.random() * seatingDocs.length);
+          const randomSeatingDoc = seatingDocs[randomIndex];
+          seatingId = randomSeatingDoc.id;
+        }
+  
+        // Obtener solo la fecha actual para dateOfPurchase
+        const currentDateOfPurchase = new Date();
+        const dateOfPurchase = currentDateOfPurchase.toISOString().slice(0, 10); // Obtener los primeros 10 caracteres (yyyy-mm-dd)
+  
+        // Obtener un documento aleatorio de la colección "purchaseDetails"
+        const purchaseDetailsQuery = query(collection(firestore, "purchaseDetails"));
+        const purchaseDetailsSnapshot = await getDocs(purchaseDetailsQuery);
+  
+        let purchaseDetailId = null;
+        if (!purchaseDetailsSnapshot.empty) {
+          const purchaseDetailDocs = purchaseDetailsSnapshot.docs;
+          const randomIndex = Math.floor(Math.random() * purchaseDetailDocs.length);
+          const randomPurchaseDetailDoc = purchaseDetailDocs[randomIndex];
+          purchaseDetailId = randomPurchaseDetailDoc.id;
+        }
+  
+        // Crear un nuevo documento en la colección 'tickets' con las referencias
+        const ticketDocRef = await addDoc(collection(firestore, "tickets"), {
+          dateOfPurchase: dateOfPurchase,
+          idTravel: travelRef,
+          passengerName: doc(firestore, `users/${uid}`),
+          seat: doc(firestore, `seating/${seatingId}`),
+          idPurchaseDetail: doc(firestore, `purchaseDetails/${purchaseDetailId}`),
+        });
+        Swal.fire("¡Éxito!", "Tu compra se realizó correctamente", "success").then(() => {
+          window.location.href = "home";
+        });
+        console.log("Documento de boleto creado con ID:", ticketDocRef.id);
+      } else {
+        console.log("No se encontró un usuario autenticado");
+      }
+    } catch (error) {
+      console.log("Error al crear los documentos:", error);
+    }
+  
+    console.log("Siguiente");
+  };
   return (
     <div className="container mt-5">
       <div
