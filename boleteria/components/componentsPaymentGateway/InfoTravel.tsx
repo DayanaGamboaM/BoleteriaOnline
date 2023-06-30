@@ -161,7 +161,9 @@ const InfoTravel: React.FC<InfoTravelProps> = ({
           seat: doc(firestore, `seating/${seatingId}`),
           idPurchaseDetail: doc(firestore, `purchaseDetails/${purchaseDetailId}`),
         });
-        Swal.fire("¡Éxito!", "Tu compra se realizó correctamente", "success");
+        Swal.fire("¡Éxito!", "Tu compra se realizó correctamente", "success").then(() => {
+          window.location.href = "home";
+        });
         console.log("Documento de boleto creado con ID:", ticketDocRef.id);
       } else {
         console.log("No se encontró un usuario autenticado");
