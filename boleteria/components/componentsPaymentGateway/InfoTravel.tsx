@@ -1,8 +1,5 @@
 import React, { useState } from "react";
 import { PayPalButton } from "react-paypal-button-v2";
-import Image from "next/image";
-import Paypal from "/public/paypal.jpg";
-import QR from '../componentsQR/QR';
 import { getFirestore, collection, addDoc } from 'firebase/firestore';
 import { app } from "../../src/fireBase/app";
 import { getApp } from "firebase/app";
@@ -30,12 +27,12 @@ const InfoTravel = () => {
     generateRandomQRCode(qrValue);
   };
 
-  // const onSuccess = (details: any, data: any) => {
-  //   // Lógica a ejecutar cuando el pago es exitoso
-  //   console.log("Pago realizado con éxito", details, data);
-  //   setPaymentStatus("success");
-  //   generateRandomQRCode
-  // };
+    const onSuccess = (details: any, data: any) => {
+      //Lógica a ejecutar cuando el pago es exitoso
+      console.log("Pago realizado con éxito", details, data);
+      setPaymentStatus("success");
+      generateRandomQRCode
+    }
 
   return (
     <div className="container mt-5">
@@ -88,6 +85,7 @@ const InfoTravel = () => {
           >
             <div>
               <h5>Datos para pago</h5>
+              
               <div>
                 <h5>Tarifa:</h5>
                 <p style={{ textDecoration: "underline" }}>$50.00</p>
@@ -101,7 +99,17 @@ const InfoTravel = () => {
                 <p style={{ textDecoration: "underline" }}>$60.00</p>
               </div>
             </div>
-
+            <div>
+              <PayPalButton
+                amount={60.0}
+                onSuccess={onSuccess}
+                options={{
+                  clientId: "AXtVLUWZ8_l5qbZoCt2IloZ3g1y9kD1N8O0JLZ9HUOpFTkPbAw6IZ63MmCGSle0HbkJByTQaWJx2OrdU",
+                  currency: "USD",
+                }}
+                style={{ color: "blue", shape: "rect", label: "pay" }}
+              />
+            </div>
             <div>
             <button onClick={handleClick}>Guardar</button>
             </div>
