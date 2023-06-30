@@ -87,8 +87,8 @@ const InfoTravel: React.FC<InfoTravelProps> = ({
   const handleNextClick = async () => {
     try {
       // Crear un nuevo documento en la colección 'travels'
-      const originValue = originProp || "Valor predeterminado";
-      const destinationValue = destinationProp || "Valor predeterminado";
+      const originValue = origin;
+      const destinationValue = destination;
       const currentDate = new Date();
       const dateTravel = currentDate.toISOString().split("T")[0]; // Obtener solo la parte de la fecha
       const travelDocRef = await addDoc(collection(firestore, "travels"), {
