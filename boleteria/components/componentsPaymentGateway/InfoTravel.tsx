@@ -85,7 +85,6 @@ const InfoTravel = () => {
           >
             <div>
               <h5>Datos para pago</h5>
-              
               <div>
                 <h5>Tarifa:</h5>
                 <p style={{ textDecoration: "underline" }}>$50.00</p>
