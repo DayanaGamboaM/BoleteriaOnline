@@ -251,10 +251,11 @@ const InfoTravel: React.FC<InfoTravelProps> = ({
                 }}
                 style={{ color: "blue", shape: "rect", label: "pay" }}
               />
-            </div>
-            <button className="btn-tickes" onClick={handleNextClick}>
-              Siguiente
+              <button className="btn-tickes" onClick={handleNextClick}>
+              Pagar
             </button>
+            </div>
+            
           </div>
         </div>
       </div>
