@@ -42,8 +42,11 @@ const RoutesC: React.FC<RoutesCProps> = ({ origen, destino }) => {
   const handleAvanzarClick = () => {
     setRouteOrigin(origen);
     setRouteDestination(destino);
-    window.location.href = "paymentGateway"
+    localStorage.setItem("routeOrigin", origen);
+    localStorage.setItem("routeDestination", destino);
+    window.location.href = "paymentGateway";
   };
+  
   
   return (
     <div style={{ backgroundColor: "#d9d9d9" }}>
