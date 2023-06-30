@@ -34,7 +34,7 @@ const NavBar = () => {
 
   return (
     <Navbar className="navBar" expand="sm" collapseOnSelect>
-      <Navbar.Brand className="ml-5 p-2 fs-3" href="http://localhost:3000/">
+      <Navbar.Brand className="ml-5 p-2 fs-3" href="home">
         <Image
           src={Logo}
           alt="Header Image"
@@ -60,20 +60,6 @@ const NavBar = () => {
             className="fs-22 m-3"
           >
             Mis tiquetes
-          </Nav.Link>
-          <Nav.Link
-            href="myTicketsQR"
-            style={{ color: "#ffffff" }}
-            className="fs-22 m-3"
-          >
-            QR
-          </Nav.Link>
-          <Nav.Link
-            href="login"
-            style={{ color: "#ffffff" }}
-            className="fs-22 m-3"
-          >
-            Login
           </Nav.Link>
         </Nav>
         <Nav className="container-right align-items-center text-center">

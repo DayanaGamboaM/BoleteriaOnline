@@ -366,3 +366,19 @@ color: white;
   text-transform: uppercase;
   border-radius:1em;
 }
+
+.ticket-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  color: white;
+  text-align: center;
+}
+.selected-seat {
+  margin-left: 10px;
+  color: green;
+  font-weight: bold;
+}

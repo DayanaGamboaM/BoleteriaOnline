@@ -35,11 +35,6 @@ const Header = () => {
   const [origen, setOrigen] = useState(selectedOrigin);
   const [destino, setDestino] = useState(selectedDestination);
 
-  // const handleRouteSearch = (selectedOrigin: string, selectedDestination: string) => {
-  //   setOrigen(selectedOrigin);
-  //   setDestino(selectedDestination);
-  // };
-
   const [showAlert, setShowAlert] = useState(false);
   const currentDate = dayjs(new Date());
 
@@ -59,7 +54,7 @@ const Header = () => {
         text: "Debe llenar todos los campos",
       });
     } else {
-      
+
       window.location.href = "routeCalendar";
     }
   };
@@ -68,13 +63,12 @@ const Header = () => {
 
   return (
     <div style={{ backgroundColor: "#d9d9d9" }}>
-      
       <div className="card-section">
         <div className="container">
           <div className="card-block bg-white mb30">
             <div className="row mt-9">
-              <div className="col-xl-3 col-lg-2 col-md-4 col-sm-6 col-12">
-                <p className="cardBlock-titles">Origen</p>
+              <div className="col">
+                <p className="cardBlock-titles text-center">Origen</p>
                 <div className="form-group">
                   <div className="input-group">
                     <span className="input-group-text text-black">
@@ -102,8 +96,8 @@ const Header = () => {
                   </div>
                 </div>
               </div>
-              <div className="col-xl-3 col-lg-2 col-md-4 col-sm-6 col-12">
-                <p className="cardBlock-titles">Destino</p>
+              <div className="col">
+                <p className="cardBlock-titles text-center">Destino</p>
                 <div className="form-group">
                   <div className="input-group">
                     <span className="input-group-text text-black">
@@ -130,19 +124,6 @@ const Header = () => {
                     </select>
                   </div>
                 </div>
-              </div>
-              <div className="col-xl-2 col-lg-2 col-md-4 col-sm-6 col-12">
-                <button
-                  type="button"
-                  className="btn btn-primary btn-block btn-lg"
-                  onClick={handleSearchClick}
-                  
-                >
-                  
-                  Buscar
-                </button>
-                
-      
               </div>
             </div>
           </div>
